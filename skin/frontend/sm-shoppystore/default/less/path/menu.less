@@ -1,0 +1,164 @@
+.yt-menu-container-home,
+.yt-menu-container{
+}
+.cms-index-index #nav li.level0:hover{
+  background-color:@color_theme;
+  > a{
+    color: #fff;
+  }
+  a:before{
+    color: #fff;
+  }
+  a:after{
+    color: #fff;
+  }
+}
+.cms-index-index #nav .shown-sub span{
+  color: #333;
+}
+.yt-menu-nav{
+  position: absolute;
+  z-index: 99;
+}
+.ver-megamenu-header .yt-menu-nav{
+  .nav-home{
+    display: none
+  }
+}
+.ver-megamenu-header .sm_megamenu_wrapper_vertical_menu .level0 > a::before{
+  color: #666;
+  content: "\f009";
+  font-family: "FontAwesome";
+  font-size: 6px;
+  margin-right: 5px;
+  position: relative;
+  top: -2px;
+}
+#nav .level0.nav-1{
+  margin-top: 10px;
+}
+#nav li.parent{
+        > a{
+          &:after{
+            font-family: "FontAwesome";
+            font-size:12px;
+            content:"\f0da";
+            float:right;
+          }
+        }
+      }
+#nav{
+  .more-wrap{
+    padding: 5px 15px 10px 20px;
+
+  }
+  margin-top: -8px;
+  > li{
+    position:relative;
+    width: 100%;
+    > a{
+      display:block;
+      line-height:34px;
+      padding:0 15px 0 20px;
+
+    }
+
+    > .nav-home{
+    }
+
+    ul{
+      display:none;
+      position:absolute;
+      right:-221px;
+      top:-1px;
+      background:#fff;
+      width:220px;
+      z-index:99;
+        -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.15);
+      box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.15);
+      li.parent{
+        > a{
+          
+        }
+      }
+
+      li{
+        position:relative;
+
+        a{
+          padding:8px 14px;
+          display:block;
+          border-top: 1px solid #ddd;
+        }
+
+        &:hover{
+          > a{
+            background-color:#f4f4f4;
+          }
+        }
+
+        ul{
+          position:absolute;
+          top:0px;
+          left:220px;
+        }
+        &:hover > ul{
+          display:block;
+
+        }
+      }
+
+      li:last-child a{
+        border-bottom:none;
+      }
+    }
+
+    &:hover > ul{
+      display:block;
+    }
+
+    &:hover > a{
+
+    }
+  }
+
+  > li:first-child{
+    margin-left:0px;
+  }
+
+  > li.active > a{
+
+  }
+
+  > li.active:before{
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: 100% 11px;
+    bottom: -11px;
+    content: "";
+    display: inline-block;
+    height: 11px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 9;
+  }
+
+
+}
+
+.cms-index-index .header-default li.nav-home:before{
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: 100% 11px;
+  bottom: -11px;
+  content: "";
+  display: inline-block;
+  height: 11px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 9;
+}
+
+

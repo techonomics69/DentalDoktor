@@ -1,0 +1,295 @@
+.cmspage1{
+  .item-time{
+    position: absolute;
+    top: -35px;
+    right: 0;
+    .item-timer{
+          background: @color_theme;
+          display: inline-flex;
+          position: relative;
+          color: #fff;
+          font-size: 15px;
+          line-height: 27px;
+      .item-time{
+        background-color:@color_theme_active!important;
+      }
+      .time-min{
+        background-color:@color_theme_active!important;
+      }
+       .time-hour{
+          background-color: @color_theme!important;
+          width: 26px!important;
+        }
+        .time-sec{
+          background-color: @color_theme!important;
+          width: 26px!important;
+        }
+      .time-item{
+        width:30px;
+        height:30px;
+        text-align:center;
+        background-color:@color_theme;
+        display:inline-block;
+        color:#fff;
+        padding:5px 0px 2px;
+        line-height:20px;
+        font-size: 12px!important;
+        .transition_all(.3s);
+       
+        .num-time{
+          font-size:116.67%;
+          font-weight:bold;
+        }
+
+        .name-time{
+          font-size:83.33%;
+        }
+      }
+    }
+  }
+}
+.item-time{
+  position: absolute;
+  top: -35px;
+  right: 0;
+  .item-timer{
+       
+    .item-time{
+      background-color:@color_theme_active!important;
+    }
+     
+    .time-item{
+      width:30px;
+      height:30px;
+      text-align:center;
+      background-color:@color_theme;
+      display:inline-block;
+      color:#fff;
+      padding:5px 0px 2px;
+      line-height:15px;
+      font-size: 12px!important;
+      .transition_all(.3s);
+     
+      .num-time{
+        font-size:116.67%;
+        font-weight:bold;
+      }
+
+      .name-time{
+        font-size:83.33%;
+      }
+    }
+  }
+}
+.cmspage1 .w-deal-res .owl-wrapper-outer:before{
+      content:"";
+      display: inline-block;
+      position: absolute;
+      top:0px;
+      left:14px;
+      width:84px;
+      height:84px;
+      background:url(../../../images/icon-deal.png) no-repeat top left;
+      z-index: 9;
+      cursor: pointer;
+    }
+.w-deal-res{
+  
+  .owl-controls .owl-pagination .owl-page{
+    width: 10px;
+    height: 10px;
+  }
+  .respl-item .item-inner .item-info{
+    padding-left: 5px;
+    text-align: left;
+  }
+  .respl-item .item-inner .item-info .item-price{
+    margin-bottom: 8px;
+  }
+  .owl-theme .owl-controls{
+    top: 5px;
+    line-height: 35px;
+    height: 35px;
+    background-color: #eee;
+    border-top: 1px solid #ddd;
+  }
+  .owl-controls .owl-pagination .owl-page{
+    border-radius: 0;
+  }
+  .respl-item .item-inner .w-image-box{
+    margin-top: 35px;
+  }
+  position:relative;
+   
+  .customNavigation{
+    .button-default1{
+      position:absolute;
+      top:35%;
+      z-index:9;
+      border: none;
+      font-size: 30px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .prev-deal{
+      left:10px;
+      &:hover{
+        color: @color_theme;
+      }
+    }
+
+    .next-deal{
+      right:10px;
+      &:hover{
+        color: @color_theme;
+      }
+    }
+  }
+
+  &:hover{
+    .customNavigation{
+
+      .button-default{
+        background-color: transparent;
+       
+      }
+    }
+  }
+}
+.slider-deal .respl-item{
+  margin-bottom:0px;
+}
+.home-top-right{
+  padding-left: 0;
+}
+.deal-wrapper{
+  margin-bottom:10px;
+  position:relative;
+  top:0px;
+  clear: both;
+  border: 1px solid #ddd;
+  .block-title-default{
+    margin-bottom:20px;
+  }
+}
+
+
+// HOME V3
+
+ .cms-home-v3{
+  .deal-wrapper{
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    .overflow-owl-slider{
+      overflow: visible;
+    }
+    .owl-carousel .owl-wrapper-outer{
+      overflow: visible;
+    }
+    border: none;
+    .block-title-default{
+      border-bottom: 2px solid @color_theme;
+      height: 45px;
+      margin-bottom: 30px;
+      span{
+        font-size: 133.33%;
+        background-color: @color_theme;
+        color: #fff;
+        padding: 0 20px;
+        height: 43px;
+        line-height: 43px;
+      }
+    }
+    .item-inner{
+      .hover-image{
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top:0;
+      }
+      &:hover{
+        -webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.3);
+        .item-time{
+          display: block;
+          .transition_all(.3s);
+        }
+        .hover-image{
+          visibility: visible;
+          opacity: 1;
+          .transition_all(.2s);
+        }  
+      }
+      .btn-cart:hover{
+          background: #f44336!important;
+          color: #fff!important;
+          border-color: #f44336!important;
+        }
+      padding: 15px 15px 30px;
+       &:before{
+          background:none;
+         
+        }
+      .w-image-box{
+        margin: 0;
+      }
+      .item-info{
+        text-align: center;
+        padding-left: 0;
+      }
+    }
+    .item-time{
+      display: none;
+      position: absolute;
+      top: 33%;
+      right: 27%;
+      .item-timer{
+        background: @color_theme;
+        display: inline-flex;
+        font-size: 15px;
+        position: relative;
+        color: #fff;
+        line-height: 35px!important;
+         .time-item{
+            width: 32px!important;
+            height: 37px!important;
+            background-color:@color_theme;
+            display:inline-block;
+            line-height: 28px!important;
+          }
+          .time-item.time-min{
+            width: 37px!important;
+            background-color:@color_theme_active;
+            display:inline-block;
+          }
+      }
+    }
+    .custom-nav-default{
+      position: absolute;
+      right: 0;
+      top: 9px;
+      .prev-deal{
+        margin-right: -3px;
+      }
+      .button-default1{
+        width: 34px;
+        height: 34px;
+        display: inline-block;
+        background: #ddd;
+        line-height: 34px;
+        font-size: 18px;
+        color: #999;
+        &:hover{
+          background: @color_theme;
+          color: #fff;
+        }
+      }
+    }
+  }
+  .slider-deal .respl-item{
+    background: #fff; 
+  }
+ }
