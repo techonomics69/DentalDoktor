@@ -8,7 +8,10 @@
 				<!-- LANGUAGE_CURENCY -->
 				<div class="col-lg-6 col-md-7 top-links-action">
 					<?php echo $this->getChildHtml('store_language') ?>
-					<?php echo $this->getChildHtml('currency'); ?>					
+					<?php echo $this->getChildHtml('currency'); ?>
+
+					<?php if($this->helper('customer')->isLoggedIn()){?>
+					<!-- MY ACCOUNT -->
 					<div class="block-action-header top-link-account my-account-link">
 						<ul>
 							<li>
@@ -19,6 +22,19 @@
 							</li>
 						</ul>
 					</div>
+					<!-- END MY ACCOUNT -->
+					<?php } else{?>
+					<!-- REGISTER -->
+					<div class="block-action-header top-link-account login-link">
+						<ul>
+								<li>
+									<a href="/customer/account/create/" title="Registrarse">Registrarse</a>
+								</li>
+						</ul>
+					</div>
+					<!-- END REGISTER -->
+					<?php } ?>
+
 					<!-- MYLOGIN -->
 					<div class="block-action-header top-link-account login-link">
 						<ul>
@@ -48,7 +64,7 @@
 								<?php echo $this->getChildHtml('topLinks');?>
 							</div>
 						</div>
-						
+
 						<div class="block-action-header top-link-account login-link login-mobile-btn">
 							<ul>
 								<?php if(!$this->helper('customer')->isLoggedIn()){?>
@@ -62,7 +78,7 @@
 								<?php } ?>
 							</ul>
 						</div>
-						
+
 					</div>
 				</div>
 			</div>

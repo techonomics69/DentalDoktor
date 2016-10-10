@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magebright_CustomerApprove>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Magebright_CustomerApprove>
+    </modules>
+</config>

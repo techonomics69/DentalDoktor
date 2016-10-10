@@ -11692,8 +11692,12 @@ label em {
   margin-bottom: 20px;
 }
 .account-create .input-text {
+  width: 80% !important;
+}
+.account-create .select {
   width: 100% !important;
 }
+
 .links-second a {
   cursor: pointer;
 }
