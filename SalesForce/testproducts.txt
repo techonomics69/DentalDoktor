@@ -1,5 +1,0 @@
-{
-  "LastModifiedDate": "2016-10-02",
-  "IsActive": true,
-  "IsDeleted": false
-}

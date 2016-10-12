@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <webtolead_index_index>
+        <reference name="content">
+            <block type="webtolead/webtolead" name="webtolead" template="webtolead/webtolead.phtml" />
+        </reference>
+    </webtolead_index_index>
+</layout>
