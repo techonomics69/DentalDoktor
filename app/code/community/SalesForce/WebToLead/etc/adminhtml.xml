@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SalesForce_WebToLead extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       SalesForce
+ * @package        SalesForce_WebToLead
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <salesforce_webtolead translate="title" module="salesforce_webtolead">
+                                        <title>WebToLead</title>
+                                    </salesforce_webtolead>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <salesforce_webtolead translate="title" module="salesforce_webtolead">
+                        <title>SalesForce</title>
+                        <children>
+                            <prospecto translate="title" module="salesforce_webtolead">
+                                <title>Prospecto</title>
+                                <sort_order>0</sort_order>
+                            </prospecto>
+                        </children>
+                    </salesforce_webtolead>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <salesforce_webtolead translate="title" module="salesforce_webtolead">
+            <title>SalesForce</title>
+            <sort_order>35</sort_order>
+            <children>
+                <prospecto translate="title" module="salesforce_webtolead">
+                    <title>Prospecto</title>
+                    <action>adminhtml/webtolead_prospecto</action>
+                    <sort_order>0</sort_order>
+                </prospecto>
+            </children>
+        </salesforce_webtolead>
+    </menu>
+</config>

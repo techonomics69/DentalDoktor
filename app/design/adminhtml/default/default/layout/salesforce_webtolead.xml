@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SalesForce_WebToLead extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       SalesForce
+ * @package        SalesForce_WebToLead
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_webtolead_prospecto_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>salesforce_webtolead/prospecto</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="salesforce_webtolead/adminhtml_prospecto" name="prospecto" />
+
+        </reference>
+    </adminhtml_webtolead_prospecto_index>
+    <adminhtml_webtolead_prospecto_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="salesforce_webtolead/adminhtml_prospecto_grid" name="prospecto_grid"/>
+        </block>
+    </adminhtml_webtolead_prospecto_grid>
+    <!-- Prospecto add/edit action -->
+    <adminhtml_webtolead_prospecto_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>salesforce_webtolead/prospecto</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="salesforce_webtolead/adminhtml_prospecto_edit" name="prospecto_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="salesforce_webtolead/adminhtml_prospecto_edit_tabs" name="prospecto_tabs"></block>
+        </reference>
+    </adminhtml_webtolead_prospecto_edit>
+
+</layout>

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SalesForce_WebToLead extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       SalesForce
+ * @package        SalesForce_WebToLead
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <SalesForce_WebToLead>
+            <version>1.0.0</version>
+        </SalesForce_WebToLead>
+    </modules>
+    <global>
+        <resources>
+            <salesforce_webtolead_setup>
+                <setup>
+                    <module>SalesForce_WebToLead</module>
+                    <class>SalesForce_WebToLead_Model_Resource_Setup</class>
+                </setup>
+            </salesforce_webtolead_setup>
+        </resources>
+        <blocks>
+            <salesforce_webtolead>
+                <class>SalesForce_WebToLead_Block</class>
+            </salesforce_webtolead>
+        </blocks>
+        <helpers>
+            <salesforce_webtolead>
+                <class>SalesForce_WebToLead_Helper</class>
+            </salesforce_webtolead>
+        </helpers>
+        <models>
+            <salesforce_webtolead>
+                <class>SalesForce_WebToLead_Model</class>
+                <resourceModel>salesforce_webtolead_resource</resourceModel>
+            </salesforce_webtolead>
+            <salesforce_webtolead_resource>
+                <class>SalesForce_WebToLead_Model_Resource</class>
+                <entities>
+                    <prospecto>
+                        <table>salesforce_webtolead_prospecto</table>
+                    </prospecto>
+                </entities>
+            </salesforce_webtolead_resource>
+        </models>
+        <events>
+            <customer_new_account_email_sent>
+                <observers>
+                    <SalesForce_WebToLead_Model_Observer>
+                        <type>singleton</type>
+                        <class>salesforce_webtolead/observer</class>
+                        <method>createProspect</method>
+                    </SalesForce_WebToLead_Model_Observer>
+                </observers>
+            </customer_new_account_email_sent>
+        </events>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <salesforce_webtolead>
+                    <file>salesforce_webtolead.xml</file>
+                </salesforce_webtolead>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <SalesForce_WebToLead>
+                    <files>
+                        <default>SalesForce_WebToLead.csv</default>
+                    </files>
+                </SalesForce_WebToLead>
+            </modules>
+        </translate>
+        <global_search>
+            <prospecto>
+                <class>salesforce_webtolead/adminhtml_search_prospecto</class>
+                <acl>salesforce_webtolead</acl>
+            </prospecto>
+        </global_search>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <SalesForce_WebToLead before="Mage_Adminhtml">SalesForce_WebToLead_Adminhtml</SalesForce_WebToLead>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * SalesForce_WebToLead extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       SalesForce
+ * @package        SalesForce_WebToLead
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <api>
+        <resources>
+            <webtolead_prospecto translate="title" module="salesforce_webtolead">
+                <title>Prospecto API</title>
+                <model>salesforce_webtolead/prospecto_api</model>
+                <acl>webtolead/prospecto</acl>
+                <methods>
+                    <list translate="title" module="salesforce_webtolead">
+                        <title>Retrieve list of prospectos</title>
+                        <method>items</method>
+                        <acl>webtolead/prospecto/list</acl>
+                    </list>
+                    <info translate="title" module="salesforce_webtolead">
+                        <title>Retrieve prospecto info</title>
+                        <acl>webtolead/prospecto/info</acl>
+                    </info>
+                    <add translate="title" module="salesforce_webtolead">
+                        <title>Add prospecto</title>
+                        <acl>webtolead/prospecto/add</acl>
+                    </add>
+                    <update translate="title" module="salesforce_webtolead">
+                        <title>Update prospecto</title>
+                        <acl>webtolead/prospecto/update</acl>
+                    </update>
+                    <remove translate="title" module="salesforce_webtolead">
+                        <title>Remove prospecto</title>
+                        <acl>webtolead/prospecto/remove</acl>
+                    </remove>
+                </methods>
+                <faults module="salesforce_webtolead">
+                    <prospecto_not_exists>
+                        <code>101</code>
+                        <message>Requested prospecto does not exist.</message>
+                    </prospecto_not_exists>
+                    <invalid_data>
+                        <code>102</code>
+                        <message>Provided data is invalid.</message>
+                    </invalid_data>
+                    <save_error>
+                        <code>103</code>
+                        <message>Error while saving prospecto. Details in error message.</message>
+                    </save_error>
+                    <remove_error>
+                        <code>104</code>
+                        <message>Error while removing prospecto. Details in error message.</message>
+                    </remove_error>
+                </faults>
+            </webtolead_prospecto>
+        </resources>
+        <resources_alias>
+            <prospecto>webtolead_prospecto</prospecto>
+        </resources_alias>
+        <v2>
+            <resources_function_prefix>
+                <prospecto>webtoleadProspecto</prospecto>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <salesforce_webtolead translate="title" module="salesforce_webtolead">
+                    <title>WebToLead</title>
+                    <prospecto translate="title" module="salesforce_webtolead">
+                        <title>Prospecto</title>
+                        <sort_order>0</sort_order>
+                        <list translate="title" module="salesforce_webtolead">
+                            <title>List</title>
+                        </list>
+                        <info translate="title" module="salesforce_webtolead">
+                            <title>Info</title>
+                        </info>
+                        <add translate="title" module="salesforce_webtolead">
+                            <title>Add</title>
+                        </add>
+                        <update translate="title" module="salesforce_webtolead">
+                            <title>Update</title>
+                        </update>
+                        <remove translate="title" module="salesforce_webtolead">
+                            <title>Remove</title>
+                        </remove>
+                    </prospecto>
+                </salesforce_webtolead>
+            </resources>
+        </acl>
+    </api>
+</config>

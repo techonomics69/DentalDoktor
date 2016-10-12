@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+    name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />
+            <complexType name="webtoleadProspectoListEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="first_name" type="xsd:string" minOccurs="1" />
+                    <element name="last_name" type="xsd:string" minOccurs="1" />
+                    <element name="document_type" type="xsd:string" minOccurs="1" />
+                    <element name="document_number" type="xsd:string" minOccurs="1" />
+                    <element name="birthdate" type="xsd:string" minOccurs="0" />
+                    <element name="mobile" type="xsd:string" minOccurs="0" />
+                    <element name="email_type" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="1" />
+                    <element name="password" type="xsd:string" minOccurs="0" />
+                    <element name="company" type="xsd:string" minOccurs="1" />
+                    <element name="industry" type="xsd:string" minOccurs="0" />
+                    <element name="area" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="phone" type="xsd:string" minOccurs="1" />
+                    <element name="fax" type="xsd:string" minOccurs="0" />
+                    <element name="website" type="xsd:string" minOccurs="0" />
+                    <element name="country_code" type="xsd:string" minOccurs="1" />
+                    <element name="state_code" type="xsd:string" minOccurs="1" />
+                    <element name="city" type="xsd:string" minOccurs="1" />
+                    <element name="locality" type="xsd:string" minOccurs="0" />
+                    <element name="street" type="xsd:string" minOccurs="1" />
+                    <element name="zip" type="xsd:string" minOccurs="0" />
+                    <element name="lead_source" type="xsd:string" minOccurs="0" />
+                    <element name="dentaldoktor" type="xsd:string" minOccurs="1" />
+                    <element name="habeas_data" type="xsd:string" minOccurs="1" />
+                    <element name="response" type="xsd:string" minOccurs="1" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+            <complexType name="webtoleadProspectoListEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:webtoleadProspectoListEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="webtoleadProspectoAddEntity">
+                <all>
+                    <element name="first_name" type="xsd:string" minOccurs="1" />
+                    <element name="last_name" type="xsd:string" minOccurs="1" />
+                    <element name="document_type" type="xsd:string" minOccurs="1" />
+                    <element name="document_number" type="xsd:string" minOccurs="1" />
+                    <element name="birthdate" type="xsd:string" minOccurs="0" />
+                    <element name="mobile" type="xsd:string" minOccurs="0" />
+                    <element name="email_type" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="1" />
+                    <element name="password" type="xsd:string" minOccurs="0" />
+                    <element name="company" type="xsd:string" minOccurs="1" />
+                    <element name="industry" type="xsd:string" minOccurs="0" />
+                    <element name="area" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="phone" type="xsd:string" minOccurs="1" />
+                    <element name="fax" type="xsd:string" minOccurs="0" />
+                    <element name="website" type="xsd:string" minOccurs="0" />
+                    <element name="country_code" type="xsd:string" minOccurs="1" />
+                    <element name="state_code" type="xsd:string" minOccurs="1" />
+                    <element name="city" type="xsd:string" minOccurs="1" />
+                    <element name="locality" type="xsd:string" minOccurs="0" />
+                    <element name="street" type="xsd:string" minOccurs="1" />
+                    <element name="zip" type="xsd:string" minOccurs="0" />
+                    <element name="lead_source" type="xsd:string" minOccurs="0" />
+                    <element name="dentaldoktor" type="xsd:string" minOccurs="1" />
+                    <element name="habeas_data" type="xsd:string" minOccurs="1" />
+                    <element name="response" type="xsd:string" minOccurs="1" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="webtoleadProspectoUpdateEntity">
+                <all>
+                    <element name="first_name" type="xsd:string" minOccurs="1" />
+                    <element name="last_name" type="xsd:string" minOccurs="1" />
+                    <element name="document_type" type="xsd:string" minOccurs="1" />
+                    <element name="document_number" type="xsd:string" minOccurs="1" />
+                    <element name="birthdate" type="xsd:string" minOccurs="0" />
+                    <element name="mobile" type="xsd:string" minOccurs="0" />
+                    <element name="email_type" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="1" />
+                    <element name="password" type="xsd:string" minOccurs="0" />
+                    <element name="company" type="xsd:string" minOccurs="1" />
+                    <element name="industry" type="xsd:string" minOccurs="0" />
+                    <element name="area" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="phone" type="xsd:string" minOccurs="1" />
+                    <element name="fax" type="xsd:string" minOccurs="0" />
+                    <element name="website" type="xsd:string" minOccurs="0" />
+                    <element name="country_code" type="xsd:string" minOccurs="1" />
+                    <element name="state_code" type="xsd:string" minOccurs="1" />
+                    <element name="city" type="xsd:string" minOccurs="1" />
+                    <element name="locality" type="xsd:string" minOccurs="0" />
+                    <element name="street" type="xsd:string" minOccurs="1" />
+                    <element name="zip" type="xsd:string" minOccurs="0" />
+                    <element name="lead_source" type="xsd:string" minOccurs="0" />
+                    <element name="dentaldoktor" type="xsd:string" minOccurs="1" />
+                    <element name="habeas_data" type="xsd:string" minOccurs="1" />
+                    <element name="response" type="xsd:string" minOccurs="1" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="webtoleadProspectoInfoEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="first_name" type="xsd:string" minOccurs="1" />
+                    <element name="last_name" type="xsd:string" minOccurs="1" />
+                    <element name="document_type" type="xsd:string" minOccurs="1" />
+                    <element name="document_number" type="xsd:string" minOccurs="1" />
+                    <element name="birthdate" type="xsd:string" minOccurs="0" />
+                    <element name="mobile" type="xsd:string" minOccurs="0" />
+                    <element name="email_type" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="1" />
+                    <element name="password" type="xsd:string" minOccurs="0" />
+                    <element name="company" type="xsd:string" minOccurs="1" />
+                    <element name="industry" type="xsd:string" minOccurs="0" />
+                    <element name="area" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="phone" type="xsd:string" minOccurs="1" />
+                    <element name="fax" type="xsd:string" minOccurs="0" />
+                    <element name="website" type="xsd:string" minOccurs="0" />
+                    <element name="country_code" type="xsd:string" minOccurs="1" />
+                    <element name="state_code" type="xsd:string" minOccurs="1" />
+                    <element name="city" type="xsd:string" minOccurs="1" />
+                    <element name="locality" type="xsd:string" minOccurs="0" />
+                    <element name="street" type="xsd:string" minOccurs="1" />
+                    <element name="zip" type="xsd:string" minOccurs="0" />
+                    <element name="lead_source" type="xsd:string" minOccurs="0" />
+                    <element name="dentaldoktor" type="xsd:string" minOccurs="1" />
+                    <element name="habeas_data" type="xsd:string" minOccurs="1" />
+                    <element name="response" type="xsd:string" minOccurs="1" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+                </schema>
+    </types>
+    <message name="webtoleadProspectoListRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters"/>
+    </message>
+    <message name="webtoleadProspectoListResponse">
+        <part name="result" type="typens:webtoleadProspectoListEntityArray" />
+    </message>
+    <message name="webtoleadProspectoInfoRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="prospectoId" type="xsd:string" />
+    </message>
+    <message name="webtoleadProspectoInfoResponse">
+        <part name="result" type="typens:webtoleadProspectoInfoEntity" />
+    </message>
+    <message name="webtoleadProspectoAddRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="data" type="typens:webtoleadProspectoAddEntity" />
+    </message>
+    <message name="webtoleadProspectoAddResponse">
+        <part name="result" type="xsd:int"/>
+    </message>
+    <message name="webtoleadProspectoUpdateRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="prospectoId" type="xsd:string" />
+        <part name="data" type="typens:webtoleadProspectoUpdateEntity" />
+    </message>
+    <message name="webtoleadProspectoUpdateResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+    <message name="webtoleadProspectoRemoveRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="prospectoId" type="xsd:string" />
+    </message>
+    <message name="webtoleadProspectoRemoveResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+        <portType name="{{var wsdl.handler}}PortType">
+        <operation name="webtoleadProspectoList">
+            <documentation>Retrieve list of prospecto</documentation>
+            <input message="typens:webtoleadProspectoListRequest" />
+            <output message="typens:webtoleadProspectoListResponse" />
+        </operation>
+        <operation name="webtoleadProspectoInfo">
+            <documentation>Retrieve prospecto info</documentation>
+            <input message="typens:webtoleadProspectoInfoRequest" />
+            <output message="typens:webtoleadProspectoInfoResponse" />
+        </operation>
+        <operation name="webtoleadProspectoAdd">
+            <documentation>Add prospecto</documentation>
+            <input message="typens:webtoleadProspectoAddRequest" />
+            <output message="typens:webtoleadProspectoAddResponse" />
+        </operation>
+        <operation name="webtoleadProspectoUpdate">
+            <documentation>Update prospecto</documentation>
+            <input message="typens:webtoleadProspectoUpdateRequest" />
+            <output message="typens:webtoleadProspectoUpdateResponse" />
+        </operation>
+        <operation name="webtoleadProspectoRemove">
+            <documentation>Remove prospecto</documentation>
+            <input message="typens:webtoleadProspectoRemoveRequest" />
+            <output message="typens:webtoleadProspectoRemoveResponse" />
+        </operation>
+        </portType>
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="webtoleadProspectoList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="webtoleadProspectoInfo">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="webtoleadProspectoAdd">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="webtoleadProspectoUpdate">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="webtoleadProspectoRemove">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        </binding>
+    <service name="{{var wsdl.name}}Service">
+        <port name="{{var wsdl.handler}}Port" binding="typens:{{var wsdl.handler}}Binding">
+            <soap:address location="{{var wsdl.url}}" />
+        </port>
+    </service>
+</definitions>
