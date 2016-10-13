@@ -16,39 +16,48 @@ class SalesForce_WebToLead_Model_Observer
             }
         }
 
+        // General Data
+        $lead["oid"] = "00DP0000003ooje";
+        $lead["retURL"] = "http://dental.herfox.com/SalesForce/testpost.php";
+        $lead["00NP0000000zglf"] = $data["dentaldoktor"] = 1;
+
         // Customer
+        $document_type = Mage::getModel('eav/config')->getAttribute('customer','document_type')->getSource()->getOptionText($customer->document_type);
+        $email_type = Mage::getModel('eav/config')->getAttribute('customer','email_type')->getSource()->getOptionText($customer->email_type);
+        $lead_source = Mage::getModel('eav/config')->getAttribute('customer','lead_source')->getSource()->getOptionText($customer->lead_source);
+
         $lead["first_name"] = $data["first_name"] = $customer->firstname;
         $lead["last_name"] = $data["last_name"] = $customer->lastname;
-        $lead["00NP0000000zfGl"] = $data["document_type"] = "RUT";
-        $lead["00NP0000000zfK9"] = $data["document_number"] = "80127297";
+        $lead["00NP0000000zfGl"] = $data["document_type"] = $document_type;
+        $lead["00NP0000000zfK9"] = $data["document_number"] = $customer->document_number;
         $lead["00NP0000000zgdb"] = $data["birthdate"] = explode(" ", $customer->dob)[0];
-        $lead["mobile"] = $data["mobile"] = "3014431092";
-        $lead["00NP0000000zfHK"] = $data["email_type"] = "Personal";
+        $lead["mobile"] = $data["mobile"] = $customer->mobile;
+        $lead["00NP0000000zfHK"] = $data["email_type"] = $email_type;
         $lead["email"] = $data["email"] = $customer->email;
         $lead["password"] = $data["password"] = md5($customer->password);
+        $lead["lead_source"] = $data["lead_source"] = $lead_source;
+        $lead["00NP0000000zfLR"] = $data["habeas_data"] = $customer->habeas_data;
 
         // Customer Address
         foreach ($customer->getAddresses() as $address)
         {
-            $region = Mage::getModel('directory/region')->load($address->region_id);
+            $region = Mage::getModel('directory/region')->load($address->region_id)->getCode();
+            $industry = Mage::getModel('eav/config')->getAttribute('customer_address', 'industry')->getSource()->getOptionText($address->industry);
+            $locality = Mage::getModel('eav/config')->getAttribute('customer_address', 'locality')->getSource()->getOptionText($address->locality);
 
             $lead["company"] = $data["company"] = $address->company;
-            $lead["industry"] = $data["industry"] = "Cirugía Oral y Maxilofacial";
-            $lead["00NP00000019sFL"] = $data["area"] = "Admistrativa";
-            $lead["title"] = $data["title"] = "Gerente Administrativo";
+            $lead["industry"] = $data["industry"] = $industry;
+            $lead["00NP00000019sFL"] = $data["area"] = $address->area;
+            $lead["title"] = $data["title"] = $address->title;
             $lead["phone"] = $data["phone"] = $address->telephone;
             $lead["fax"] = $data["fax"] = "";
-            $lead["URL"] = $data["website"] = "www.herfox.com";
+            $lead["URL"] = $data["website"] = $address->website;
             $lead["country_code"] = $data["country_code"] = $address->country_id;
-            $lead["state_code"] = $data["region_code"] = $region->getCode();
+            $lead["state_code"] = $data["state_code"] = $region;
             $lead["city"] = $data["city"] = $address->city;
-            $lead["00NP00000014QcS"] = $data["locality"] = "Engativa";
+            $lead["00NP00000014QcS"] = $data["locality"] = $locality;
             $lead["street"] = $data["street"] = $address->street;
             $lead["zip"] = $data["zip"] = $address->postcode;
-            $lead["lead_source"] = $data["lead_source"] = "Visita comercial";
-            $lead["00NP0000000zglf"] = $data["dentaldoktor"] = 1;
-            $lead["00NP0000000zfLR"] = $data["habeas_data"] = 1;
-
         }
 /*
         echo('<pre>');
@@ -65,7 +74,7 @@ class SalesForce_WebToLead_Model_Observer
         $client = new Varien_Http_Client();
         $result = new Varien_Object();
 
-        $client->setUri('https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8')
+        $client->setUri('https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8')
             ->setConfig($_config)
             ->setMethod(Varien_Http_Client::POST)
             ->setParameterPost($lead);
@@ -74,7 +83,8 @@ class SalesForce_WebToLead_Model_Observer
             $response = $client->request();
             if ($response->isSuccessful())
             {
-                $data['response'] = $response->getBody();
+                //$data['response'] = $response->getBody();
+                $data['response'] = 'Ok';
                 $data["status"] = 1;
 
                 //echo('<pre>');

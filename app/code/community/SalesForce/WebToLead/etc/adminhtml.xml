@@ -36,7 +36,7 @@
                         <title>SalesForce</title>
                         <children>
                             <prospecto translate="title" module="salesforce_webtolead">
-                                <title>Prospecto</title>
+                                <title>Prospectos</title>
                                 <sort_order>0</sort_order>
                             </prospecto>
                         </children>
@@ -48,7 +48,7 @@
     <menu>
         <salesforce_webtolead translate="title" module="salesforce_webtolead">
             <title>SalesForce</title>
-            <sort_order>35</sort_order>
+            <sort_order>45</sort_order>
             <children>
                 <prospecto translate="title" module="salesforce_webtolead">
                     <title>Prospecto</title>
