@@ -3,6 +3,9 @@
     <modules>
         <Hwg_Attributemanager>
             <version>0.1.0</version>
+            <depends>
+                <Mage_Customer />
+            </depends>
         </Hwg_Attributemanager>
     </modules>
     <admin>
@@ -69,6 +72,12 @@
       
     <global>
         <models>
+            <customer>
+                <rewrite>
+                    <customer_api>Hwg_Attributemanager_Model_Customer_Api</customer_api>
+                    <customer_api_v2>Hwg_Attributemanager_Model_Customer_Api_V2</customer_api_v2>
+                </rewrite>
+            </customer>
             <attributemanager>
                 <class>Hwg_Attributemanager_Model</class>
             </attributemanager>

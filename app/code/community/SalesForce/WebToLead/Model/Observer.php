@@ -20,6 +20,7 @@ class SalesForce_WebToLead_Model_Observer
         $lead["oid"] = "00DP0000003ooje";
         $lead["retURL"] = "http://dental.herfox.com/SalesForce/testpost.php";
         $lead["00NP0000000zglf"] = $data["dentaldoktor"] = 1;
+        $lead["00NP0000001A5NI"] = $customer->entity_id;
 
         // Customer
         $document_type = Mage::getModel('eav/config')->getAttribute('customer','document_type')->getSource()->getOptionText($customer->document_type);
@@ -34,7 +35,7 @@ class SalesForce_WebToLead_Model_Observer
         $lead["mobile"] = $data["mobile"] = $customer->mobile;
         $lead["00NP0000000zfHK"] = $data["email_type"] = $email_type;
         $lead["email"] = $data["email"] = $customer->email;
-        $lead["password"] = $data["password"] = md5($customer->password);
+        $lead["00NP00000019r2a"] = $data["password"] = md5($customer->password);
         $lead["lead_source"] = $data["lead_source"] = $lead_source;
         $lead["00NP0000000zfLR"] = $data["habeas_data"] = $customer->habeas_data;
 
@@ -61,10 +62,11 @@ class SalesForce_WebToLead_Model_Observer
         }
 /*
         echo('<pre>');
-        var_dump($data);
+        var_dump($lead);
         echo('</pre>');
-        Mage::log($data, null, "herfox_test.log");
 */
+        Mage::log($lead, null, "prospects.log");
+
         // Call to Web To Lead of SalesForce
         $_config = array(
             'maxredirects' => 5,
@@ -84,7 +86,7 @@ class SalesForce_WebToLead_Model_Observer
             if ($response->isSuccessful())
             {
                 //$data['response'] = $response->getBody();
-                $data['response'] = 'Ok';
+                $data['response'] = $customer->entity_id;
                 $data["status"] = 1;
 
                 //echo('<pre>');
