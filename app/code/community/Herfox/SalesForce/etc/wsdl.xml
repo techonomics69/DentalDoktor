@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+    name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />
+            <complexType name="salesforceProspectListEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="customer_id" type="xsd:string" minOccurs="1" />
+                    <element name="first_name" type="xsd:string" minOccurs="1" />
+                    <element name="last_name" type="xsd:string" minOccurs="1" />
+                    <element name="document_type" type="xsd:string" minOccurs="1" />
+                    <element name="document_number" type="xsd:string" minOccurs="1" />
+                    <element name="birthdate" type="xsd:string" minOccurs="0" />
+                    <element name="mobile" type="xsd:string" minOccurs="0" />
+                    <element name="email_type" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="1" />
+                    <element name="password" type="xsd:string" minOccurs="0" />
+                    <element name="company" type="xsd:string" minOccurs="1" />
+                    <element name="industry" type="xsd:string" minOccurs="0" />
+                    <element name="area" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="phone" type="xsd:string" minOccurs="1" />
+                    <element name="fax" type="xsd:string" minOccurs="0" />
+                    <element name="website" type="xsd:string" minOccurs="0" />
+                    <element name="country_code" type="xsd:string" minOccurs="1" />
+                    <element name="state_code" type="xsd:string" minOccurs="1" />
+                    <element name="city" type="xsd:string" minOccurs="1" />
+                    <element name="locality" type="xsd:string" minOccurs="0" />
+                    <element name="street" type="xsd:string" minOccurs="1" />
+                    <element name="zip" type="xsd:string" minOccurs="0" />
+                    <element name="lead_source" type="xsd:string" minOccurs="0" />
+                    <element name="dentaldoktor" type="xsd:string" minOccurs="1" />
+                    <element name="habeas_data" type="xsd:string" minOccurs="1" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+            <complexType name="salesforceProspectListEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:salesforceProspectListEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="salesforceProspectAddEntity">
+                <all>
+                    <element name="customer_id" type="xsd:string" minOccurs="1" />
+                    <element name="first_name" type="xsd:string" minOccurs="1" />
+                    <element name="last_name" type="xsd:string" minOccurs="1" />
+                    <element name="document_type" type="xsd:string" minOccurs="1" />
+                    <element name="document_number" type="xsd:string" minOccurs="1" />
+                    <element name="birthdate" type="xsd:string" minOccurs="0" />
+                    <element name="mobile" type="xsd:string" minOccurs="0" />
+                    <element name="email_type" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="1" />
+                    <element name="password" type="xsd:string" minOccurs="0" />
+                    <element name="company" type="xsd:string" minOccurs="1" />
+                    <element name="industry" type="xsd:string" minOccurs="0" />
+                    <element name="area" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="phone" type="xsd:string" minOccurs="1" />
+                    <element name="fax" type="xsd:string" minOccurs="0" />
+                    <element name="website" type="xsd:string" minOccurs="0" />
+                    <element name="country_code" type="xsd:string" minOccurs="1" />
+                    <element name="state_code" type="xsd:string" minOccurs="1" />
+                    <element name="city" type="xsd:string" minOccurs="1" />
+                    <element name="locality" type="xsd:string" minOccurs="0" />
+                    <element name="street" type="xsd:string" minOccurs="1" />
+                    <element name="zip" type="xsd:string" minOccurs="0" />
+                    <element name="lead_source" type="xsd:string" minOccurs="0" />
+                    <element name="dentaldoktor" type="xsd:string" minOccurs="1" />
+                    <element name="habeas_data" type="xsd:string" minOccurs="1" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="salesforceProspectUpdateEntity">
+                <all>
+                    <element name="customer_id" type="xsd:string" minOccurs="1" />
+                    <element name="first_name" type="xsd:string" minOccurs="1" />
+                    <element name="last_name" type="xsd:string" minOccurs="1" />
+                    <element name="document_type" type="xsd:string" minOccurs="1" />
+                    <element name="document_number" type="xsd:string" minOccurs="1" />
+                    <element name="birthdate" type="xsd:string" minOccurs="0" />
+                    <element name="mobile" type="xsd:string" minOccurs="0" />
+                    <element name="email_type" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="1" />
+                    <element name="password" type="xsd:string" minOccurs="0" />
+                    <element name="company" type="xsd:string" minOccurs="1" />
+                    <element name="industry" type="xsd:string" minOccurs="0" />
+                    <element name="area" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="phone" type="xsd:string" minOccurs="1" />
+                    <element name="fax" type="xsd:string" minOccurs="0" />
+                    <element name="website" type="xsd:string" minOccurs="0" />
+                    <element name="country_code" type="xsd:string" minOccurs="1" />
+                    <element name="state_code" type="xsd:string" minOccurs="1" />
+                    <element name="city" type="xsd:string" minOccurs="1" />
+                    <element name="locality" type="xsd:string" minOccurs="0" />
+                    <element name="street" type="xsd:string" minOccurs="1" />
+                    <element name="zip" type="xsd:string" minOccurs="0" />
+                    <element name="lead_source" type="xsd:string" minOccurs="0" />
+                    <element name="dentaldoktor" type="xsd:string" minOccurs="1" />
+                    <element name="habeas_data" type="xsd:string" minOccurs="1" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="salesforceProspectInfoEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="customer_id" type="xsd:string" minOccurs="1" />
+                    <element name="first_name" type="xsd:string" minOccurs="1" />
+                    <element name="last_name" type="xsd:string" minOccurs="1" />
+                    <element name="document_type" type="xsd:string" minOccurs="1" />
+                    <element name="document_number" type="xsd:string" minOccurs="1" />
+                    <element name="birthdate" type="xsd:string" minOccurs="0" />
+                    <element name="mobile" type="xsd:string" minOccurs="0" />
+                    <element name="email_type" type="xsd:string" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="1" />
+                    <element name="password" type="xsd:string" minOccurs="0" />
+                    <element name="company" type="xsd:string" minOccurs="1" />
+                    <element name="industry" type="xsd:string" minOccurs="0" />
+                    <element name="area" type="xsd:string" minOccurs="0" />
+                    <element name="title" type="xsd:string" minOccurs="0" />
+                    <element name="phone" type="xsd:string" minOccurs="1" />
+                    <element name="fax" type="xsd:string" minOccurs="0" />
+                    <element name="website" type="xsd:string" minOccurs="0" />
+                    <element name="country_code" type="xsd:string" minOccurs="1" />
+                    <element name="state_code" type="xsd:string" minOccurs="1" />
+                    <element name="city" type="xsd:string" minOccurs="1" />
+                    <element name="locality" type="xsd:string" minOccurs="0" />
+                    <element name="street" type="xsd:string" minOccurs="1" />
+                    <element name="zip" type="xsd:string" minOccurs="0" />
+                    <element name="lead_source" type="xsd:string" minOccurs="0" />
+                    <element name="dentaldoktor" type="xsd:string" minOccurs="1" />
+                    <element name="habeas_data" type="xsd:string" minOccurs="1" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+                    <complexType name="salesforceProductListEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+            <complexType name="salesforceProductListEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:salesforceProductListEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="salesforceProductAddEntity">
+                <all>
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="salesforceProductUpdateEntity">
+                <all>
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="salesforceProductInfoEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+                    <complexType name="salesforcePriceListEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+            <complexType name="salesforcePriceListEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:salesforcePriceListEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="salesforcePriceAddEntity">
+                <all>
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="salesforcePriceUpdateEntity">
+                <all>
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="salesforcePriceInfoEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+                    <complexType name="salesforceDiscountListEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+            <complexType name="salesforceDiscountListEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:salesforceDiscountListEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="salesforceDiscountAddEntity">
+                <all>
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="salesforceDiscountUpdateEntity">
+                <all>
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                </all>
+            </complexType>
+            <complexType name="salesforceDiscountInfoEntity">
+                <all>
+                    <element name="entity_id" type="xsd:string" minOccurs="1" />
+                    <element name="name" type="xsd:string" minOccurs="1" />
+                    <element name="total" type="xsd:string" minOccurs="1" />
+                    <element name="success" type="xsd:string" minOccurs="1" />
+                    <element name="unsuccess" type="xsd:string" minOccurs="1" />
+                    <element name="errors" type="xsd:string" minOccurs="0" />
+                    <element name="status" type="xsd:string" minOccurs="0" />
+
+                    <element name="created_at" type="xsd:string" minOccurs="1" />
+                    <element name="updated_at" type="xsd:string" minOccurs="1" />
+                </all>
+            </complexType>
+                </schema>
+    </types>
+    <message name="salesforceProspectListRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters"/>
+    </message>
+    <message name="salesforceProspectListResponse">
+        <part name="result" type="typens:salesforceProspectListEntityArray" />
+    </message>
+    <message name="salesforceProspectInfoRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="prospectId" type="xsd:string" />
+    </message>
+    <message name="salesforceProspectInfoResponse">
+        <part name="result" type="typens:salesforceProspectInfoEntity" />
+    </message>
+    <message name="salesforceProspectAddRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="data" type="typens:salesforceProspectAddEntity" />
+    </message>
+    <message name="salesforceProspectAddResponse">
+        <part name="result" type="xsd:int"/>
+    </message>
+    <message name="salesforceProspectUpdateRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="prospectId" type="xsd:string" />
+        <part name="data" type="typens:salesforceProspectUpdateEntity" />
+    </message>
+    <message name="salesforceProspectUpdateResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+    <message name="salesforceProspectRemoveRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="prospectId" type="xsd:string" />
+    </message>
+    <message name="salesforceProspectRemoveResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+        <message name="salesforceProductListRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters"/>
+    </message>
+    <message name="salesforceProductListResponse">
+        <part name="result" type="typens:salesforceProductListEntityArray" />
+    </message>
+    <message name="salesforceProductInfoRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="productId" type="xsd:string" />
+    </message>
+    <message name="salesforceProductInfoResponse">
+        <part name="result" type="typens:salesforceProductInfoEntity" />
+    </message>
+    <message name="salesforceProductAddRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="data" type="typens:salesforceProductAddEntity" />
+    </message>
+    <message name="salesforceProductAddResponse">
+        <part name="result" type="xsd:int"/>
+    </message>
+    <message name="salesforceProductUpdateRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="productId" type="xsd:string" />
+        <part name="data" type="typens:salesforceProductUpdateEntity" />
+    </message>
+    <message name="salesforceProductUpdateResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+    <message name="salesforceProductRemoveRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="productId" type="xsd:string" />
+    </message>
+    <message name="salesforceProductRemoveResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+        <message name="salesforcePriceListRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters"/>
+    </message>
+    <message name="salesforcePriceListResponse">
+        <part name="result" type="typens:salesforcePriceListEntityArray" />
+    </message>
+    <message name="salesforcePriceInfoRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="priceId" type="xsd:string" />
+    </message>
+    <message name="salesforcePriceInfoResponse">
+        <part name="result" type="typens:salesforcePriceInfoEntity" />
+    </message>
+    <message name="salesforcePriceAddRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="data" type="typens:salesforcePriceAddEntity" />
+    </message>
+    <message name="salesforcePriceAddResponse">
+        <part name="result" type="xsd:int"/>
+    </message>
+    <message name="salesforcePriceUpdateRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="priceId" type="xsd:string" />
+        <part name="data" type="typens:salesforcePriceUpdateEntity" />
+    </message>
+    <message name="salesforcePriceUpdateResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+    <message name="salesforcePriceRemoveRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="priceId" type="xsd:string" />
+    </message>
+    <message name="salesforcePriceRemoveResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+        <message name="salesforceDiscountListRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters"/>
+    </message>
+    <message name="salesforceDiscountListResponse">
+        <part name="result" type="typens:salesforceDiscountListEntityArray" />
+    </message>
+    <message name="salesforceDiscountInfoRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="discountId" type="xsd:string" />
+    </message>
+    <message name="salesforceDiscountInfoResponse">
+        <part name="result" type="typens:salesforceDiscountInfoEntity" />
+    </message>
+    <message name="salesforceDiscountAddRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="data" type="typens:salesforceDiscountAddEntity" />
+    </message>
+    <message name="salesforceDiscountAddResponse">
+        <part name="result" type="xsd:int"/>
+    </message>
+    <message name="salesforceDiscountUpdateRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="discountId" type="xsd:string" />
+        <part name="data" type="typens:salesforceDiscountUpdateEntity" />
+    </message>
+    <message name="salesforceDiscountUpdateResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+    <message name="salesforceDiscountRemoveRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="discountId" type="xsd:string" />
+    </message>
+    <message name="salesforceDiscountRemoveResponse">
+        <part name="result" type="xsd:boolean" />
+    </message>
+        <portType name="{{var wsdl.handler}}PortType">
+        <operation name="salesforceProspectList">
+            <documentation>Retrieve list of prospecto</documentation>
+            <input message="typens:salesforceProspectListRequest" />
+            <output message="typens:salesforceProspectListResponse" />
+        </operation>
+        <operation name="salesforceProspectInfo">
+            <documentation>Retrieve prospecto info</documentation>
+            <input message="typens:salesforceProspectInfoRequest" />
+            <output message="typens:salesforceProspectInfoResponse" />
+        </operation>
+        <operation name="salesforceProspectAdd">
+            <documentation>Add prospecto</documentation>
+            <input message="typens:salesforceProspectAddRequest" />
+            <output message="typens:salesforceProspectAddResponse" />
+        </operation>
+        <operation name="salesforceProspectUpdate">
+            <documentation>Update prospecto</documentation>
+            <input message="typens:salesforceProspectUpdateRequest" />
+            <output message="typens:salesforceProspectUpdateResponse" />
+        </operation>
+        <operation name="salesforceProspectRemove">
+            <documentation>Remove prospecto</documentation>
+            <input message="typens:salesforceProspectRemoveRequest" />
+            <output message="typens:salesforceProspectRemoveResponse" />
+        </operation>
+            <operation name="salesforceProductList">
+            <documentation>Retrieve list of producto</documentation>
+            <input message="typens:salesforceProductListRequest" />
+            <output message="typens:salesforceProductListResponse" />
+        </operation>
+        <operation name="salesforceProductInfo">
+            <documentation>Retrieve producto info</documentation>
+            <input message="typens:salesforceProductInfoRequest" />
+            <output message="typens:salesforceProductInfoResponse" />
+        </operation>
+        <operation name="salesforceProductAdd">
+            <documentation>Add producto</documentation>
+            <input message="typens:salesforceProductAddRequest" />
+            <output message="typens:salesforceProductAddResponse" />
+        </operation>
+        <operation name="salesforceProductUpdate">
+            <documentation>Update producto</documentation>
+            <input message="typens:salesforceProductUpdateRequest" />
+            <output message="typens:salesforceProductUpdateResponse" />
+        </operation>
+        <operation name="salesforceProductRemove">
+            <documentation>Remove producto</documentation>
+            <input message="typens:salesforceProductRemoveRequest" />
+            <output message="typens:salesforceProductRemoveResponse" />
+        </operation>
+            <operation name="salesforcePriceList">
+            <documentation>Retrieve list of precio</documentation>
+            <input message="typens:salesforcePriceListRequest" />
+            <output message="typens:salesforcePriceListResponse" />
+        </operation>
+        <operation name="salesforcePriceInfo">
+            <documentation>Retrieve precio info</documentation>
+            <input message="typens:salesforcePriceInfoRequest" />
+            <output message="typens:salesforcePriceInfoResponse" />
+        </operation>
+        <operation name="salesforcePriceAdd">
+            <documentation>Add precio</documentation>
+            <input message="typens:salesforcePriceAddRequest" />
+            <output message="typens:salesforcePriceAddResponse" />
+        </operation>
+        <operation name="salesforcePriceUpdate">
+            <documentation>Update precio</documentation>
+            <input message="typens:salesforcePriceUpdateRequest" />
+            <output message="typens:salesforcePriceUpdateResponse" />
+        </operation>
+        <operation name="salesforcePriceRemove">
+            <documentation>Remove precio</documentation>
+            <input message="typens:salesforcePriceRemoveRequest" />
+            <output message="typens:salesforcePriceRemoveResponse" />
+        </operation>
+            <operation name="salesforceDiscountList">
+            <documentation>Retrieve list of descuento</documentation>
+            <input message="typens:salesforceDiscountListRequest" />
+            <output message="typens:salesforceDiscountListResponse" />
+        </operation>
+        <operation name="salesforceDiscountInfo">
+            <documentation>Retrieve descuento info</documentation>
+            <input message="typens:salesforceDiscountInfoRequest" />
+            <output message="typens:salesforceDiscountInfoResponse" />
+        </operation>
+        <operation name="salesforceDiscountAdd">
+            <documentation>Add descuento</documentation>
+            <input message="typens:salesforceDiscountAddRequest" />
+            <output message="typens:salesforceDiscountAddResponse" />
+        </operation>
+        <operation name="salesforceDiscountUpdate">
+            <documentation>Update descuento</documentation>
+            <input message="typens:salesforceDiscountUpdateRequest" />
+            <output message="typens:salesforceDiscountUpdateResponse" />
+        </operation>
+        <operation name="salesforceDiscountRemove">
+            <documentation>Remove descuento</documentation>
+            <input message="typens:salesforceDiscountRemoveRequest" />
+            <output message="typens:salesforceDiscountRemoveResponse" />
+        </operation>
+        </portType>
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="salesforceProspectList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceProspectInfo">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceProspectAdd">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceProspectUpdate">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceProspectRemove">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+            <operation name="salesforceProductList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceProductInfo">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceProductAdd">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceProductUpdate">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceProductRemove">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+            <operation name="salesforcePriceList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforcePriceInfo">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforcePriceAdd">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforcePriceUpdate">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforcePriceRemove">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+            <operation name="salesforceDiscountList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceDiscountInfo">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceDiscountAdd">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceDiscountUpdate">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="salesforceDiscountRemove">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        </binding>
+    <service name="{{var wsdl.name}}Service">
+        <port name="{{var wsdl.handler}}Port" binding="typens:{{var wsdl.handler}}Binding">
+            <soap:address location="{{var wsdl.url}}" />
+        </port>
+    </service>
+</definitions>

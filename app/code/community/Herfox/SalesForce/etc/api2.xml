@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Herfox_SalesForce extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Herfox
+ * @package        Herfox_SalesForce
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <api2>
+        <resource_groups>
+            <herfox_salesforce translate="title" module="herfox_salesforce">
+                <title>SalesForce</title>
+                <sort_order>120</sort_order>
+                <children>
+                    <herfox_salesforce_prospect translate="title" module="herfox_salesforce">
+                        <title>Prospecto</title>
+                        <sort_order>0</sort_order>
+                    </herfox_salesforce_prospect>
+                    <herfox_salesforce_product translate="title" module="herfox_salesforce">
+                        <title>Producto</title>
+                        <sort_order>10</sort_order>
+                    </herfox_salesforce_product>
+                    <herfox_salesforce_price translate="title" module="herfox_salesforce">
+                        <title>Precio</title>
+                        <sort_order>20</sort_order>
+                    </herfox_salesforce_price>
+                    <herfox_salesforce_discount translate="title" module="herfox_salesforce">
+                        <title>Descuento</title>
+                        <sort_order>30</sort_order>
+                    </herfox_salesforce_discount>
+
+                </children>
+            </herfox_salesforce>
+        </resource_groups>
+        <resources>
+            <herfox_salesforce_prospect translate="title" module="herfox_salesforce">
+                <group>herfox_salesforce_prospect</group>
+                <model>herfox_salesforce/api2_prospect</model>
+                <working_model>herfox_salesforce/prospect</working_model>
+                <title>Prospecto</title>
+                <sort_order>0</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <attributes translate="entity_id customer_id first_name last_name document_type document_number birthdate mobile email_type email password company industry area title phone fax website country_code state_code city locality street zip lead_source dentaldoktor habeas_data status" module="herfox_salesforce">
+                    <entity_id>Id</entity_id>
+                    <customer_id>ID Cliente</customer_id>
+                    <first_name>Nombres</first_name>
+                    <last_name>Apellidos</last_name>
+                    <document_type>Tipo de Documento</document_type>
+                    <document_number>Número de Documento</document_number>
+                    <birthdate>Fecha de nacimiento</birthdate>
+                    <mobile>Celular</mobile>
+                    <email_type>Tipo de Correo</email_type>
+                    <email>Correo electrónico</email>
+                    <password>Clave</password>
+                    <company>Compañía</company>
+                    <industry>Especialidad</industry>
+                    <area>Área</area>
+                    <title>Cargo</title>
+                    <phone>Teléfono</phone>
+                    <fax>Fax</fax>
+                    <website>Sitio Web</website>
+                    <country_code>Código país</country_code>
+                    <state_code>Código región</state_code>
+                    <city>Ciudad</city>
+                    <locality>Localidad</locality>
+                    <street>Dirección</street>
+                    <zip>Código postal</zip>
+                    <lead_source>Como se enteró</lead_source>
+                    <dentaldoktor>Proviene de Web DentalDoktor</dentaldoktor>
+                    <habeas_data>Autoriza Habeas Data</habeas_data>
+                    <status>Enabled</status>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/salesforce_prospects/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/salesforce_prospects</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </herfox_salesforce_prospect>
+            <herfox_salesforce_product translate="title" module="herfox_salesforce">
+                <group>herfox_salesforce_product</group>
+                <model>herfox_salesforce/api2_product</model>
+                <working_model>herfox_salesforce/product</working_model>
+                <title>Producto</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <attributes translate="entity_id name total success unsuccess errors status" module="herfox_salesforce">
+                    <entity_id>Id</entity_id>
+                    <name>Nombre</name>
+                    <total>Procesados</total>
+                    <success>Exitosos</success>
+                    <unsuccess>No exitosos</unsuccess>
+                    <errors>Errores</errors>
+                    <status>Enabled</status>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/salesforce_products/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/salesforce_products</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </herfox_salesforce_product>
+            <herfox_salesforce_price translate="title" module="herfox_salesforce">
+                <group>herfox_salesforce_price</group>
+                <model>herfox_salesforce/api2_price</model>
+                <working_model>herfox_salesforce/price</working_model>
+                <title>Precio</title>
+                <sort_order>20</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <attributes translate="entity_id name total success unsuccess errors status" module="herfox_salesforce">
+                    <entity_id>Id</entity_id>
+                    <name>Nombre</name>
+                    <total>Procesados</total>
+                    <success>Exitosos</success>
+                    <unsuccess>No exitosos</unsuccess>
+                    <errors>Errores</errors>
+                    <status>Enabled</status>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/salesforce_prices/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/salesforce_prices</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </herfox_salesforce_price>
+            <herfox_salesforce_discount translate="title" module="herfox_salesforce">
+                <group>herfox_salesforce_discount</group>
+                <model>herfox_salesforce/api2_discount</model>
+                <working_model>herfox_salesforce/discount</working_model>
+                <title>Descuento</title>
+                <sort_order>30</sort_order>
+                <privileges>
+                    <admin>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                        <delete>1</delete>
+                    </admin>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                    <guest>
+                        <retrieve>1</retrieve>
+                    </guest>
+                </privileges>
+                <attributes translate="entity_id name total success unsuccess errors status" module="herfox_salesforce">
+                    <entity_id>Id</entity_id>
+                    <name>Nombre</name>
+                    <total>Procesados</total>
+                    <success>Exitosos</success>
+                    <unsuccess>No exitosos</unsuccess>
+                    <errors>Errores</errors>
+                    <status>Enabled</status>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/salesforce_discounts/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/salesforce_discounts</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </herfox_salesforce_discount>
+
+        </resources>
+    </api2>
+</config>

@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Herfox_SalesForce extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Herfox
+ * @package        Herfox_SalesForce
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <api>
+        <resources>
+            <salesforce_prospect translate="title" module="herfox_salesforce">
+                <title>Prospecto API</title>
+                <model>herfox_salesforce/prospect_api</model>
+                <acl>salesforce/prospect</acl>
+                <methods>
+                    <list translate="title" module="herfox_salesforce">
+                        <title>Retrieve list of prospectos</title>
+                        <method>items</method>
+                        <acl>salesforce/prospect/list</acl>
+                    </list>
+                    <info translate="title" module="herfox_salesforce">
+                        <title>Retrieve prospecto info</title>
+                        <acl>salesforce/prospect/info</acl>
+                    </info>
+                    <add translate="title" module="herfox_salesforce">
+                        <title>Add prospecto</title>
+                        <acl>salesforce/prospect/add</acl>
+                    </add>
+                    <update translate="title" module="herfox_salesforce">
+                        <title>Update prospecto</title>
+                        <acl>salesforce/prospect/update</acl>
+                    </update>
+                    <remove translate="title" module="herfox_salesforce">
+                        <title>Remove prospecto</title>
+                        <acl>salesforce/prospect/remove</acl>
+                    </remove>
+                </methods>
+                <faults module="herfox_salesforce">
+                    <prospect_not_exists>
+                        <code>101</code>
+                        <message>Requested prospecto does not exist.</message>
+                    </prospect_not_exists>
+                    <invalid_data>
+                        <code>102</code>
+                        <message>Provided data is invalid.</message>
+                    </invalid_data>
+                    <save_error>
+                        <code>103</code>
+                        <message>Error while saving prospecto. Details in error message.</message>
+                    </save_error>
+                    <remove_error>
+                        <code>104</code>
+                        <message>Error while removing prospecto. Details in error message.</message>
+                    </remove_error>
+                </faults>
+            </salesforce_prospect>
+            <salesforce_product translate="title" module="herfox_salesforce">
+                <title>Producto API</title>
+                <model>herfox_salesforce/product_api</model>
+                <acl>salesforce/product</acl>
+                <methods>
+                    <list translate="title" module="herfox_salesforce">
+                        <title>Retrieve list of productos</title>
+                        <method>items</method>
+                        <acl>salesforce/product/list</acl>
+                    </list>
+                    <info translate="title" module="herfox_salesforce">
+                        <title>Retrieve producto info</title>
+                        <acl>salesforce/product/info</acl>
+                    </info>
+                    <add translate="title" module="herfox_salesforce">
+                        <title>Add producto</title>
+                        <acl>salesforce/product/add</acl>
+                    </add>
+                    <update translate="title" module="herfox_salesforce">
+                        <title>Update producto</title>
+                        <acl>salesforce/product/update</acl>
+                    </update>
+                    <remove translate="title" module="herfox_salesforce">
+                        <title>Remove producto</title>
+                        <acl>salesforce/product/remove</acl>
+                    </remove>
+                </methods>
+                <faults module="herfox_salesforce">
+                    <product_not_exists>
+                        <code>101</code>
+                        <message>Requested producto does not exist.</message>
+                    </product_not_exists>
+                    <invalid_data>
+                        <code>102</code>
+                        <message>Provided data is invalid.</message>
+                    </invalid_data>
+                    <save_error>
+                        <code>103</code>
+                        <message>Error while saving producto. Details in error message.</message>
+                    </save_error>
+                    <remove_error>
+                        <code>104</code>
+                        <message>Error while removing producto. Details in error message.</message>
+                    </remove_error>
+                </faults>
+            </salesforce_product>
+            <salesforce_price translate="title" module="herfox_salesforce">
+                <title>Precio API</title>
+                <model>herfox_salesforce/price_api</model>
+                <acl>salesforce/price</acl>
+                <methods>
+                    <list translate="title" module="herfox_salesforce">
+                        <title>Retrieve list of precios</title>
+                        <method>items</method>
+                        <acl>salesforce/price/list</acl>
+                    </list>
+                    <info translate="title" module="herfox_salesforce">
+                        <title>Retrieve precio info</title>
+                        <acl>salesforce/price/info</acl>
+                    </info>
+                    <add translate="title" module="herfox_salesforce">
+                        <title>Add precio</title>
+                        <acl>salesforce/price/add</acl>
+                    </add>
+                    <update translate="title" module="herfox_salesforce">
+                        <title>Update precio</title>
+                        <acl>salesforce/price/update</acl>
+                    </update>
+                    <remove translate="title" module="herfox_salesforce">
+                        <title>Remove precio</title>
+                        <acl>salesforce/price/remove</acl>
+                    </remove>
+                </methods>
+                <faults module="herfox_salesforce">
+                    <price_not_exists>
+                        <code>101</code>
+                        <message>Requested precio does not exist.</message>
+                    </price_not_exists>
+                    <invalid_data>
+                        <code>102</code>
+                        <message>Provided data is invalid.</message>
+                    </invalid_data>
+                    <save_error>
+                        <code>103</code>
+                        <message>Error while saving precio. Details in error message.</message>
+                    </save_error>
+                    <remove_error>
+                        <code>104</code>
+                        <message>Error while removing precio. Details in error message.</message>
+                    </remove_error>
+                </faults>
+            </salesforce_price>
+            <salesforce_discount translate="title" module="herfox_salesforce">
+                <title>Descuento API</title>
+                <model>herfox_salesforce/discount_api</model>
+                <acl>salesforce/discount</acl>
+                <methods>
+                    <list translate="title" module="herfox_salesforce">
+                        <title>Retrieve list of descuentos</title>
+                        <method>items</method>
+                        <acl>salesforce/discount/list</acl>
+                    </list>
+                    <info translate="title" module="herfox_salesforce">
+                        <title>Retrieve descuento info</title>
+                        <acl>salesforce/discount/info</acl>
+                    </info>
+                    <add translate="title" module="herfox_salesforce">
+                        <title>Add descuento</title>
+                        <acl>salesforce/discount/add</acl>
+                    </add>
+                    <update translate="title" module="herfox_salesforce">
+                        <title>Update descuento</title>
+                        <acl>salesforce/discount/update</acl>
+                    </update>
+                    <remove translate="title" module="herfox_salesforce">
+                        <title>Remove descuento</title>
+                        <acl>salesforce/discount/remove</acl>
+                    </remove>
+                </methods>
+                <faults module="herfox_salesforce">
+                    <discount_not_exists>
+                        <code>101</code>
+                        <message>Requested descuento does not exist.</message>
+                    </discount_not_exists>
+                    <invalid_data>
+                        <code>102</code>
+                        <message>Provided data is invalid.</message>
+                    </invalid_data>
+                    <save_error>
+                        <code>103</code>
+                        <message>Error while saving descuento. Details in error message.</message>
+                    </save_error>
+                    <remove_error>
+                        <code>104</code>
+                        <message>Error while removing descuento. Details in error message.</message>
+                    </remove_error>
+                </faults>
+            </salesforce_discount>
+        </resources>
+        <resources_alias>
+            <prospect>salesforce_prospect</prospect>
+            <product>salesforce_product</product>
+            <price>salesforce_price</price>
+            <discount>salesforce_discount</discount>
+        </resources_alias>
+        <v2>
+            <resources_function_prefix>
+                <prospect>salesforceProspect</prospect>
+                <product>salesforceProduct</product>
+                <price>salesforcePrice</price>
+                <discount>salesforceDiscount</discount>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <herfox_salesforce translate="title" module="herfox_salesforce">
+                    <title>SalesForce</title>
+                    <prospect translate="title" module="herfox_salesforce">
+                        <title>Prospecto</title>
+                        <sort_order>0</sort_order>
+                        <list translate="title" module="herfox_salesforce">
+                            <title>List</title>
+                        </list>
+                        <info translate="title" module="herfox_salesforce">
+                            <title>Info</title>
+                        </info>
+                        <add translate="title" module="herfox_salesforce">
+                            <title>Add</title>
+                        </add>
+                        <update translate="title" module="herfox_salesforce">
+                            <title>Update</title>
+                        </update>
+                        <remove translate="title" module="herfox_salesforce">
+                            <title>Remove</title>
+                        </remove>
+                    </prospect>
+                    <product translate="title" module="herfox_salesforce">
+                        <title>Producto</title>
+                        <sort_order>10</sort_order>
+                        <list translate="title" module="herfox_salesforce">
+                            <title>List</title>
+                        </list>
+                        <info translate="title" module="herfox_salesforce">
+                            <title>Info</title>
+                        </info>
+                        <add translate="title" module="herfox_salesforce">
+                            <title>Add</title>
+                        </add>
+                        <update translate="title" module="herfox_salesforce">
+                            <title>Update</title>
+                        </update>
+                        <remove translate="title" module="herfox_salesforce">
+                            <title>Remove</title>
+                        </remove>
+                    </product>
+                    <price translate="title" module="herfox_salesforce">
+                        <title>Precio</title>
+                        <sort_order>20</sort_order>
+                        <list translate="title" module="herfox_salesforce">
+                            <title>List</title>
+                        </list>
+                        <info translate="title" module="herfox_salesforce">
+                            <title>Info</title>
+                        </info>
+                        <add translate="title" module="herfox_salesforce">
+                            <title>Add</title>
+                        </add>
+                        <update translate="title" module="herfox_salesforce">
+                            <title>Update</title>
+                        </update>
+                        <remove translate="title" module="herfox_salesforce">
+                            <title>Remove</title>
+                        </remove>
+                    </price>
+                    <discount translate="title" module="herfox_salesforce">
+                        <title>Descuento</title>
+                        <sort_order>30</sort_order>
+                        <list translate="title" module="herfox_salesforce">
+                            <title>List</title>
+                        </list>
+                        <info translate="title" module="herfox_salesforce">
+                            <title>Info</title>
+                        </info>
+                        <add translate="title" module="herfox_salesforce">
+                            <title>Add</title>
+                        </add>
+                        <update translate="title" module="herfox_salesforce">
+                            <title>Update</title>
+                        </update>
+                        <remove translate="title" module="herfox_salesforce">
+                            <title>Remove</title>
+                        </remove>
+                    </discount>
+                </herfox_salesforce>
+            </resources>
+        </acl>
+    </api>
+</config>

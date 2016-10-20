@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Herfox_SalesForce extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Herfox
+ * @package        Herfox_SalesForce
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+--> 
+<layout>
+    <adminhtml_salesforce_prospect_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>herfox_salesforce/prospect</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="herfox_salesforce/adminhtml_prospect" name="prospect" />
+
+        </reference>
+    </adminhtml_salesforce_prospect_index>
+    <adminhtml_salesforce_prospect_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="herfox_salesforce/adminhtml_prospect_grid" name="prospect_grid"/>
+        </block>
+    </adminhtml_salesforce_prospect_grid>
+    <!-- Prospect add/edit action -->
+    <adminhtml_salesforce_prospect_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>herfox_salesforce/prospect</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="herfox_salesforce/adminhtml_prospect_edit" name="prospect_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="herfox_salesforce/adminhtml_prospect_edit_tabs" name="prospect_tabs"></block>
+        </reference>
+    </adminhtml_salesforce_prospect_edit>
+
+    <adminhtml_salesforce_product_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>herfox_salesforce/product</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="herfox_salesforce/adminhtml_product" name="product" />
+
+        </reference>
+    </adminhtml_salesforce_product_index>
+    <adminhtml_salesforce_product_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="herfox_salesforce/adminhtml_product_grid" name="product_grid"/>
+        </block>
+    </adminhtml_salesforce_product_grid>
+    <!-- Product add/edit action -->
+    <adminhtml_salesforce_product_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>herfox_salesforce/product</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="herfox_salesforce/adminhtml_product_edit" name="product_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="herfox_salesforce/adminhtml_product_edit_tabs" name="product_tabs"></block>
+        </reference>
+    </adminhtml_salesforce_product_edit>
+
+    <adminhtml_salesforce_price_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>herfox_salesforce/price</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="herfox_salesforce/adminhtml_price" name="price" />
+
+        </reference>
+    </adminhtml_salesforce_price_index>
+    <adminhtml_salesforce_price_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="herfox_salesforce/adminhtml_price_grid" name="price_grid"/>
+        </block>
+    </adminhtml_salesforce_price_grid>
+    <!-- Price add/edit action -->
+    <adminhtml_salesforce_price_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>herfox_salesforce/price</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="herfox_salesforce/adminhtml_price_edit" name="price_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="herfox_salesforce/adminhtml_price_edit_tabs" name="price_tabs"></block>
+        </reference>
+    </adminhtml_salesforce_price_edit>
+
+    <adminhtml_salesforce_discount_index>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>herfox_salesforce/discount</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="herfox_salesforce/adminhtml_discount" name="discount" />
+
+        </reference>
+    </adminhtml_salesforce_discount_index>
+    <adminhtml_salesforce_discount_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="herfox_salesforce/adminhtml_discount_grid" name="discount_grid"/>
+        </block>
+    </adminhtml_salesforce_discount_grid>
+    <!-- Discount add/edit action -->
+    <adminhtml_salesforce_discount_edit>
+        <update handle="editor"/>
+        <reference name="menu">
+            <action method="setActive">
+                <menupath>herfox_salesforce/discount</menupath>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="herfox_salesforce/adminhtml_discount_edit" name="discount_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="herfox_salesforce/adminhtml_discount_edit_tabs" name="discount_tabs"></block>
+        </reference>
+    </adminhtml_salesforce_discount_edit>
+
+</layout>

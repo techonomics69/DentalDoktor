@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Herfox_SalesForce extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Herfox
+ * @package        Herfox_SalesForce
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <herfox_salesforce translate="title" module="herfox_salesforce">
+                                        <title>SalesForce</title>
+                                    </herfox_salesforce>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <herfox_salesforce translate="title" module="herfox_salesforce">
+                        <title>SalesForce</title>
+                        <children>
+                            <prospect translate="title" module="herfox_salesforce">
+                                <title>Prospecto</title>
+                                <sort_order>0</sort_order>
+                            </prospect>
+                            <product translate="title" module="herfox_salesforce">
+                                <title>Producto</title>
+                                <sort_order>10</sort_order>
+                            </product>
+                            <price translate="title" module="herfox_salesforce">
+                                <title>Precio</title>
+                                <sort_order>20</sort_order>
+                            </price>
+                            <discount translate="title" module="herfox_salesforce">
+                                <title>Descuento</title>
+                                <sort_order>30</sort_order>
+                            </discount>
+                        </children>
+                    </herfox_salesforce>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <herfox_salesforce translate="title" module="herfox_salesforce">
+            <title>SalesForce</title>
+            <sort_order>42</sort_order>
+            <children>
+                <prospect translate="title" module="herfox_salesforce">
+                    <title>Prospecto</title>
+                    <action>adminhtml/salesforce_prospect</action>
+                    <sort_order>0</sort_order>
+                </prospect>
+                <product translate="title" module="herfox_salesforce">
+                    <title>Producto</title>
+                    <action>adminhtml/salesforce_product</action>
+                    <sort_order>10</sort_order>
+                </product>
+                <price translate="title" module="herfox_salesforce">
+                    <title>Precio</title>
+                    <action>adminhtml/salesforce_price</action>
+                    <sort_order>20</sort_order>
+                </price>
+                <discount translate="title" module="herfox_salesforce">
+                    <title>Descuento</title>
+                    <action>adminhtml/salesforce_discount</action>
+                    <sort_order>30</sort_order>
+                </discount>
+            </children>
+        </herfox_salesforce>
+    </menu>
+</config>

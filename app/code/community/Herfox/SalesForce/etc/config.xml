@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Herfox_SalesForce extension
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ * 
+ * @category       Herfox
+ * @package        Herfox_SalesForce
+ * @copyright      Copyright (c) 2016
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Herfox_SalesForce>
+            <version>1.0.0</version>
+        </Herfox_SalesForce>
+    </modules>
+    <global>
+        <resources>
+            <herfox_salesforce_setup>
+                <setup>
+                    <module>Herfox_SalesForce</module>
+                    <class>Herfox_SalesForce_Model_Resource_Setup</class>
+                </setup>
+            </herfox_salesforce_setup>
+        </resources>
+        <blocks>
+            <herfox_salesforce>
+                <class>Herfox_SalesForce_Block</class>
+            </herfox_salesforce>
+        </blocks>
+        <helpers>
+            <herfox_salesforce>
+                <class>Herfox_SalesForce_Helper</class>
+            </herfox_salesforce>
+        </helpers>
+        <models>
+            <herfox_salesforce>
+                <class>Herfox_SalesForce_Model</class>
+                <resourceModel>herfox_salesforce_resource</resourceModel>
+            </herfox_salesforce>
+            <herfox_salesforce_resource>
+                <class>Herfox_SalesForce_Model_Resource</class>
+                <entities>
+                    <prospect>
+                        <table>herfox_salesforce_prospect</table>
+                    </prospect>
+                    <product>
+                        <table>herfox_salesforce_product</table>
+                    </product>
+                    <price>
+                        <table>herfox_salesforce_price</table>
+                    </price>
+                    <discount>
+                        <table>herfox_salesforce_discount</table>
+                    </discount>
+                </entities>
+            </herfox_salesforce_resource>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <herfox_salesforce>
+                    <file>herfox_salesforce.xml</file>
+                </herfox_salesforce>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Herfox_SalesForce>
+                    <files>
+                        <default>Herfox_SalesForce.csv</default>
+                    </files>
+                </Herfox_SalesForce>
+            </modules>
+        </translate>
+        <global_search>
+            <prospect>
+                <class>herfox_salesforce/adminhtml_search_prospect</class>
+                <acl>herfox_salesforce</acl>
+            </prospect>
+            <product>
+                <class>herfox_salesforce/adminhtml_search_product</class>
+                <acl>herfox_salesforce</acl>
+            </product>
+            <price>
+                <class>herfox_salesforce/adminhtml_search_price</class>
+                <acl>herfox_salesforce</acl>
+            </price>
+            <discount>
+                <class>herfox_salesforce/adminhtml_search_discount</class>
+                <acl>herfox_salesforce</acl>
+            </discount>
+        </global_search>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Herfox_SalesForce before="Mage_Adminhtml">Herfox_SalesForce_Adminhtml</Herfox_SalesForce>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>
