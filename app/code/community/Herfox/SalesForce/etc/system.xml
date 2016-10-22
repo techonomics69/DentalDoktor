@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <herfox translate="label" module="herfox_salesforce">
+            <label>Herfox SalesForce</label>
+            <sort_order>100</sort_order>
+        </herfox>
+    </tabs>
+    <sections>
+        <herfox_salesforce translate="label" module="herfox_salesforce">
+            <class>separator-top</class>
+            <label>Configuración API Client</label>
+            <tab>herfox</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <oauth2 translate="label" module="herfox_salesforce">
+                    <label>Configuración OAuth2</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <grant_type translate="label">
+                            <label>Grant Type - SessionID: </label>
+                            <comment>Normalmente es: password</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </grant_type>
+                        <client_id translate="label">
+                            <label>Client ID: </label>
+                            <comment>Consumer Key - Oauth2 SalesForce</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </client_id>
+                        <client_secret translate="label">
+                            <label>Client Secret: </label>
+                            <comment>Consumer Secret - Oauth2 SalesForce</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </client_secret>
+                        <username translate="label">
+                            <label>Usuario: </label>
+                            <comment>Usuario/Email de su cuenta en SalesForce</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </username>
+                        <password translate="label">
+                            <label>Clave: </label>
+                            <comment>Clave de su cuenta en SalesForce</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </password>
+                    </fields>
+                </oauth2>
+            </groups>
+        </herfox_salesforce>
+    </sections>
+</config>

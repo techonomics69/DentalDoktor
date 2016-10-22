@@ -100,6 +100,28 @@
                 <acl>herfox_salesforce</acl>
             </discount>
         </global_search>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <herfox_salesforce>
+                                            <title>Herfox - All</title>
+                                        </herfox_salesforce>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
     </adminhtml>
     <admin>
         <routers>
@@ -112,4 +134,16 @@
             </adminhtml>
         </routers>
     </admin>
+    <crontab>
+        <jobs>
+            <sync_products>
+                <schedule>
+                    <cron_expr>*/15 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>herfox_salesforce/observer::syncProducts</model>
+                </run>
+            </sync_products>
+        </jobs>
+    </crontab>
 </config>
