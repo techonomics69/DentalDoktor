@@ -141,7 +141,7 @@
                     <cron_expr>*/15 * * * *</cron_expr>
                 </schedule>
                 <run>
-                    <model>herfox_salesforce/observer::syncProducts</model>
+                    <model>herfox_salesforce/observer::sync</model>
                 </run>
             </sync_products>
         </jobs>

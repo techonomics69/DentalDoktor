@@ -10,7 +10,7 @@ session_start();
 
 function show_prices($instance_url, $access_token)
 {
-    $LastModifiedDate = "2016-01-01T00:00:00.000Z";
+    $LastModifiedDate = "2016-01-01T12:21:58.000Z";
     $IsActive = true;
     $IsDelete = false;
 
@@ -37,9 +37,9 @@ function show_prices($instance_url, $access_token)
 */
     echo count($response) . " record(s) returned<br/><br/>";
     echo "<table border='1'>";
-    echo "<tr><th>Id</th><th>Codigo Producto</th><th>Id Lista de Precios</th><th>Precio Unidad</th><th>Id Producto</th></tr>";
+    echo "<tr><th>Id</th><th>Codigo Producto</th><th>Id Lista de Precios</th><th>Precio Unidad</th><th>Id Producto</th><th>Estandar</th></tr>";
     foreach ((array) $response as $record) {
-        echo "<tr><td>".$record['Id']."</td><td>".$record['ProductCode']."</td><td>".$record['Pricebook2Id']."</td><td>".$record['UnitPrice']."</td><td>".$record['Product2Id']."</td></tr>";
+        echo "<tr><td>".$record['Id']."</td><td>".$record['ProductCode']."</td><td>".$record['Pricebook2Id']."</td><td>".$record['UnitPrice']."</td><td>".$record['Product2Id']."</td><td>".$record['Pricebook2']["IsStandard"]."</td></tr>";
     }
     echo "</table>";
 }

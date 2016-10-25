@@ -9,7 +9,7 @@
     <sections>
         <herfox_salesforce translate="label" module="herfox_salesforce">
             <class>separator-top</class>
-            <label>Configuración API Client</label>
+            <label>API Client</label>
             <tab>herfox</tab>
             <sort_order>1000</sort_order>
             <show_in_default>1</show_in_default>
@@ -17,7 +17,7 @@
             <show_in_store>0</show_in_store>
             <groups>
                 <oauth2 translate="label" module="herfox_salesforce">
-                    <label>Configuración OAuth2</label>
+                    <label>Configuración OAuth2 con SessionID</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>5</sort_order>
                     <show_in_default>1</show_in_default>
@@ -69,6 +69,16 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </password>
+
+                        <last_modified translate="label">
+                            <label>Última sincronización: </label>
+                            <comment>(Ej. 2016-01-01T00:00:00.000Z) No diligenciar o modificar si desconoce su función</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </last_modified>
                     </fields>
                 </oauth2>
             </groups>
