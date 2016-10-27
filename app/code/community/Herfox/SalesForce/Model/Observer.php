@@ -22,7 +22,7 @@ class Herfox_SalesForce_Model_Observer
     {
         $this->date = Mage::getModel('core/date')->date('Y-m-d H:i:s');
         $this->session = Mage::getModel('herfox_salesforce/config')->getSession();
-        $this->LastModifiedDate = Mage::getStoreConfig('herfox_salesforce/oauth2/last_modified');
+        $this->LastModifiedDate = Mage::getStoreConfig('herfox_salesforce/general/last_modified');
         if(empty($this->LastModifiedDate))
             $this->LastModifiedDate = "2016-01-01T00:00:00.000Z";
         $this->IsActive = true;
@@ -34,10 +34,11 @@ class Herfox_SalesForce_Model_Observer
         // Sync Data
         $this->syncProducts();
         $this->syncPrices();
+        $this->syncPriceRules();
 
         // Update last sync date in configuration
         $LastModifiedDate = str_replace(' ', 'T', $this->date) . ".000Z";
-        Mage::getConfig()->saveConfig('herfox_salesforce/oauth2/last_modified', $LastModifiedDate);
+        Mage::getConfig()->saveConfig('herfox_salesforce/general/last_modified', $LastModifiedDate);
     }
 
     private function syncProducts()
@@ -122,11 +123,52 @@ class Herfox_SalesForce_Model_Observer
         }
     }
 
+    private function syncPriceRules()
+    {
+        $response = $this->getSalesForceData('DescuentoVolumen');
+
+        if($response) {
+            $sync['name'] = "Sincronización " . $this->date;
+            $sync['total'] = count($response);
+            $sync['success'] = 0;
+            $sync['unsuccess'] = 0;
+            $sync['status'] = 1;
+            $sync['errors'] = "";
+
+            foreach ($response as $record) {
+
+                if ($record['Descuento__c'] != 0){
+                    $priceRule = Mage::getModel('salesrule/rule')->load($record['Id'], 'name');
+
+                    if (!isset($priceRule['name'])) {
+                        if ($this->createPriceRule($record)) {
+                            $sync['success']++;
+                        } else {
+                            $sync['unsuccess']++;
+                            $sync['errors'] .= 'No se pudo crear la promoción: ' . $record['Id'] . "\n";
+                        }
+                    } else {
+                        $sync['unsuccess']++;
+                        $sync['errors'] .= 'Promoción Duplicada: ' . $record['Id'] . "\n";
+                    }
+                } else {
+                    $sync['unsuccess']++;
+                    $sync['errors'] .= 'Promoción con descuento cero: ' . $record['Id'] . "\n";
+                }
+            }
+
+            // Create products sync register
+            $sync_product = Mage::getModel('herfox_salesforce/discount');
+            $sync_product->setData($sync);
+            $sync_product->save();
+        }
+    }
+
     private function createProduct($record)
     {
         $product = Mage::getModel('catalog/product');
         $product
-            ->setStoreId(1)
+            // ->setStoreId(1)
             ->setWebsiteIds([1])
             ->setAttributeSetId(4)
             ->setTypeId('simple')
@@ -153,6 +195,14 @@ class Herfox_SalesForce_Model_Observer
                 'qty' => 1000 //qty
             ]);
 
+        if(isset($record['Foto__c'])){
+            $file = $this->getImageUrl($record['Foto__c'], $record['Name']);
+            $media = array('image','small_image','thumbnail');
+            $product
+                ->setMediaGallery (array('images'=>array (), 'values'=>array ()))
+                ->addImageToMediaGallery($file, $media, false, false);
+        }
+
         // Assign Categories
         if(isset($record['Subcategor_a__c']))
             $product->setCategoryIds($this->getCategory($record['Family'], $record['Subcategor_a__c']));
@@ -163,6 +213,88 @@ class Herfox_SalesForce_Model_Observer
         $product->setData('delivery_days', $record['Tiempo_de_Entrega__c']);
 
         return $product->save();
+    }
+
+    private function getImageUrl($remote_html_img, $name_product)
+    {
+        $oub = Mage::getStoreConfig('herfox_salesforce/general/origin_image_url_base');
+        $nub = Mage::getStoreConfig('herfox_salesforce/general/new_image_url_base');
+
+        // Extract src value of image element
+        $doc = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $doc->loadHTML($remote_html_img);
+        libxml_clear_errors();
+        $xpath = new DOMXPath($doc);
+        $src = $xpath->evaluate("string(//img/@src)");
+
+        $url_remote_img = str_replace($oub, $nub, $src);
+        $remote_img = file_get_contents($url_remote_img);
+
+        $url_base = Mage::getBaseDir('media') . DS . 'import';
+        $name_file = str_replace(" ", "_", $name_product) . ".jpeg";
+        $url_local_img = $url_base . DS . $name_file;
+        file_put_contents($url_local_img, $remote_img);
+
+        return $url_local_img;
+    }
+
+    private function createPriceRule($record)
+    {
+        $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $record['Producto_Id__r']['ProductCode']);
+        $label = $record['Descuento__c']."% en ".$product->name;
+
+        // Price Rule
+        $priceRule = Mage::getModel('salesrule/rule');
+        $priceRule
+            ->setName($record['Id'])
+            ->setDescription('')
+            ->setIsActive(1)
+            ->setWebsiteIds([1])
+            ->setCustomerGroupIds([$this->getGroup($record['ListaPrecios_Id__c'])])
+            ->setFromDate('')
+            ->setToDate('')
+            ->setSortOrder('')
+            ->setSimpleAction('by_percent')
+            ->setDiscountAmount($record['Descuento__c'])
+            ->setStopRulesProcessing(0)
+            ->setStoreLabels([$label]);
+
+        // Price Rule Conditions
+        $condition = Mage::getModel('salesrule/rule_condition_product_found');
+        $condition
+            ->setType('salesrule/rule_condition_product_found')
+            ->setValue(1)
+            ->setAggregator('all');
+        $priceRule->getConditions()->addCondition($condition);
+
+        $product = Mage::getModel('salesrule/rule_condition_product');
+        $product
+            ->setType('salesrule/rule_condition_product')
+            ->setAttribute('sku')
+            ->setOperator('==')
+            ->setValue($record['Producto_Id__r']['ProductCode']);
+        $condition->addCondition($product);
+
+        $minimum = Mage::getModel('salesrule/rule_condition_product');
+        $minimum
+            ->setType('salesrule/rule_condition_product')
+            ->setAttribute('quote_item_qty')
+            ->setOperator('>')
+            ->setValue($record['Minimo__c']);
+        $condition->addCondition($minimum);
+
+        $maximum = Mage::getModel('salesrule/rule_condition_product');
+        $maximum
+            ->setType('salesrule/rule_condition_product')
+            ->setAttribute('quote_item_qty')
+            ->setOperator('<=')
+            ->setValue($record['Maximo__c']);
+        $condition->addCondition($maximum);
+
+        $priceRule->getActions()->addCondition($product);
+
+        return $priceRule->save();
     }
 
     private function getCategory($category_name, $subcategory_name = "")

@@ -37,9 +37,9 @@ function show_discounts($instance_url, $access_token)
 */
     echo count($response) . " record(s) returned<br/><br/>";
     echo "<table border='1'>";
-    echo "<tr><th>Id</th><th>Descuento</th><th>Id Lista de Precios</th><th>Cantidad Minima</th><th>Cantidad Maxima</th><th>Id Producto</th></tr>";
+    echo "<tr><th>Id</th><th>Descuento</th><th>Id Lista de Precios</th><th>Cantidad Minima</th><th>Cantidad Maxima</th><th>Id Producto</th><th>Codigo Producto</th></tr>";
     foreach ((array) $response as $record) {
-        echo "<tr><td>".$record['Id']."</td><td>".$record['Descuento__c']."</td><td>".$record['ListaPrecios_Id__c']."</td><td>".$record['Minimo__c']."</td><td>".$record['Maximo__c']."</td><td>".$record['Producto_Id__c']."</td></tr>";
+        echo "<tr><td>".$record['Id']."</td><td>".$record['Descuento__c']."</td><td>".$record['ListaPrecios_Id__c']."</td><td>".$record['Minimo__c']."</td><td>".$record['Maximo__c']."</td><td>".$record['Producto_Id__c']."</td><td>".$record['Producto_Id__r']['ProductCode']."</td></tr>";
     }
     echo "</table>";
 }

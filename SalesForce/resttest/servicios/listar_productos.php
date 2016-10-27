@@ -38,9 +38,9 @@ function show_products($instance_url, $access_token)
 
     echo count($response) . " record(s) returned<br/><br/>";
     echo "<table border='1'>";
-    echo "<tr><th>Id</th><th>Nombre</th><th>Descripcion</th><th>Codigo Producto</th><th>Marca</th><th>Tiempo Entrega</th><th>Categoria</th><th>Subcategoria</th></tr>";
+    echo "<tr><th>Id</th><th>Nombre</th><th>Descripcion</th><th>Codigo Producto</th><th>Marca</th><th>Tiempo Entrega</th><th>Categoria</th><th>Subcategoria</th><th>Imagen</th></tr>";
     foreach ((array) $response as $record) {
-        echo "<tr><td>".$record['Id']."</td><td>".$record['Name']."</td><td>".$record['Description']."</td><td>".$record['ProductCode']."</td><td>".$record['Marca__c']."</td><td>".$record['Tiempo_de_Entrega__c']."</td><td>".$record['Family']."</td><td>".$record['Subcategor_a__c']."</td></tr>";
+        echo "<tr><td>".$record['Id']."</td><td>".$record['Name']."</td><td>".$record['Description']."</td><td>".$record['ProductCode']."</td><td>".$record['Marca__c']."</td><td>".$record['Tiempo_de_Entrega__c']."</td><td>".$record['Family']."</td><td>".$record['Subcategor_a__c']."</td><td>".$record['Foto__c']."</td></tr>";
     }
     echo "</table>";
 }

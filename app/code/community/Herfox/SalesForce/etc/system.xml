@@ -24,11 +24,20 @@
                     <show_in_website>0</show_in_website>
                     <show_in_store>0</show_in_store>
                     <fields>
-                        <grant_type translate="label">
-                            <label>Grant Type - SessionID: </label>
-                            <comment>Normalmente es: password</comment>
+                        <login_uri translate="label">
+                            <label>Url instancia: </label>
+                            <comment>Ej. https://example.salesforce.com</comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </login_uri>
+                        <grant_type translate="label">
+                            <label>Grant Type: </label>
+                            <comment>Normalmente para SessionID es: password</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -37,7 +46,7 @@
                             <label>Client ID: </label>
                             <comment>Consumer Key - Oauth2 SalesForce</comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>1</sort_order>
+                            <sort_order>2</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -46,7 +55,7 @@
                             <label>Client Secret: </label>
                             <comment>Consumer Secret - Oauth2 SalesForce</comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>2</sort_order>
+                            <sort_order>3</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -55,7 +64,7 @@
                             <label>Usuario: </label>
                             <comment>Usuario/Email de su cuenta en SalesForce</comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>3</sort_order>
+                            <sort_order>4</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -64,23 +73,50 @@
                             <label>Clave: </label>
                             <comment>Clave de su cuenta en SalesForce</comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>4</sort_order>
+                            <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </password>
-
+                    </fields>
+                </oauth2>
+                <general translate="label" module="herfox_salesforce">
+                    <label>Configuración General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <origin_image_url_base translate="label">
+                            <label>Base url imágenes original: </label>
+                            <comment>(Ej. http://www.example1.com/) No diligenciar o modificar si desconoce su función</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </origin_image_url_base>
+                        <new_image_url_base translate="label">
+                            <label>Base url imágenes nueva: </label>
+                            <comment>(Ej. http://www.example2.com/productos2/) No diligenciar o modificar si desconoce su función</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </new_image_url_base>
                         <last_modified translate="label">
                             <label>Última sincronización: </label>
                             <comment>(Ej. 2016-01-01T00:00:00.000Z) No diligenciar o modificar si desconoce su función</comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>5</sort_order>
+                            <sort_order>8</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </last_modified>
                     </fields>
-                </oauth2>
+                </general>
             </groups>
         </herfox_salesforce>
     </sections>

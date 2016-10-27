@@ -67,7 +67,7 @@ class Hwg_Attributemanager_Model_Customer_Api extends Mage_Customer_Model_Custom
         $customerData = $this->_prepareData($customerData);
 
         $customer = Mage::getModel('customer/customer')->load($customerId);
-        Mage::log($customerData, null, "herfox_test.log");
+        //Mage::log($customerData, null, "herfox_test.log");
 
         if (!$customer->getId()) {
             $this->_fault('not_exists');
@@ -78,6 +78,12 @@ class Hwg_Attributemanager_Model_Customer_Api extends Mage_Customer_Model_Custom
                 $customer->setData($attributeCode, $customerData[$attributeCode]);
             }
         }
+        // Get group id 
+        $group = Mage::getModel('customer/group')->load($customerData['pricelist_id'], 'customer_group_code');
+        if(isset($group['customer_group_id'])){
+            $customer->setData('group_id', $group["customer_group_id"]);
+        }
+
         $customer->save();
 
         if(isset($customerData['mp_cc_is_approved_id']) && isset($customerData['account_id'])) {
@@ -91,5 +97,4 @@ class Hwg_Attributemanager_Model_Customer_Api extends Mage_Customer_Model_Custom
 
         return true;
     }
-
 }

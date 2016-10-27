@@ -5,12 +5,12 @@
  * Date: 10/20/16
  * Time: 4:28 PM
  */
-define("LOGIN_URI", "https://cs4.salesforce.com");
+
 class Herfox_SalesForce_Model_Config
 {
     public function getSession()
     {
-        $token_url = LOGIN_URI . "/services/oauth2/token";
+        $token_url = Mage::getStoreConfig('herfox_salesforce/oauth2/login_uri') . "/services/oauth2/token";
         $params = "grant_type=" . Mage::getStoreConfig('herfox_salesforce/oauth2/grant_type')
             . "&client_id=" . Mage::getStoreConfig('herfox_salesforce/oauth2/client_id')
             . "&client_secret=" . Mage::getStoreConfig('herfox_salesforce/oauth2/client_secret')
