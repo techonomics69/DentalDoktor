@@ -7,6 +7,20 @@
             <input type="text" id="<?php echo $_code ?>_way_to_pay" name="payment[way_to_pay]" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Forma de Pago')) ?>" class="input-text required-entry validation-passed" value="" />
         </div>
     </li>
+
+    <li>
+        <label for="<?php echo $_code ?>_way_to_pay" class="required"><em>*</em><?php echo $this->__('Forma de Pago') ?></label>
+        <div class="input-box">
+            <select id="<?php echo $_code ?>_way_to_pay" name="payment[way_to_pay]" class="required-entry validate-way-to-pay-select">
+                <option value=""><?php echo $this->__('--Please Select--')?></option>
+                <option value="30 días"><?php echo $this->__('30 días')?></option>
+                <option value="60 días"><?php echo $this->__('60 días')?></option>
+                <option value="90 días"><?php echo $this->__('90 días')?></option>
+                <option value="120 días"><?php echo $this->__('120 días')?></option>
+                <option value="Más de 120 días"><?php echo $this->__('Más de 120 días')?></option>
+            </select>
+        </div>
+    </li>
 </ul>
 <div>
     <?php echo $this->getMethod()->getConfigData('message');?>
