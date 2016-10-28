@@ -23,7 +23,8 @@
             <codePool>community</codePool>
             <depends>
                 <Mage_Core />
-             </depends>
+                <Mage_Payment />
+            </depends>
         </Herfox_SalesForce>
     </modules>
 </config>

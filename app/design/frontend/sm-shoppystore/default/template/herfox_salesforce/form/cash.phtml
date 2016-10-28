@@ -1,0 +1,13 @@
+
+<?php $_code=$this->getMethodCode() ?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <li>
+        <label for="<?php echo $_code ?>_way_to_pay" class="required"><em>*</em><?php echo $this->__('Forma de Pago') ?></label>
+        <div class="input-box">
+            <input type="text" id="<?php echo $_code ?>_way_to_pay" name="payment[way_to_pay]" title="<?php echo Mage::helper('core')->jsQuoteEscape($this->__('Forma de Pago')) ?>" class="input-text required-entry validation-passed" value="" />
+        </div>
+    </li>
+</ul>
+<div>
+    <?php echo $this->getMethod()->getConfigData('message');?>
+</div>

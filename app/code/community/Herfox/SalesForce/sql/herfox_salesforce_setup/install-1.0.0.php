@@ -472,4 +472,10 @@ $table = $this->getConnection()
     ) 
     ->setComment('Descuento Table');
 $this->getConnection()->createTable($table);
+
+$this->run("
+ALTER TABLE `{$this->getTable('sales/quote_payment')}` ADD `way_to_pay` VARCHAR( 255 ) NOT NULL;
+ALTER TABLE `{$this->getTable('sales/order_payment')}` ADD `way_to_pay` VARCHAR( 255 ) NOT NULL;
+");
+
 $this->endSetup();
