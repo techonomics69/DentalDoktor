@@ -2,15 +2,15 @@
 <?php $_code=$this->getMethodCode() ?>
 <ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
     <li>
-        <label for="<?php echo $_code ?>_way_to_pay" class="required"><em>*</em><?php echo $this->__('Forma de Pago') ?></label>
+        <label for="<?php echo $_code ?>_way_to_pay" class="required"><em>*</em><?php echo $this->__('Modalidad de Pago') ?></label>
         <div class="input-box">
             <select id="<?php echo $_code ?>_way_to_pay" name="payment[way_to_pay]" class="required-entry validate-way-to-pay-select">
                 <option value=""><?php echo $this->__('--Please Select--')?></option>
-                <option value="Contado"><?php echo $this->__('Contado')?></option>
-                <option value="30 días"><?php echo $this->__('30 días')?></option>
-                <option value="60 días"><?php echo $this->__('60 días')?></option>
-                <option value="90 días"><?php echo $this->__('90 días')?></option>
-                <option value="120 días"><?php echo $this->__('120 días')?></option>
+                <option value="Contado"><?php echo $this->__('De contado')?></option>
+                <option value="30 días"><?php echo $this->__('A 30 días')?></option>
+                <option value="60 días"><?php echo $this->__('A 60 días')?></option>
+                <option value="90 días"><?php echo $this->__('A 90 días')?></option>
+                <option value="120 días"><?php echo $this->__('A 120 días')?></option>
                 <option value="Más de 120 días"><?php echo $this->__('Más de 120 días')?></option>
             </select>
         </div>

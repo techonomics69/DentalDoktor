@@ -474,8 +474,12 @@ $table = $this->getConnection()
 $this->getConnection()->createTable($table);
 
 $this->run("
-ALTER TABLE `{$this->getTable('sales/quote_payment')}` ADD `way_to_pay` VARCHAR( 255 ) NOT NULL;
-ALTER TABLE `{$this->getTable('sales/order_payment')}` ADD `way_to_pay` VARCHAR( 255 ) NOT NULL;
+ALTER TABLE `{$this->getTable('sales/quote_payment')}` ADD `way_to_pay` VARCHAR( 255 ) CHARACTER SET utf8 NOT NULL;
+ALTER TABLE `{$this->getTable('sales/order_payment')}` ADD `way_to_pay` VARCHAR( 255 ) CHARACTER SET utf8 NOT NULL;
+ALTER TABLE `{$this->getTable('sales/quote_address')}` ADD `locality` VARCHAR(255) CHARACTER SET utf8 DEFAULT NULL AFTER `region`;
+ALTER TABLE `{$this->getTable('sales/order_address')}` ADD `locality` VARCHAR(255) CHARACTER SET utf8 DEFAULT NULL AFTER `region`;
+ALTER TABLE `{$this->getTable('sales/quote')}` ADD `account_id` VARCHAR(255) CHARACTER SET utf8 DEFAULT NULL AFTER `customer_id`;
+ALTER TABLE `{$this->getTable('sales/order')}` ADD `account_id` VARCHAR(255) CHARACTER SET utf8 DEFAULT NULL AFTER `customer_id`;
 ");
 
 $this->endSetup();

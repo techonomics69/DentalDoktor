@@ -29,6 +29,61 @@ class Herfox_SalesForce_Model_Observer
         $this->IsDelete = false;
     }
 
+    public function createOpportunity($order_event)
+    {
+        $orders = $order_event->getOrderIds();
+        foreach ($orders as $order_id)
+        {
+            $order = Mage::getModel('sales/order')->load($order_id);
+            $customer = Mage::getModel('customer/customer')->load($order->getCustomerId());
+            $shipping = $order->getShippingAddress();
+
+            $group = Mage::getModel('customer/group')->load($order->getCustomerGroupId())->getCustomerGroupCode();
+            $region = Mage::getModel('directory/region')->load($shipping->getRegionId())->getCode();
+            $locality = Mage::getModel('eav/config')->getAttribute('customer_address', 'locality')->getSource()->getOptionText($shipping->getLocality());
+            
+            $opportunity['name'] = "DentalDoktor-".$order->getIncrementId();
+            $opportunity['accountId'] = $customer->getData('account_id');
+            $opportunity['stageName'] = "En facturación";
+            $opportunity['closeDate'] = "2016-11-08";
+            $opportunity['calle_entrega'] = $shipping->getStreet1();
+            $opportunity['ciudad_entrega'] = $shipping->getCity();
+            $opportunity['condiciones'] = $order->getStatusHistoryCollection()->getFirstItem()->getComment();
+            $opportunity['depto_entrega'] = $region;
+            $opportunity['localidad'] = $locality;
+            $opportunity['pais_entrega'] = $shipping->getCountryId();
+            $opportunity['tipo_pago'] = $order->getPayment()->getMethodInstance()->getTitle();
+            $method = $order->getPayment()->getMethodInstance()->getCode();
+
+            if($method == 'cash'){
+                $opportunity['forma_pago'] = $order->getPayment()->getWayToPay();
+            }
+
+            $opportunity['recordTypeName'] = Mage::getStoreConfig('herfox_salesforce/general/oportunity_type_id');;
+
+            Mage::log($opportunity, null, "oportunity.log");
+
+            $products = $order->getAllItems();
+            $opportunity_products = [];
+
+            foreach ($products as $product){
+
+                $opportunity_products[] = [
+                    'Quantity' => $product->getQtyOrdered(),
+                    'ProductCode' => $product->getSku(),
+                    'OpportunityId' => '',
+                    'PricebookId' => $group,
+                    'TotalPrice' => $product->getRowTotal()
+                ];
+            }
+
+            Mage::log($opportunity_products, null, "oportunity.log");
+
+            $response = $this->setSalesForceData('Opportunity', $opportunity);
+
+        }
+    }
+
     public function sync()
     {
         // Sync Data
@@ -377,6 +432,34 @@ class Herfox_SalesForce_Model_Observer
 
         $json_response = curl_exec($curl);
         curl_close($curl);
+
+        return json_decode($json_response, true);
+    }
+
+    private function setSalesForceData($method, $data)
+    {
+        $url = $this->session['instance_url'] . "/services/apexrest/" . $method;
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $this->session['access_token'], "Content-type: application/json"));
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $json_response = curl_exec($curl);
+
+        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if ( $status != 201 ) {
+            $error = "Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl);
+            Mage::log($error, null, "oportunity.log");
+        }
+
+        curl_close($curl);
+
+        $response = json_decode($json_response, true);
+        Mage::log($response, null, "oportunity.log");
 
         return json_decode($json_response, true);
     }

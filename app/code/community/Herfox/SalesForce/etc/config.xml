@@ -29,6 +29,63 @@
                     <to_order_payment>*</to_order_payment>
                 </way_to_pay>
             </sales_convert_quote_payment>
+
+            <checkout_onepage_quote>
+                <account_id>
+                    <to_customer>*</to_customer>
+                </account_id>
+            </checkout_onepage_quote>
+            <customer_account>
+                <account_id>
+                    <to_order>*</to_order>
+                </account_id>
+            </customer_account>
+            <sales_convert_quote>
+                <account_id>
+                    <to_order>*</to_order>
+                </account_id>
+            </sales_convert_quote>
+            <sales_convert_order>
+                <account_id>
+                    <to_order>*</to_order>
+                </account_id>
+            </sales_convert_order>
+
+            <sales_copy_order_billing_address>
+                <locality>
+                    <to_order>*</to_order>
+                </locality>
+            </sales_copy_order_billing_address>
+            <sales_copy_order_shipping_address>
+                <locality>
+                    <to_order>*</to_order>
+                </locality>
+            </sales_copy_order_shipping_address>
+            <sales_convert_quote_address>
+                <locality>
+                    <to_order_address>*</to_order_address>
+                    <to_customer_address>*</to_customer_address>
+                </locality>
+            </sales_convert_quote_address>
+            <sales_convert_order_address>
+                <locality>
+                    <to_quote_address>*</to_quote_address>
+                </locality>
+            </sales_convert_order_address>
+            <customer_address>
+                <locality>
+                    <to_quote_address>*</to_quote_address>
+                </locality>
+            </customer_address>
+            <checkout_onepage_billing>
+                <locality>
+                    <to_customer>*</to_customer>
+                </locality>
+                <account_id>
+                    <to_order>*</to_order>
+                </account_id>
+            </checkout_onepage_billing>
+
         </fieldsets>
         <helpers>
             <herfox_salesforce>
@@ -71,25 +128,36 @@
                 </setup>
             </herfox_salesforce_setup>
         </resources>
+        <events>
+            <checkout_onepage_controller_success_action>
+                <observers>
+                    <Herfox_SalesForce_Model_Observer>
+                        <type>singleton</type>
+                        <class>herfox_salesforce/observer</class>
+                        <method>createOpportunity</method>
+                    </Herfox_SalesForce_Model_Observer>
+                </observers>
+            </checkout_onepage_controller_success_action>
+        </events>
     </global>
     <default>
         <payment>
             <creditquota>
                 <active>1</active>
                 <model>herfox_salesforce/creditquota</model>
-                <order_status>pending</order_status>
+                <order_status>processing</order_status>
                 <title>Cupo de Crédito</title>
             </creditquota>
             <oncredit>
                 <active>1</active>
                 <model>herfox_salesforce/oncredit</model>
-                <order_status>pending</order_status>
+                <order_status>processing</order_status>
                 <title>A Crédito</title>
             </oncredit>
             <cash>
                 <active>1</active>
                 <model>herfox_salesforce/cash</model>
-                <order_status>pending</order_status>
+                <order_status>processing</order_status>
                 <title>Efectivo</title>
             </cash>
         </payment>
@@ -180,12 +248,20 @@
                 </args>
             </adminhtml>
         </routers>
+        <fieldsets>
+            <customer_dataflow>
+                <locality>
+                    <billing>1</billing>
+                    <shipping>1</shipping>
+                </locality>
+            </customer_dataflow>
+        </fieldsets>
     </admin>
     <crontab>
         <jobs>
             <sync_products>
                 <schedule>
-                    <cron_expr>*/15 * * * *</cron_expr>
+                    <cron_expr>*/60 * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>herfox_salesforce/observer::sync</model>
