@@ -29,27 +29,27 @@ class Herfox_SalesForce_Model_Config
 
         if ( $status != 200 ) {
             $error = "Error: call to token URL $token_url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl);
-            Mage::log($error, null, "salesforce.log");
+            Mage::log($error, null, "sf_get_session.log");
             die;
         }
 
         curl_close($curl);
 
         $response = json_decode($json_response, true);
-        Mage::log($response, null, "salesforce_response.log");
+        // Mage::log($response, null, "sf_get_session.log");
 
         $access_token = $response['access_token'];
         $instance_url = $response['instance_url'];
 
         if (!isset($access_token) || $access_token == "") {
             $error = "Error - access token missing from response!";
-            Mage::log($error, null, "salesforce.log");
+            Mage::log($error, null, "sf_get_session.log");
             die;
         }
 
         if (!isset($instance_url) || $instance_url == "") {
             $error = "Error - instance URL missing from response!";
-            Mage::log($error, null, "salesforce.log");
+            Mage::log($error, null, "sf_get_session.log");
             die;
         }
 

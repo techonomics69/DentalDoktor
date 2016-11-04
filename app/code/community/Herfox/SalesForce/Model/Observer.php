@@ -90,23 +90,26 @@ class Herfox_SalesForce_Model_Observer
     public function updateCustomer($customer_event)
     {
         $customer = $customer_event->getCustomer();
+        // Mage::log($customer->toArray(), null, "sf_edit_customer.log");
 
         $update = [
             'mobilePhone' => $customer->getMobile(),
             'birthdate' => explode(' ', $customer->getDob())[0]
         ];
 
-        Mage::log($update, null, "edit_customer.log");
-        $this->updateSalesForceData('Contacts', $update, $customer->getAccountId());
+        //Mage::log($update, null, "sf_edit_customer.log");
+        // $this->updateSalesForceData('Contacts', $update, $customer->getAccountId());
+        $this->updateSalesForceData('Contacts', $update, $customer->getEntityId());
     }
 
     public function updateCustomerAddress($address_event)
     {
         $address = $address_event->getCustomerAddress();
+        // Mage::log($address->toArray(), null, "sf_edit_address.log");
 
         $region_code = Mage::getModel('directory/region')->load($address->getRegionId())->getCode();
         $industry = Mage::getModel('eav/config')->getAttribute('customer_address', 'industry')->getSource()->getOptionText($address->getIndustry());
-        $customer = Mage::getModel('customer/customer')->load($address->getCustomerId());
+        // $customer = Mage::getModel('customer/customer')->load($address->getCustomerId());
 
         $update = [
             'industry' => $industry,
@@ -121,8 +124,9 @@ class Herfox_SalesForce_Model_Observer
             'billingStreet' => $address->getStreet1()
         ];
 
-        Mage::log($update, null, "edit_address.log");
-        $this->updateSalesForceData('Contacts', $update, $customer->getAccountId());
+        // Mage::log($update, null, "sf_edit_address.log");
+        // $this->updateSalesForceData('Contacts', $update, $customer->getAccountId());
+        $this->updateSalesForceData('Contacts', $update, $address->getCustomerId());
     }
 
     public function sync()
@@ -493,16 +497,24 @@ class Herfox_SalesForce_Model_Observer
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         if ( $status != 200 || isset($json_response['error_messages']) ) {
-            $error = "Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl);
-            Mage::log($error, null, "oportunity.log");
+            $error = [
+                "URL" => $url,
+                "Status" => $status,
+                "response" => $json_response,
+                "method" => $method,
+                "data" => $data,
+                "curl_error" => curl_error($curl),
+                "curl_errno" => curl_errno($curl)
+            ];
+            Mage::log($error, null, "sf_set_data.log");
         }
 
         curl_close($curl);
 
         $response = json_decode($json_response, true);
-        Mage::log($response, null, "oportunity.log");
+        // Mage::log($response, null, "sf_set_data.log");
 
-        return json_decode($json_response, true);
+        return $response;
     }
 
     private function updateSalesForceData($method, $data, $id)
@@ -521,15 +533,23 @@ class Herfox_SalesForce_Model_Observer
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         if ( $status != 200 || isset($json_response['error_messages']) ) {
-            $error = "Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl);
-            Mage::log($error, null, "sf_update_error.log");
+            $error = [
+                "URL" => $url,
+                "Status" => $status,
+                "response" => $json_response,
+                "method" => $method,
+                "data" => $data,
+                "curl_error" => curl_error($curl),
+                "curl_errno" => curl_errno($curl)
+            ];
+            Mage::log($error, null, "sf_update_data.log");
         }
 
         curl_close($curl);
 
         $response = json_decode($json_response, true);
-        Mage::log($response, null, "sf_update_error.log");
+        // Mage::log($response, null, "sf_update_data.log");
 
-        return json_decode($json_response, true);
+        return $response;
     }
 }
