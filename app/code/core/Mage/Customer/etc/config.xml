@@ -98,7 +98,6 @@
                 <firstname>
                     <billing>1</billing>
                     <shipping>1</shipping>
-                    <required>1</required>
                     <mapped>1</mapped>
                 </firstname>
                 <middlename>
@@ -109,7 +108,6 @@
                 <lastname>
                     <billing>1</billing>
                     <shipping>1</shipping>
-                    <required>1</required>
                     <mapped>1</mapped>
                 </lastname>
                 <suffix>

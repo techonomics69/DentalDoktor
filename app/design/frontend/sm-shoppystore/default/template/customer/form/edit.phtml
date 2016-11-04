@@ -35,12 +35,36 @@
         <h2 class="legend"><?php echo $this->__('Account Information') ?></h2>
         <ul class="form-list">
             <li class="fields">
-                <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
+                <?php // echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
+                <div class="<?php echo $this->getContainerClassName()?> row">
+                    <div class="field name-firstname col-md-6 col-sm-6">
+                        <label for="firstname" class="required"><em>*</em><?php echo $this->__('Nombre') ?></label>
+                        <div class="input-box">
+                            <input disabled style="cursor: no-drop" type="text" id="firstname-no-drop" name="firstname-no-drop" value="<?php echo $this->escapeHtml($this->getCustomer()->getFirstname()) ?>" title="<?php echo $this->__('Nombre') ?>" maxlength="255" class="input-text" />
+                        </div>
+                    </div>
+                    <div class="field name-lastname col-md-6 col-sm-6">
+                        <label for="lastname" class="required"><em>*</em><?php echo $this->__('Apellidos') ?></label>
+                        <div class="input-box">
+                            <input disabled style="cursor: no-drop" type="text" id="lastname-no-drop" name="lastname-no-drop" value="<?php echo $this->escapeHtml($this->getCustomer()->getLastname()) ?>" title="<?php echo $this->__('Apellidos') ?>" maxlength="255" class="input-text" />
+                        </div>
+                    </div>
+                </div>
             </li>
-            <li>
-                <label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
-                <div class="input-box">
-                    <input type="text" name="email" id="email" value="<?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" />
+            <li class="fields">
+                <div class="row">
+                    <div class="field col-md-6">
+                        <label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                        <div class="input-box">
+                            <input disabled style="cursor: no-drop" type="text" name="email-no-drop" id="email-no-drop" value="<?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" />
+                        </div>
+                    </div>
+                    <div class="field col-md-6">
+                        <label for="mobile" class="required"><?php echo $this->__('Celular') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="mobile" id="mobile" value="<?php echo $this->escapeHtml($this->getCustomer()->getMobile()) ?>" title="<?php echo $this->__('Celular') ?>" class="input-text" />
+                        </div>
+                    </div>
                 </div>
             </li>
         <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>

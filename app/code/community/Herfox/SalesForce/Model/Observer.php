@@ -6,9 +6,9 @@
  * Time: 6:56 PM
  */
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 class Herfox_SalesForce_Model_Observer
 {
@@ -44,7 +44,7 @@ class Herfox_SalesForce_Model_Observer
             
             $opportunity['name'] = "DentalDoktor-".$order->getIncrementId();
             $opportunity['accountId'] = $customer->getData('account_id');
-            $opportunity['stageName'] = "En facturación";
+            $opportunity['stageName'] = "Abierta";
             $opportunity['closeDate'] = "2016-11-08";
             $opportunity['calle_entrega'] = $shipping->getStreet1();
             $opportunity['ciudad_entrega'] = $shipping->getCity();
@@ -53,35 +53,76 @@ class Herfox_SalesForce_Model_Observer
             $opportunity['localidad'] = $locality;
             $opportunity['pais_entrega'] = $shipping->getCountryId();
             $opportunity['tipo_pago'] = $order->getPayment()->getMethodInstance()->getTitle();
-            $method = $order->getPayment()->getMethodInstance()->getCode();
+            $opportunity['forma_pago'] = "";
 
+            $method = $order->getPayment()->getMethodInstance()->getCode();
             if($method == 'cash'){
                 $opportunity['forma_pago'] = $order->getPayment()->getWayToPay();
             }
+            $opportunity['recordTypeName'] = Mage::getStoreConfig('herfox_salesforce/general/oportunity_type_id');
 
-            $opportunity['recordTypeName'] = Mage::getStoreConfig('herfox_salesforce/general/oportunity_type_id');;
+            // Mage::log($opportunity, null, "oportunity.log");
+            $o_response = $this->setSalesForceData('Opportunity', $opportunity);
 
-            Mage::log($opportunity, null, "oportunity.log");
+            if(isset($o_response['operation_successful']) && isset($o_response['new_opp_id']))
+            {
+                $products = $order->getAllItems();
 
-            $products = $order->getAllItems();
-            $opportunity_products = [];
+                foreach ($products as $product)
+                {
+                    $o_product = [
+                        'quantity' => $product->getQtyOrdered(),
+                        'productCode' => $product->getSku(),
+                        'opportunityId' => $o_response['new_opp_id'],
+                        'pricebookId' => $group,
+                        'totalPrice' => $product->getRowTotal()
+                    ];
 
-            foreach ($products as $product){
+                    // Mage::log($o_product, null, "oportunity.log");
+                    $this->setSalesForceData('OpportunityLineItem', $o_product);
+                }
 
-                $opportunity_products[] = [
-                    'Quantity' => $product->getQtyOrdered(),
-                    'ProductCode' => $product->getSku(),
-                    'OpportunityId' => '',
-                    'PricebookId' => $group,
-                    'TotalPrice' => $product->getRowTotal()
-                ];
+                $this->updateSalesForceData('Opportunity', ['stageName' => 'En Facturación'], $o_response['new_opp_id']);
             }
-
-            Mage::log($opportunity_products, null, "oportunity.log");
-
-            $response = $this->setSalesForceData('Opportunity', $opportunity);
-
         }
+    }
+
+    public function updateCustomer($customer_event)
+    {
+        $customer = $customer_event->getCustomer();
+
+        $update = [
+            'mobilePhone' => $customer->getMobile(),
+            'birthdate' => explode(' ', $customer->getDob())[0]
+        ];
+
+        Mage::log($update, null, "edit_customer.log");
+        $this->updateSalesForceData('Contacts', $update, $customer->getAccountId());
+    }
+
+    public function updateCustomerAddress($address_event)
+    {
+        $address = $address_event->getCustomerAddress();
+
+        $region_code = Mage::getModel('directory/region')->load($address->getRegionId())->getCode();
+        $industry = Mage::getModel('eav/config')->getAttribute('customer_address', 'industry')->getSource()->getOptionText($address->getIndustry());
+        $customer = Mage::getModel('customer/customer')->load($address->getCustomerId());
+
+        $update = [
+            'industry' => $industry,
+            'department' => $address->getArea(),
+            'title' => $address->getTitle(),
+            'website' => $address->getWebsite(),
+            'fax' => $address->getFax(),
+            'billingCity' => $address->getCity(),
+            'billingCountry' => $address->getCountryId(),
+            'billingPostalCode' => $address->getPostcode(),
+            'billingState' => $region_code,
+            'billingStreet' => $address->getStreet1()
+        ];
+
+        Mage::log($update, null, "edit_address.log");
+        $this->updateSalesForceData('Contacts', $update, $customer->getAccountId());
     }
 
     public function sync()
@@ -451,7 +492,7 @@ class Herfox_SalesForce_Model_Observer
 
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-        if ( $status != 201 ) {
+        if ( $status != 200 || isset($json_response['error_messages']) ) {
             $error = "Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl);
             Mage::log($error, null, "oportunity.log");
         }
@@ -460,6 +501,34 @@ class Herfox_SalesForce_Model_Observer
 
         $response = json_decode($json_response, true);
         Mage::log($response, null, "oportunity.log");
+
+        return json_decode($json_response, true);
+    }
+
+    private function updateSalesForceData($method, $data, $id)
+    {
+        $url = $this->session['instance_url'] . "/services/apexrest/" . $method . DS . $id;
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $this->session['access_token'], "Content-type: application/json"));
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $json_response = curl_exec($curl);
+
+        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if ( $status != 200 || isset($json_response['error_messages']) ) {
+            $error = "Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl);
+            Mage::log($error, null, "sf_update_error.log");
+        }
+
+        curl_close($curl);
+
+        $response = json_decode($json_response, true);
+        Mage::log($response, null, "sf_update_error.log");
 
         return json_decode($json_response, true);
     }

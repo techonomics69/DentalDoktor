@@ -24,27 +24,66 @@
     </modules>
     <global>
         <fieldsets>
-            <sales_convert_quote_payment>
-                <way_to_pay>
-                    <to_order_payment>*</to_order_payment>
-                </way_to_pay>
-            </sales_convert_quote_payment>
+            <customer_account>
+                <mobile>
+                    <create>1</create>
+                    <update>1</update>
+                </mobile>
+                <account_id>
+                    <to_order>*</to_order>
+                </account_id>
+            </customer_account>
+
+            <customer_address>
+                <locality>
+                    <to_quote_address>*</to_quote_address>
+                </locality>
+                <industry>
+                    <to_quote_address>*</to_quote_address>
+                </industry>
+                <account_id>
+                    <to_quote_address>*</to_quote_address>
+                </account_id>
+            </customer_address>
 
             <checkout_onepage_quote>
                 <account_id>
                     <to_customer>*</to_customer>
                 </account_id>
             </checkout_onepage_quote>
-            <customer_account>
+
+            <checkout_onepage_billing>
+                <locality>
+                    <to_customer>*</to_customer>
+                </locality>
                 <account_id>
                     <to_order>*</to_order>
                 </account_id>
-            </customer_account>
+            </checkout_onepage_billing>
+
             <sales_convert_quote>
                 <account_id>
                     <to_order>*</to_order>
                 </account_id>
             </sales_convert_quote>
+
+            <sales_convert_quote_payment>
+                <way_to_pay>
+                    <to_order_payment>*</to_order_payment>
+                </way_to_pay>
+            </sales_convert_quote_payment>
+
+            <sales_convert_quote_address>
+                <locality>
+                    <to_order_address>*</to_order_address>
+                    <to_customer_address>*</to_customer_address>
+                </locality>
+                <industry>
+                    <to_order_address>*</to_order_address>
+                    <to_customer_address>*</to_customer_address>
+                </industry>
+            </sales_convert_quote_address>
+
             <sales_convert_order>
                 <account_id>
                     <to_order>*</to_order>
@@ -56,35 +95,18 @@
                     <to_order>*</to_order>
                 </locality>
             </sales_copy_order_billing_address>
+
             <sales_copy_order_shipping_address>
                 <locality>
                     <to_order>*</to_order>
                 </locality>
             </sales_copy_order_shipping_address>
-            <sales_convert_quote_address>
-                <locality>
-                    <to_order_address>*</to_order_address>
-                    <to_customer_address>*</to_customer_address>
-                </locality>
-            </sales_convert_quote_address>
+
             <sales_convert_order_address>
                 <locality>
                     <to_quote_address>*</to_quote_address>
                 </locality>
             </sales_convert_order_address>
-            <customer_address>
-                <locality>
-                    <to_quote_address>*</to_quote_address>
-                </locality>
-            </customer_address>
-            <checkout_onepage_billing>
-                <locality>
-                    <to_customer>*</to_customer>
-                </locality>
-                <account_id>
-                    <to_order>*</to_order>
-                </account_id>
-            </checkout_onepage_billing>
 
         </fieldsets>
         <helpers>
@@ -138,6 +160,24 @@
                     </Herfox_SalesForce_Model_Observer>
                 </observers>
             </checkout_onepage_controller_success_action>
+            <customer_save_after>
+                <observers>
+                    <Herfox_SalesForce_Model_Observer>
+                        <type>singleton</type>
+                        <class>herfox_salesforce/observer</class>
+                        <method>updateCustomer</method>
+                    </Herfox_SalesForce_Model_Observer>
+                </observers>
+            </customer_save_after>
+            <customer_address_save_after>
+                <observers>
+                    <Herfox_SalesForce_Model_Observer>
+                        <type>singleton</type>
+                        <class>herfox_salesforce/observer</class>
+                        <method>updateCustomerAddress</method>
+                    </Herfox_SalesForce_Model_Observer>
+                </observers>
+            </customer_address_save_after>
         </events>
     </global>
     <default>

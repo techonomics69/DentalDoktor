@@ -45,29 +45,90 @@
         <h2 class="legend"><?php echo $this->__('Contact Information') ?></h2>
         <ul class="form-list edit-address-form">
             <li class="fields">
-                <?php echo $this->getNameBlockHtml() ?>
+                <?php // echo $this->getNameBlockHtml() ?>
+                <div class="customer-name row">
+                    <div class="field name-firstname col-md-6 col-sm-6">
+                        <label for="firstname" class="required"><em>*</em><?php echo $this->__('Nombre') ?></label>
+                        <div class="input-box">
+                            <input readonly="readonly" style="cursor: no-drop" type="text" id="firstname" name="firstname" value="<?php echo $this->escapeHtml($this->getAddress()->getFirstname()) ?>" title="<?php echo $this->__('Nombre') ?>" maxlength="255" class="input-text required-entry">
+                        </div>
+                    </div>
+                    <div class="field name-lastname col-md-6 col-sm-6">
+                        <label for="lastname" class="required"><em>*</em><?php echo $this->__('Apellidos') ?></label>
+                        <div class="input-box">
+                            <input readonly="readonly" style="cursor: no-drop" type="text" id="lastname" name="lastname" value="<?php echo $this->escapeHtml($this->getAddress()->getLastname()) ?>" title="<?php echo $this->__('Apellidos') ?>" maxlength="255" class="input-text required-entry">
+                        </div>
+                    </div>
+                </div>
             </li>
-            <li class="wide">
-                <label for="company"><?php echo $this->__('Company') ?></label>
-                <div class="input-box">
-                    <input type="text" name="company" id="company" title="<?php echo $this->__('Company') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
+            <li class="fields">
+                <div class="row">
+                    <div class="field col-md-6">
+                        <label for="company" class="required"><em>*</em><?php echo $this->__('Company') ?></label>
+                        <div class="input-box">
+                            <input readonly="readonly" style="cursor: no-drop" type="text" name="company" id="company" title="<?php echo $this->__('Company') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?>" />
+                        </div>
+                    </div>
+                    <div class="field col-md-6">
+                        <label for="industry" class="required"><em>*</em><?php echo $this->__('Especialidad') ?></label>
+                        <div class="input-box">
+                            <?php
+                            $attribute = Mage::getModel('eav/config')->getAttribute('customer_address', 'industry');
+                            $options = $attribute->getSource()->getAllOptions(false);
+                            ?>
+                            <select id="industry" name="industry" title="<?php echo $this->__('Especialidad') ?>" class="validate-select">
+                                <option value=""><?php echo $this->__('Seleccione Especialidad') ?></option>
+                                <?php
+                                foreach($options as $option){
+                                    ?>
+                                    <option value='<?php echo $option['value']?>' <?php if($this->getAddress()->getIndustry() == $option['value']){ echo 'selected="selected"';}?>><?php echo $this->__($option['label'])?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="row">
+                    <div class="field col-md-6">
+                        <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                        <div class="input-box">
+                            <input readonly="readonly" style="cursor: no-drop" type="text" name="telephone" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text  <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" />
+                        </div>
+                    </div>
+                    <div class="field col-md-6">
+                        <label for="fax"><?php echo $this->__('Fax') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="fax" id="fax" title="<?php echo $this->__('Fax') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getFax()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>" />
+                        </div>
+                    </div>
                 </div>
             </li>
             <li class="fields">
 				<div class="row">
-					<div class="field col-md-6">
-						<label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
-						<div class="input-box">
-							<input type="text" name="telephone" value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text  <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" id="telephone" />
-						</div>
-					</div>
-					<div class="field col-md-6">
-						<label for="fax"><?php echo $this->__('Fax') ?></label>
-						<div class="input-box">
-							<input type="text" name="fax" id="fax" title="<?php echo $this->__('Fax') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getFax()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>" />
-						</div>
-					</div>
+                    <div class="field col-md-6">
+                        <label for="area"><?php echo $this->__('Area') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="area" value="<?php echo $this->escapeHtml($this->getAddress()->getArea()) ?>" title="<?php echo $this->__('Area') ?>" class="input-text" id="area" />
+                        </div>
+                    </div>
+                    <div class="field col-md-6">
+                        <label for="title"><?php echo $this->__('Title') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="title" value="<?php echo $this->escapeHtml($this->getAddress()->getTitle()) ?>" title="<?php echo $this->__('Title') ?>" class="input-text" id="title" />
+                        </div>
+                    </div>
 				</div>
+            </li>
+            <li class="fields">
+                <div class="row">
+                    <div class="field col-md-6">
+                        <label for="website"><?php echo $this->__('Website') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="website" value="<?php echo $this->escapeHtml($this->getAddress()->getWebsite()) ?>" title="<?php echo $this->__('Website') ?>" class="input-text" id="website" />
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -76,9 +137,30 @@
         <ul class="form-list edit-address-form">
         <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
             <li class="wide">
-                <label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
-                <div class="input-box">
-                    <input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text <?php echo $_streetValidationClass ?>" />
+                <div class="row">
+                    <div class="field col-md-6">
+                        <label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text <?php echo $_streetValidationClass ?>" />
+                        </div>
+                    </div>
+                    <div class="field col-md-6">
+                        <label for="locality"><?php echo $this->__('Localidad') ?></label>
+                        <div class="input-box">
+                            <?php
+                            $attribute = Mage::getModel('eav/config')->getAttribute('customer_address', 'locality');
+                            $options = $attribute->getSource()->getAllOptions(false);
+                            ?>
+                            <select id="locality" name="locality" title="<?php echo $this->__('Localidad') ?>" class="validate-select">
+                                <option value=""><?php echo $this->__('Seleccione Localidad') ?></option>
+                                <?php
+                                foreach($options as $option){
+                                    ?>
+                                    <option value='<?php echo $option['value']?>' <?php if($this->getAddress()->getLocality() == $option['value']){ echo 'selected="selected"';}?>><?php echo $this->__($option['label'])?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </li>
         <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
