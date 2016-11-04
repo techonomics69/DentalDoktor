@@ -67,6 +67,19 @@
             </customer_new_account_email_sent>
         </events>
     </global>
+    <frontend>
+        <events>
+            <controller_action_postdispatch_contacts_index_post>
+                <observers>
+                    <SalesForce_WebToLead_Model_Observer>
+                        <type>singleton</type>
+                        <class>salesforce_webtolead/observer</class>
+                        <method>createCase</method>
+                    </SalesForce_WebToLead_Model_Observer>
+                </observers>
+            </controller_action_postdispatch_contacts_index_post>
+        </events>
+    </frontend>
     <adminhtml>
         <layout>
             <updates>

@@ -8,6 +8,62 @@
 
 class SalesForce_WebToLead_Model_Observer
 {
+    public function createCase($contact_event)
+    {
+        $contact = $contact_event->getData();
+        $contact = $contact['controller_action']->getRequest()->getPost();
+
+        // General Data
+        $case = [
+            "orgid" => "00DP0000003ooje",
+            "retURL" => "http://dentaldoktor.sinatsys.com/SalesForce/testpost.php",
+            "name" => $contact['name'],
+            "email" => $contact['email'],
+            "phone" => $contact['telephone'],
+            "subject" => $contact['subject'],
+            "description" => $contact['comment'],
+            "reason" => $contact['reason'],
+            "type" => $contact['type']
+        ];
+
+        // Mage::log($case, null, "sf_cases.log");
+
+        // Call to Web To Lead of SalesForce
+        $_config = array(
+            'maxredirects' => 5,
+            'timeout'    => 30
+        );
+
+        $client = new Varien_Http_Client();
+        $result = new Varien_Object();
+
+        $client->setUri('https://test.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8')
+            ->setConfig($_config)
+            ->setMethod(Varien_Http_Client::POST)
+            ->setParameterPost($case);
+
+        try{
+            $response = $client->request();
+            if ($response->isSuccessful())
+            {
+                //echo('<pre>');
+                //var_dump($response->getBody());
+                //echo('</pre>');
+                // Mage::log($response->getBody(), null, "sf_cases.log");
+            }
+        }
+        catch (Exception $e) {
+            $result->setResponseCode(-1)
+                ->setResponseReasonCode($e->getCode())
+                ->setResponseReasonText($e->getMessage());
+            $debugData['result'] = $result->getData();
+            Mage::log("Error: ".$debugData, null, "sf_cases.log");
+            throw $e;
+        }
+
+        return;
+    }
+
     public function createProspect($customer)
     {
         if (!($customer instanceof Mage_Customer_Model_Customer)) {
@@ -18,7 +74,7 @@ class SalesForce_WebToLead_Model_Observer
 
         // General Data
         $lead["oid"] = "00DP0000003ooje";
-        $lead["retURL"] = "http://dental.herfox.com/SalesForce/testpost.php";
+        $lead["retURL"] = "http://dentaldoktor.sinatsys.com/SalesForce/testpost.php";
         $lead["00NP0000000zglf"] = $data["dentaldoktor"] = 1;
         $lead["00NP0000001A5NI"] = $customer->entity_id;
 
@@ -35,7 +91,7 @@ class SalesForce_WebToLead_Model_Observer
         $lead["mobile"] = $data["mobile"] = $customer->mobile;
         $lead["00NP0000000zfHK"] = $data["email_type"] = $email_type;
         $lead["email"] = $data["email"] = $customer->email;
-        $lead["00NP00000019r2a"] = $data["password"] = md5($customer->password);
+        $lead["00NP00000019r2a"] = $data["password"] = $customer->password;
         $lead["lead_source"] = $data["lead_source"] = $lead_source;
         $lead["00NP0000000zfLR"] = $data["habeas_data"] = $customer->habeas_data;
 
@@ -65,7 +121,7 @@ class SalesForce_WebToLead_Model_Observer
         var_dump($lead);
         echo('</pre>');
 */
-        Mage::log($lead, null, "prospects.log");
+        //Mage::log($lead, null, "prospects.log");
 
         // Call to Web To Lead of SalesForce
         $_config = array(
@@ -100,7 +156,7 @@ class SalesForce_WebToLead_Model_Observer
                 ->setResponseReasonCode($e->getCode())
                 ->setResponseReasonText($e->getMessage());
             $data['response'] = $debugData['result'] = $result->getData();
-            Mage::log("Error: ".$debugData, null, "herfox_test.log");
+            Mage::log("Error: ".$debugData, null, "sf_prospects.log");
             throw $e;
         }
 
