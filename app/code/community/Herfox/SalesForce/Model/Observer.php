@@ -56,14 +56,18 @@ class Herfox_SalesForce_Model_Observer
             $opportunity['forma_pago'] = "";
 
             $method = $order->getPayment()->getMethodInstance()->getCode();
+            // Mage::log($method, null, "sf_opportunity.log");
             if($method == 'cash'){
                 $opportunity['forma_pago'] = $order->getPayment()->getWayToPay();
             }
             $opportunity['recordTypeName'] = Mage::getStoreConfig('herfox_salesforce/general/oportunity_type_id');
 
-            // Mage::log($opportunity, null, "oportunity.log");
+            // Mage::log($opportunity, null, "sf_opportunity.log");
+
+            // Create Opportunity
             $o_response = $this->setSalesForceData('Opportunity', $opportunity);
 
+            // Add products to new opportunity
             if(isset($o_response['operation_successful']) && isset($o_response['new_opp_id']))
             {
                 $products = $order->getAllItems();
@@ -82,6 +86,7 @@ class Herfox_SalesForce_Model_Observer
                     $this->setSalesForceData('OpportunityLineItem', $o_product);
                 }
 
+                // Update status to opportunity
                 $this->updateSalesForceData('Opportunity', ['stageName' => 'En Facturación'], $o_response['new_opp_id']);
             }
         }
