@@ -85,15 +85,18 @@ class SalesForce_WebToLead_Model_Observer
 
         $lead["first_name"] = $data["first_name"] = $customer->firstname;
         $lead["last_name"] = $data["last_name"] = $customer->lastname;
+        $osclass["s_name"] = $customer->firstname." ".$customer->lastname;
         $lead["00NP0000000zfGl"] = $data["document_type"] = $document_type;
         $lead["00NP0000000zfK9"] = $data["document_number"] = $customer->document_number;
         $lead["00NP0000000zgdb"] = $data["birthdate"] = explode(" ", $customer->dob)[0];
         $lead["mobile"] = $data["mobile"] = $customer->mobile;
         $lead["00NP0000000zfHK"] = $data["email_type"] = $email_type;
-        $lead["email"] = $data["email"] = $customer->email;
-        $lead["00NP00000019r2a"] = $data["password"] = $customer->password;
+        $osclass["s_email"] = $lead["email"] = $data["email"] = $customer->email;
+        $osclass["s_password2"] = $osclass["s_password"] = $lead["00NP00000019r2a"] = $data["password"] = $customer->password;
         $lead["lead_source"] = $data["lead_source"] = $lead_source;
         $lead["00NP0000000zfLR"] = $data["habeas_data"] = $customer->habeas_data;
+        $osclass["page"] = "register";
+        $osclass["action"] = "register_post";
 
         // Customer Address
         foreach ($customer->getAddresses() as $address)
@@ -128,7 +131,9 @@ class SalesForce_WebToLead_Model_Observer
             'maxredirects' => 5,
             'timeout'    => 30
         );
-
+        // **************************
+        // Register in SalesForce
+        // **************************
         $client = new Varien_Http_Client();
         $result = new Varien_Object();
 
@@ -157,6 +162,36 @@ class SalesForce_WebToLead_Model_Observer
                 ->setResponseReasonText($e->getMessage());
             $data['response'] = $debugData['result'] = $result->getData();
             Mage::log("Error: ".$debugData, null, "sf_prospects.log");
+            throw $e;
+        }
+
+        // **************************
+        // Register in OsClass
+        // **************************
+        $client_oc = new Varien_Http_Client();
+        $result_oc = new Varien_Object();
+
+        $client_oc->setUri('http://www.dentaldoktor.com/clasificados/index.php')
+            ->setConfig($_config)
+            ->setMethod(Varien_Http_Client::POST)
+            ->setParameterPost($osclass);
+
+        try{
+            $response = $client_oc->request();
+            if ($response->isSuccessful())
+            {
+                //echo('<pre>');
+                //var_dump($response->getBody());
+                //echo('</pre>');
+                //Mage::log($response->getBody(), null, "herfox_test.log");
+            }
+        }
+        catch (Exception $e) {
+            $result_oc->setResponseCode(-1)
+                ->setResponseReasonCode($e->getCode())
+                ->setResponseReasonText($e->getMessage());
+            $data['response'] .= $debugData['result'] = $result_oc->getData();
+            Mage::log("Error: ".$debugData, null, "oc_user_register.log");
             throw $e;
         }
 

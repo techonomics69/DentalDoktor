@@ -1,0 +1,22 @@
+.header-buttons {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.header-buttons > .publish {
+    float: right;
+    margin-left: 10px;
+}
+
+.active a.grid-button, .doublebutton a.list-button {
+    background-color: #003865;
+    border-color: #d1d1d1;
+}
+
+a {
+    color: #003865;
+}

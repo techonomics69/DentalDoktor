@@ -89,7 +89,10 @@ global $var_yttheme;?>
 	<div class="footer-bottom">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+				<div class="payment col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<?php echo $this->getChildHtml('shoppy-payment') ?>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 					<div class="copyright-footer">
 						<?php if( $var_yttheme->getParam('custom_copyright') == 1 ){
 							echo $var_yttheme->getParam('copyright');
@@ -98,13 +101,34 @@ global $var_yttheme;?>
 						<?php }?>
 					</div>
 				</div>
-				<div class="payment col-lg-5 col-md-5 col-sm-6 col-xs-12">
-					<?php echo $this->getChildHtml('shoppy-payment') ?>
-				</div>
 			</div>
 		</div>
 	</div>
-</div>       
+</div>
+<script>
 
+	jQuery(function($) {
+		$('a').click(function(e)
+		{
+
+			var hash = $(this).attr('href').split('#')[1];
+			if(hash && window.location.pathname != '/') {
+				e.preventDefault();
+				var hash = $(this).attr('href').replace(/^.*?#/, '');
+				var href = $(this).attr('href'), hash = href.substr(href.indexOf('#') + 1);
+				var hash = $(this).attr('href').match(/#(.*$)/)[1];
+				var hash = '#' + this.hash.substr(1);
+
+				$('html, body').animate({
+					scrollTop: $(hash).offset().top + 'px'
+				}, 1000, 'swing');
+			}
+		});
+
+		 if(window.location.hash) {
+		 	$('html, body').stop().animate({scrollTop: $(window.location.hash).offset().top + 'px'}, 1000, 'swing');
+		 }
+	});
+</script>
 
 	

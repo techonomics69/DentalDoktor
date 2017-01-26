@@ -47,7 +47,7 @@
                     <tr>
                         <th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
                         <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
-                        <th rowspan="<?php echo $mergedCells; ?>"></th>
+                        <!-- th rowspan="<?php echo $mergedCells; ?>"></th -->
                         <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
                         <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
                         <?php endif ?>
@@ -110,7 +110,7 @@
     <div class="cart-collaterals">
         <div class="col2-set">
         	<div class="row">
-	            <div class="col-1 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+	            <div class="col-1 col-lg-3 col-md-3 col-sm-6 col-xs-12">
 	                <?php echo $this->getChildHtml('crosssell') ?>
 	            </div>
 	            <div class="col-2 col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -119,7 +119,7 @@
 	                <?php echo $this->getChildHtml('coupon') ?>
 	                <?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
 	            </div>
-	            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+	            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
 			        <div class="totals">
 			            <?php echo $this->getChildHtml('totals'); ?>
 			            <?php if(!$this->hasError()): ?>

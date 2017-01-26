@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Magebright_CustomerApprove>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
         </Magebright_CustomerApprove>
     </modules>

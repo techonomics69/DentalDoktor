@@ -41,11 +41,15 @@ class Herfox_SalesForce_Model_Observer
             $group = Mage::getModel('customer/group')->load($order->getCustomerGroupId())->getCustomerGroupCode();
             $region = Mage::getModel('directory/region')->load($shipping->getRegionId())->getCode();
             $locality = Mage::getModel('eav/config')->getAttribute('customer_address', 'locality')->getSource()->getOptionText($shipping->getLocality());
-            
+
+            $date = new Zend_Date($this->date);
+            $date->addDay(8);
+            //Mage::log($date->toString('yyyy-MM-dd'), null, "sf_opportunity.log");
+
             $opportunity['name'] = "DentalDoktor-".$order->getIncrementId();
             $opportunity['accountId'] = $customer->getData('account_id');
             $opportunity['stageName'] = "Abierta";
-            $opportunity['closeDate'] = "2016-11-08";
+            $opportunity['closeDate'] = $date->toString('yyyy-MM-dd');
             $opportunity['calle_entrega'] = $shipping->getStreet1();
             $opportunity['ciudad_entrega'] = $shipping->getCity();
             $opportunity['condiciones'] = $order->getStatusHistoryCollection()->getFirstItem()->getComment();
@@ -56,13 +60,13 @@ class Herfox_SalesForce_Model_Observer
             $opportunity['forma_pago'] = "";
 
             $method = $order->getPayment()->getMethodInstance()->getCode();
-            // Mage::log($method, null, "sf_opportunity.log");
+            //Mage::log($method, null, "sf_opportunity.log");
             if($method == 'cash'){
                 $opportunity['forma_pago'] = $order->getPayment()->getWayToPay();
             }
             $opportunity['recordTypeName'] = Mage::getStoreConfig('herfox_salesforce/general/oportunity_type_id');
 
-            // Mage::log($opportunity, null, "sf_opportunity.log");
+            Mage::log($opportunity, null, "sf_opportunity.log");
 
             // Create Opportunity
             $o_response = $this->setSalesForceData('Opportunity', $opportunity);
@@ -82,7 +86,7 @@ class Herfox_SalesForce_Model_Observer
                         'totalPrice' => $product->getRowTotal()
                     ];
 
-                    // Mage::log($o_product, null, "oportunity.log");
+                    Mage::log($o_product, null, "oportunity.log");
                     $this->setSalesForceData('OpportunityLineItem', $o_product);
                 }
 
@@ -517,7 +521,7 @@ class Herfox_SalesForce_Model_Observer
         curl_close($curl);
 
         $response = json_decode($json_response, true);
-        // Mage::log($response, null, "sf_set_data.log");
+        Mage::log($response, null, "sf_set_data.log");
 
         return $response;
     }
@@ -553,7 +557,7 @@ class Herfox_SalesForce_Model_Observer
         curl_close($curl);
 
         $response = json_decode($json_response, true);
-        // Mage::log($response, null, "sf_update_data.log");
+        Mage::log($response, null, "sf_update_data.log");
 
         return $response;
     }

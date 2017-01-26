@@ -164,7 +164,7 @@
 
 .opc-wrapper-opc .login-trigger:hover {
     color: #fff !important;;
-    background: #39b9c6 !important;
+    background: #003A69 !important;
     cursor: pointer;
 }
 
@@ -560,7 +560,7 @@
 
 .opc-wrapper-opc .payment-block dt:hover,
 .opc-wrapper-opc .payment-block dt.active {
-    background: #39b9c6;
+    background: #003A69 !important;
 }
 
 .opc-wrapper-opc .payment-block dt label {
@@ -927,7 +927,7 @@
 .signature-block h3.open-block .expand_plus,
 .comment-block h3.open-block .expand_plus,
 .giftcard h3.open-block .expand_plus {
-    background-color: #39b9c6;
+    background-color: #003A69;
 }
 
 .discount-block h3.open-block .expand_plus,
@@ -1117,7 +1117,7 @@
 
 .opc-messages-action .button:hover span,
 .opc-messages-action .button:hover span span {
-    background: #39b9c6;
+    background: #003A69;
 }
 
 .close-message-wrapper {
@@ -1298,14 +1298,14 @@
     right: 17px;
     width: 28px;
     z-index: 101;
-    border-top: 10px solid #39b9c6;
+    border-top: 10px solid #003A69;
     border-left: 14px solid transparent;
     border-right: 14px solid transparent;
 }
 
 .review-menu-block a.review-total:hover,
 .review-menu-block a.review-total.open {
-    background: url(images/cart.png) no-repeat scroll 18px 11px #39b9c6 !important
+    background: url(images/cart.png) no-repeat scroll 18px 11px #003A69 !important
 }
 
 .review-menu-block a.review-total span {

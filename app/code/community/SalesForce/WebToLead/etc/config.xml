@@ -2,14 +2,14 @@
 <!--
 /**
  * SalesForce_WebToLead extension
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the MIT License
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/mit-license.php
- * 
+ *
  * @category       SalesForce
  * @package        SalesForce_WebToLead
  * @copyright      Copyright (c) 2016
@@ -69,6 +69,15 @@
     </global>
     <frontend>
         <events>
+            <!-- controller_action_predispatch_customer_account_loginPost>
+                <observers>
+                    <SalesForce_WebToLead_Model_Observer>
+                        <type>singleton</type>
+                        <class>salesforce_webtolead/observer</class>
+                        <method>loginOsClassUser</method>
+                    </SalesForce_WebToLead_Model_Observer>
+                </observers>
+            </controller_action_predispatch_customer_account_loginPost -->
             <controller_action_postdispatch_contacts_index_post>
                 <observers>
                     <SalesForce_WebToLead_Model_Observer>

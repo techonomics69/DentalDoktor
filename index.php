@@ -47,6 +47,7 @@ if (file_exists($compilerConfig)) {
 $mageFilename = MAGENTO_ROOT . '/app/Mage.php';
 $maintenanceFile = 'maintenance.flag';
 
+
 if (!file_exists($mageFilename)) {
     if (is_dir('downloader')) {
         header("Location: downloader");
@@ -56,17 +57,34 @@ if (!file_exists($mageFilename)) {
     exit;
 }
 
-if (file_exists($maintenanceFile)) {
-    include_once dirname(__FILE__) . '/errors/503.php';
-    exit;
-}
+/* ------------------------------------------
+   START DEVELOPER BYPASS CODE
+   You may leave this code in place whether or not the store is in maintenance mode
+   ------------------------------------------ */
+$ip = $_SERVER['REMOTE_ADDR'];
+//echo $ip;
+//exit;
+$allowedIps = array(
+    '190.84.66.24',
+    '190.248.146.18',
+    '136.179.15.214',
+    '186.155.156.40'
+);
+
+if (in_array($ip, $allowedIps) || strstr($_SERVER['REQUEST_URI'], 'api/v2_soap')) {} else
+    /* ---- END DEVELOPER BYPASS CODE ---- */
+
+    if (file_exists($maintenanceFile)) {
+        include_once dirname(__FILE__) . '/errors/503.php';
+        exit;
+    }
 
 require MAGENTO_ROOT . '/app/bootstrap.php';
 require_once $mageFilename;
 
 #Varien_Profiler::enable();
 
-if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
+if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE']) ) {
     Mage::setIsDeveloperMode(true);
 }
 

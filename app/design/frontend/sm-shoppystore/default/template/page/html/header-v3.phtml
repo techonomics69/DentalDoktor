@@ -44,6 +44,9 @@
                                 <?php echo $this->getChildHtml('customer_form_mini_login'); ?>
 							</li>
 							<?php } else{?>
+								<li>
+									<p class="hello"><strong><?php echo $this->getChildHtml('welcome'); ?></strong></p>
+								</li>
 							<li>
 								<a class="logout-btn" href="<?php echo $this->getUrl('customer/account/logout')?>" title="<?php echo $this->__('Logout');?>"><?php echo $this->__('Logout');?></a>
                             </li>

@@ -30,11 +30,11 @@ function show_products($instance_url, $access_token)
     $response = json_decode($json_response, true);
 
     //$total_size = $response['totalSize'];
-/*
+
     echo "<pre>";
     var_dump($response);
     echo "</pre>";
-*/
+
 
     echo count($response) . " record(s) returned<br/><br/>";
     echo "<table border='1'>";
