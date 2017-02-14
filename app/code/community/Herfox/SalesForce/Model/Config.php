@@ -15,7 +15,7 @@ class Herfox_SalesForce_Model_Config
             . "&client_id=" . Mage::getStoreConfig('herfox_salesforce/oauth2/client_id')
             . "&client_secret=" . Mage::getStoreConfig('herfox_salesforce/oauth2/client_secret')
             . "&username=" . Mage::getStoreConfig('herfox_salesforce/oauth2/username')
-            . "&password=" . Mage::getStoreConfig('herfox_salesforce/oauth2/password');
+            . "&password=" . Mage::helper('core')->decrypt(Mage::getStoreConfig('herfox_salesforce/oauth2/password'));
         
         $curl = curl_init($token_url);
         curl_setopt($curl, CURLOPT_HEADER, false);
@@ -28,7 +28,7 @@ class Herfox_SalesForce_Model_Config
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         if ( $status != 200 ) {
-            $error = "Error: call to token URL $token_url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl);
+            echo $error = "Error: call to token URL $token_url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl);
             Mage::log($error, null, "sf_get_session.log");
             die;
         }
@@ -42,13 +42,13 @@ class Herfox_SalesForce_Model_Config
         $instance_url = $response['instance_url'];
 
         if (!isset($access_token) || $access_token == "") {
-            $error = "Error - access token missing from response!";
+            echo $error = "Error - access token missing from response!";
             Mage::log($error, null, "sf_get_session.log");
             die;
         }
 
         if (!isset($instance_url) || $instance_url == "") {
-            $error = "Error - instance URL missing from response!";
+            echo $error = "Error - instance URL missing from response!";
             Mage::log($error, null, "sf_get_session.log");
             die;
         }

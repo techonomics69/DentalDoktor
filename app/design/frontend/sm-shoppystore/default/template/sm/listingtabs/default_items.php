@@ -89,7 +89,7 @@ if (!empty($child_items)) {
                     <?php
                     /** HERFOX: Hide add to cart button if User isn't logged in grid mode */
                     if(!Mage::getSingleton('customer/session')->isLoggedIn()){
-                        echo '<span><p style="height: 35px;">INICIE SESIÓN PARA COMPRAR Y VER PRECIO</p></span>';
+                        echo '<span><p style="height: 35px;"><a href="/customer/account/login/">INICIE SESIÓN PARA COMPRAR Y VER PRECIO</a></p></span>';
                     }
                     else { ?>
                     <!-- WISTLIST -->

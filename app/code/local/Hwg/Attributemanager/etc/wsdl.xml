@@ -24,6 +24,7 @@
                     <element name="account_id" type="xsd:string" minOccurs="0" />
                     <element name="mp_cc_is_approved" type="xsd:int" minOccurs="0" />
                     <element name="pricelist_id" type="xsd:string" minOccurs="0" />
+                    <element name="cupo_de_credito" type="xsd:string" minOccurs="0" />
                 </all>
             </complexType>
             <complexType name="customerCustomerEntity">
@@ -49,6 +50,7 @@
                     <element name="account_id" type="xsd:string" minOccurs="0" />
                     <element name="mp_cc_is_approved" type="xsd:int" minOccurs="0" />
                     <element name="pricelist_id" type="xsd:string" minOccurs="0" />
+                    <element name="cupo_de_credito" type="xsd:string" minOccurs="0" />
                 </all>
             </complexType>
             <complexType name="customerCustomerEntityArray">

@@ -338,9 +338,10 @@ class Mage_Catalog_Model_Config extends Mage_Eav_Model_Config
      */
     public function getAttributeUsedForSortByArray()
     {
-        $options = array(
-            'position'  => Mage::helper('catalog')->__('Position')
-        );
+        // HERFOX: Remove option position of sort by
+        //$options = array(
+        //    'position'  => Mage::helper('catalog')->__('Position')
+        //);
         foreach ($this->getAttributesUsedForSortBy() as $attribute) {
             /* @var $attribute Mage_Eav_Model_Entity_Attribute_Abstract */
             $options[$attribute->getAttributeCode()] = $attribute->getStoreLabel();

@@ -29,6 +29,14 @@ if ($isPersistantShoppingCartEnabled) {
                         <?php echo $html ?>
                     </li>
                     <li class="fields row">
+                        <div class="field col-md-12 col-sm-12">
+                            <label for="company" class="required"><em>*</em><?php echo $this->__('Company') ?></label><p><?php echo $this->__('(Si usted es persona natural introduzca su nombre)') ?></p>
+                            <div class="input-box">
+                                <input type="text" name="company" id="company" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text required-entry" />
+                            </div>
+                        </div>
+                    </li>
+                    <li class="fields row">
                         <div class="field col-md-6 col-sm-6">
                             <label for="document_type" class="required"><em>*</em><?php echo $this->__('Tipo de Documento') ?></label>
                             <div class="input-box">
@@ -106,37 +114,6 @@ if ($isPersistantShoppingCartEnabled) {
                             </div>
                         </div>
                     </li>
-                    <li class="fields row">
-                        <div class="field col-md-6 col-sm-6">
-                            <label for="lead_source"><?php echo $this->__('¿Como conoció de DentalDoktor?') ?></label>
-                            <div class="input-box">
-                                <?php
-                                $attribute = Mage::getModel('eav/config')->getAttribute('customer','lead_source');
-                                $options = $attribute->getSource()->getAllOptions(false);
-                                ?>
-                                <select id="lead_source" name="lead_source" title="<?php echo $this->__('¿Como conoció de DentalDoktor?') ?>" class="validate-select">
-                                    <option value=""><?php echo $this->__('Seleccione Una Opción') ?></option>
-                                    <?php
-                                    foreach($options as $option){
-                                        ?>
-                                        <option value='<?php echo $option['value']?>' <?php if($this->getFormData()->getLeadSource() == $option['value']){ echo 'selected="selected"';}?>><?php echo $this->__($option['label'])?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="field col-md-6 col-sm-6" style="margin-top: 10px;">
-                            <?php if ($this->isNewsletterEnabled()): ?>
-                                <div class="input-box">
-                                    <input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
-                                </div>
-                                <label for="is_subscribed"><?php echo $this->__('Sign Up for Newsletter') ?></label>
-                            <?php endif ?>
-                            <div class="input-box">
-                                <input type="checkbox" name="habeas_data" title="<?php echo $this->__('Autoriza Habeas Data') ?>" value="1" id="habeas_data"<?php if($this->getFormData()->getHabeasData()): ?> checked="checked"<?php endif; ?> class="checkbox required-entry" />
-                            </div>
-                            <label for="habeas_data" class="required"><?php echo $this->__('Autoriza Habeas Data') ?><em>*</em></label>
-                        </div>
-                    </li>
                     <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
                     <?php if ($_taxvat->isEnabled()): ?>
                         <li><?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?></li>
@@ -152,15 +129,9 @@ if ($isPersistantShoppingCartEnabled) {
             <?php if($this->getShowAddressFields()): ?>
                 <div class="fieldset col-lg-6 col-md-6">
                     <input type="hidden" name="create_address" value="1" />
-                    <h2 class="legend"><?php echo $this->__('Address Information') ?></h2>
+                    <h2 class="legend"><?php // echo $this->__('Address Information') ?></h2>
                     <ul class="form-list">
                         <li class="fields row">
-                            <div class="field col-md-6 col-sm-6">
-                                <label for="company" class="required"><em>*</em><?php echo $this->__('Company') ?><br><?php echo $this->__('(Si usted es persona natural introduzca su nombre)') ?></label>
-                                <div class="input-box">
-                                    <input type="text" name="company" id="company" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
-                                </div>
-                            </div>
                             <div class="field col-md-6 col-sm-6">
                                 <label for="industry" class="required"><em>*</em><?php echo $this->__('Especialidad') ?></label>
                                 <div class="input-box">
@@ -178,32 +149,49 @@ if ($isPersistantShoppingCartEnabled) {
                                     </select>
                                 </div>
                             </div>
-                        </li>
-                        <li class="fields row">
                             <div class="field col-md-6 col-sm-6">
                                 <label for="area"><?php echo $this->__('Area') ?></label>
                                 <div class="input-box">
                                     <input type="text" name="area" value="<?php echo $this->htmlEscape($this->getFormData()->getArea()) ?>" title="<?php echo $this->__('Area') ?>" class="input-text" id="area" />
                                 </div>
                             </div>
+                        </li>
+                        <li class="fields row">
                             <div class="field col-md-6 col-sm-6">
                                 <label for="title"><?php echo $this->__('Title') ?></label>
                                 <div class="input-box">
                                     <input type="text" name="title" value="<?php echo $this->htmlEscape($this->getFormData()->getTitle()) ?>" title="<?php echo $this->__('Title') ?>" class="input-text" id="title" />
                                 </div>
                             </div>
-                        </li>
-                        <li class="fields row">
                             <div class="field col-md-6 col-sm-6">
                                 <label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
                                 <div class="input-box">
                                     <input type="text" name="telephone" id="telephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
                                 </div>
                             </div>
+                        </li>
+                        <li class="fields row">
                             <div class="field col-md-6 col-sm-6">
                                 <label for="website"><?php echo $this->__('Website') ?></label>
                                 <div class="input-box">
                                     <input type="text" name="website" value="<?php echo $this->htmlEscape($this->getFormData()->getWebsite()) ?>" title="<?php echo $this->__('Website') ?>" class="input-text" id="website" />
+                                </div>
+                            </div>
+                            <div class="field col-md-6 col-sm-6">
+                                <label for="lead_source"><?php echo $this->__('¿Como conoció de DentalDoktor?') ?></label>
+                                <div class="input-box">
+                                    <?php
+                                    $attribute = Mage::getModel('eav/config')->getAttribute('customer','lead_source');
+                                    $options = $attribute->getSource()->getAllOptions(false);
+                                    ?>
+                                    <select id="lead_source" name="lead_source" title="<?php echo $this->__('¿Como conoció de DentalDoktor?') ?>" class="validate-select">
+                                        <option value=""><?php echo $this->__('Seleccione Una Opción') ?></option>
+                                        <?php
+                                        foreach($options as $option){
+                                            ?>
+                                            <option value='<?php echo $option['value']?>' <?php if($this->getFormData()->getLeadSource() == $option['value']){ echo 'selected="selected"';}?>><?php echo $this->__($option['label'])?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                         </li>
@@ -253,19 +241,38 @@ if ($isPersistantShoppingCartEnabled) {
                                 <div class="input-box">
                                     <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text required-entry" />
                                 </div>
+                                <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
+                                    <div class="input-box">
+                                        <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i?>" class="input-text" />
+                                    </div>
+                                <?php endfor ?>
                                 <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
                                 <div class="input-box">
                                     <input type="text" name="postcode" value="<?php echo $this->htmlEscape($this->getFormData()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international required-entry" />
                                 </div>
                             </div>
                         </li>
-                        <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
-                            <li class="wide">
+                        <li class="fields row">
+                            <div class="field col-md-10 col-sm-10">
+                                <div style="margin-top: 10px;">
                                 <div class="input-box">
-                                    <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i?>" class="input-text" />
+                                    <input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
                                 </div>
-                            </li>
-                        <?php endfor ?>
+                                <label for="is_subscribed"><?php echo $this->__('Sign Up for Newsletter') ?></label>
+                                </div>
+                                <div style="margin-top: 10px;">
+                                <div class="input-box">
+                                    <input type="checkbox" name="habeas_data" title="<?php echo $this->__('Autoriza Habeas Data') ?>" value="1" id="habeas_data"<?php if($this->getFormData()->getHabeasData()): ?> checked="checked"<?php endif; ?> class="checkbox required-entry" />
+                                </div>
+                                <label for="habeas_data" class="required"><?php echo $this->__('Autoriza Habeas Data') ?><em>*</em></label>
+                                </div>
+                            </div>
+                            <div class="field col-md-2 col-sm-2">
+                                <div class="buttons-set">
+                                    <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                     <input type="hidden" name="default_billing" value="1" />
                     <input type="hidden" name="default_shipping" value="1" />
@@ -275,8 +282,8 @@ if ($isPersistantShoppingCartEnabled) {
         </div>
 
         <div class="buttons-set">
+            <p class="required"><?php echo $this->__('* Required Fields'); ?></p>
             <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
-            <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span><?php echo $this->__('Submit') ?></span></span></button>
         </div>
         <?php if ($isContextCheckout): ?>
             <input name="context" type="hidden" value="checkout" />

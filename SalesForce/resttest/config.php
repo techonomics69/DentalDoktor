@@ -15,5 +15,5 @@ define("LOGIN_URI", "https://cs4.salesforce.com");
 define("CLIENT_ID", "3MVG94DzwlYDSHS61n_ePZ2OifWcuggDTfBnK79h58IlH4J1aKkQx82QDoUbUwUqBrCzx7oIaJbo5RNW.s1.z");
 define("CLIENT_SECRET", "392549393682945642");
 define("USERNAME", "victoria.romero@avalon.com.co.dev");
-define("PASSWORD", "Avalon2016.5yd2XBSJmq0zAx0TvsbbSwzRJ");
+define("PASSWORD", "Bellefarma2017!jBMeRzOSVBYPW0deFdVYmGOPs");
 define("GRANT_TYPE", "password");

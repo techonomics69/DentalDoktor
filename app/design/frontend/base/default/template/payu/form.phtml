@@ -29,6 +29,8 @@ $_code = $this->getMethodCode();
 ?>
 <ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
     <li>
-        <?php echo 'Se le redirigirá a la pasarela de pago de PayU después de realizar el pedido.'; ?>
+        <?php echo $this->__('Se le redirigirá a la pasarela de pago de PayU después de realizar el pedido.'); ?>
+        <br /><br />
+        <?php echo $this->__('Por favor recuerde hacer clic en el botón "Regresar a Tienda", si PayU no lo redirecciona automaticamente.'); ?>
     </li>
 </ul>

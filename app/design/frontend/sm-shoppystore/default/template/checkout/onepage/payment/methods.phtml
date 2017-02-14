@@ -41,8 +41,10 @@
         <?php echo $this->__('No Payment Methods') ?>
     </dt>
 <?php else:
+    $current_user = $this->helper('customer')->getCustomer();
     foreach ($methods as $_method):
         $_code = $_method->getCode();
+        if($_code != 'creditquota' || ($_code == 'creditquota' && $current_user->getData('cupo_de_credito') == 427)):
 ?>
     <dt>
     <?php if(!$oneMethod): ?>
@@ -58,6 +60,7 @@
         <?php echo $html; ?>
     </dd>
     <?php endif; ?>
+        <?php endif; ?>
 <?php endforeach;
     endif;
 ?>

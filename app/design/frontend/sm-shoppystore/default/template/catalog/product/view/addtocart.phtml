@@ -36,7 +36,7 @@
 	$manage_stock = (int)Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product)->getManageStock();	
 	
 ?>
-<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php $buttonTitle = $this->__('Agregar al Carrito'); ?>
 <?php if($_product->isSaleable()): ?>
         <?php if(!$_product->isGrouped() && $_product->getTypeId() != 'bundle' && !$_product->isConfigurable()){ ?>
 			<div class="wrap-qty">				

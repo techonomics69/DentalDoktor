@@ -1,0 +1,68 @@
+<?php $posts = $this->getPosts(); ?>
+<?php
+	
+?>
+<div class="blog-bottomv3 col-lg-4 col-md-4 ">
+	<div class="blog-bottomv-3">
+		<div class="block-title-bottom">
+				<h2><?php echo $this->__('NEW BLOG')?></h2>
+		</div>
+	
+		<div class="latest-blog-bottom">
+			<?php $i=0; foreach ($posts as $post): ?>
+			<?php $i++;?>
+			<div class="item-blog item">
+				<?php
+					$pattern = "/<img .+\/>/";
+					$subject = $post->getPostContent();
+					$result = preg_match( $pattern, $subject , $matches , PREG_OFFSET_CAPTURE );
+					$matched =$matches[0];
+					$first_img=$matched[0];
+				?>
+				<div class="accordion" id="<?php  echo  $this->__('section').$i?>">
+						<h2><a title="<?php echo $post->getTitle(); ?>" href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+					</div>
+					
+				<div class="blog-info ">
+					<div class="img-blog" >
+					<a class="img-link" title="<?php echo $post->getTitle(); ?>" href="<?php echo $post->getAddress(); ?>" ><?php echo($first_img);?></a>
+					</div>
+					<div class="postTitle1">
+						<h2><a title="<?php echo $post->getTitle(); ?>" href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+					</div>
+					
+					<div class="postContent">
+						<?php $text = str_replace($first_img, '', $post->getPostContent()); 
+							$html = strip_tags($text);
+							echo substr($html,1,90);
+						?>
+					</div>
+					
+				</div>
+								
+			</div>
+
+			
+			<?php if($i==5) break;?>
+			<?php endforeach; ?>
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					$('.accordion').accordion_snyderplace({
+						defaultOpen: 'section1',
+						speed: 'fast',
+						animateOpen: function (elem, opts) { //replace the standard slideUp with custom function
+							elem.next().slideFadeToggle(opts.speed);
+						},
+						animateClose: function (elem, opts) { //replace the standard slideDown with custom function
+							elem.next().slideFadeToggle(opts.speed);
+						}
+					});
+					//custom animation for open/close
+					$.fn.slideFadeToggle = function(speed, easing, callback) {
+						return this.animate({opacity: 'toggle', height: 'toggle'}, speed, easing, callback);
+					};
+				});
+			</script>
+		</div>
+	</div>
+</div>

@@ -66,9 +66,9 @@ $rich_snippet = Mage::getStoreConfig('shoppy_cfg/rich_snippets_setting/use_rich_
 								<?php echo $_helper->productAttribute($_product, $this->htmlEscape($_product->getName()), 'name') ?>
 							</h2>
 
-							<div class="product-review">
+							<!-- div class="product-review">
 								<?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-							</div>
+							</div -->
 
 							<?php echo $this->getChildHtml('alert_urls'); ?>
 							<?php 
@@ -89,15 +89,22 @@ $rich_snippet = Mage::getStoreConfig('shoppy_cfg/rich_snippets_setting/use_rich_
 
 							<?php if ($_product->getShortDescription()):?>
 							<div class="short-description">
-								<h2 class="quick-overview"><?php echo $this->__('QUICK OVERVIEW')?></h2>
+								<!-- h2 class="quick-overview"><?php echo $this->__('QUICK OVERVIEW')?></h2 -->
 								<?php echo $_helper->productAttribute($_product, $_product->getshort_description(), 'short_description'); ?>
 							</div>
 							<?php endif;?>
-
-							<?php
+							<div class="manufacturer">
+								<?php echo $this->__('Marca: ') ?>
+								<?php echo $_helper->productAttribute($_product, $this->htmlEscape($_product->getAttributeText('manufacturer')), 'manufacturer') ?>
+							</div>
+							<div class="presentation">
+								<?php echo $this->__('Presentación: ') ?>
+								<?php echo $_helper->productAttribute($_product, $this->htmlEscape($_product->getPresentation()), 'presentation') ?>
+							</div>
+								<?php
 							/** HERFOX: Hide add to cart button if User isn't logged in view mode */
 							if(!Mage::getSingleton('customer/session')->isLoggedIn()){
-								echo '<span><p style="height: 35px;">INICIE SESIÓN PARA COMPRAR Y VER PRECIO</p></span>';
+								echo '<span><p style="height: 35px;"><a href="/customer/account/login/">INICIE SESIÓN PARA COMPRAR Y VER PRECIO</a></p></span>';
 							}
 							else{
 							?>
@@ -172,7 +179,7 @@ $rich_snippet = Mage::getStoreConfig('shoppy_cfg/rich_snippets_setting/use_rich_
 										<a title="<?php echo $this->__('Tags') ?>" href="javascript:void(0);"><?php echo $this->__('Tags') ?></a>
 									</li>
 									<?php endif; ?>							
-									<?php if($review_form = $this->getChildHtml('review_form')): ?>
+									<?php if(Mage::getSingleton('customer/session')->isLoggedIn() && $review_form = $this->getChildHtml('review_form')): ?>
 									<li id="review-tab">
 										<a title="<?php echo $this->__('Reviews') ?>" href="javascript:void(0);"><?php echo $this->__('Reviews') ?></a>
 									</li>
@@ -182,7 +189,7 @@ $rich_snippet = Mage::getStoreConfig('shoppy_cfg/rich_snippets_setting/use_rich_
 											<a title="<?php echo $this->__('Information') ?>" href="javascript:void(0);"><?php echo $this->__('Information') ?></a>
 										</li>
 									<?php endif; ?>	
-									<?php if ($var_yttheme != null && $var_yttheme->getParam('show_customtab') == 1 ) : ?>
+									<?php if ($var_yttheme != null && $var_yttheme->getParam('show_customtab') == 1 && Mage::getSingleton('customer/session')->isLoggedIn()) : ?>
 										<li>
 											<a title="<?php echo $var_yttheme->getParam('customtab_name'); ?>" href="javascript:void(0);"><?php echo $var_yttheme->getParam('customtab_name'); ?></a>
 										</li>
@@ -199,7 +206,7 @@ $rich_snippet = Mage::getStoreConfig('shoppy_cfg/rich_snippets_setting/use_rich_
 										<?php echo $product_additional_data; ?>
 									</div>
 									<?php endif;?>							
-									<?php if( $review_form ): ?>
+									<?php if( Mage::getSingleton('customer/session')->isLoggedIn() && $review_form ): ?>
 									<div id="yt_tab_reviewform" class="tab-pane">
 										<?php echo $this->getChildHtml('product_reviews');?>
 										<?php echo $review_form; ?>
@@ -210,12 +217,13 @@ $rich_snippet = Mage::getStoreConfig('shoppy_cfg/rich_snippets_setting/use_rich_
 										<?php echo $_additional ?>
 									</div>
 									<?php endif;?>
-									<?php if ($var_yttheme != null && $var_yttheme->getParam('show_customtab') == 1 ) : ?>
+									<?php if ($var_yttheme != null && $var_yttheme->getParam('show_customtab') == 1 && Mage::getSingleton('customer/session')->isLoggedIn()) : ?>
 									<div id="yt_tab_custom" class="tab-pane">
-										<?php $contenttab = $var_yttheme->getParam('customtab_content');             
-											$_myHelper = Mage::helper('cms');
-											$_processor = $_myHelper->getBlockTemplateProcessor();
-											echo $_processor->filter($contenttab); 
+										<?php echo $_product->getHtmlFiles(); ?>
+										<?php //$contenttab = $var_yttheme->getParam('customtab_content');
+											//$_myHelper = Mage::helper('cms');
+											//$_processor = $_myHelper->getBlockTemplateProcessor();
+											//echo $_processor->filter($contenttab);
 										?>
 										
 									</div>

@@ -353,7 +353,7 @@
 		var cnext="";
 		var addto="";
 		var cshop="";
-		var txtaddedto=(hideConfirm==1 || deletePCompare==1)?"<?php echo Mage::helper('cartpro')->__('item deleted from');?> ":" <?php echo Mage::helper('cartpro')->__('added to');?> ";
+		var txtaddedto=(hideConfirm==1 || deletePCompare==1)?"<?php echo Mage::helper('cartpro')->__('Producto eliminado de ');?> ":" <?php echo Mage::helper('cartpro')->__('Agregado ');?> ";
 		
 		if(isCompare){
 			cshop='<li><button id="btcshop" title="<?php echo Mage::helper('cartpro')->__('Continue Compare');?>" class="button" onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});isCompare=0;win.focus();"><span id="setcdown"><?php //echo Mage::helper('cartpro')->__('Continue Compare');?>'+ timedown +' s</span> </button></li>';		
@@ -365,26 +365,27 @@
 				var tnext=(isCart==1)?"<?php echo Mage::helper('cartpro')->__('Proceed to Checkout');?>":"<?php echo Mage::helper('cartpro')->__('View cart & checkout');?>";
 				var linknext=(isCart==1)?"<?php echo Mage::getUrl('checkout/onepage/') ?>":"<?php echo Mage::getUrl('checkout/cart/') ?>";
 				cnext='<li><a id="btccart" title="<?php echo Mage::helper('cartpro')->__('Checkout');?>"  onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});window.location=\''+linknext+'\';"  href="'+linknext+'">	<span>'+tnext+'</span></a></li>';
-				addto="<?php echo Mage::helper('cartpro')->__('your shopping cart.');?>";
+				addto="<?php echo Mage::helper('cartpro')->__('al Carrito de Compras');?>";
 		}
 		else if(resp.r=='1'){
 				cnext='<li><a id="btccart" title="<?php echo Mage::helper('cartpro')->__('View Wishlist');?>" class="button" onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});window.location=\'<?php echo Mage::getUrl('wishlist/index/') ?>\';"  href="<?php echo Mage::getUrl('wishlist/index/') ?>">	<span><?php echo Mage::helper('cartpro')->__('View Wishlist');?></span></a></li>';
-				addto="<?php echo Mage::helper('cartpro')->__('your wishlist.');?>";
+				addto="<?php echo Mage::helper('cartpro')->__('a la Lista de Deseos');?>";
 		}
 		else if(resp.r=='2'){
 				var str=resp.cart;
 				var strclick=str.substring(str.indexOf("popWin('"),str.indexOf(")",str.indexOf("popWin('"))+1);
 				cnext='<li><a id="btccart" title="<?php echo Mage::helper('cartpro')->__('View Comparison');?>" href="javascript:void(\'0\')" onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});'+strclick+'">	<span><?php echo Mage::helper('cartpro')->__('View Comparison');?></span></a></li>';
-				addto="<?php echo Mage::helper('cartpro')->__('comparison list.');?>";
+				addto="<?php echo Mage::helper('cartpro')->__('a la Tabla de Comparación');?>";
 		}
 		var info= (typeof resp.infoitem !="undefined")?resp.infoitem:"";
 		var sometext = '<div class="moretext"><?php echo $this->__('Thank you for your choosing !')?></div>';
-		
-		var headinfo = '<p class="head-iteminfo '+((resp.r=='1' || resp.r=='2')?'show':'')+'"><span id="item-name"><?php echo $this->__('"')?>'+resp.nameitem+'<?php echo $this->__('"')?></span>'+txtaddedto+addto+'</p>';
-		var blockconfirm=	headinfo
-							+ ((typeof info.item !="undefined" && info.item!="" && confirm_item_display)?(info.item + sometext):"") + ((typeof info.other !="undefined" && info.other!="")?info.other:"") 
-							
-							+'<div id="btnavi"><ul>'+cshop+cnext+'</ul></div>'+iffix;
+		var image = '<div class="image"><img src="/media/wysiwyg/confirmbox.png" /></div>';
+		var headinfo = '<p class="head-iteminfo '+((resp.r=='1' || resp.r=='2')?'show':'')+'"><span id="item-name"><?php echo $this->__('"')?>'+resp.nameitem+'<?php echo $this->__('"')?></span><br><span class="txtaddto">'+txtaddedto+addto+'</span></p>';
+		var blockconfirm=	image + headinfo
+							//+ ((typeof info.item !="undefined" && info.item!="" && confirm_item_display)?(info.item + sometext):"") + ((typeof info.other !="undefined" && info.other!="")?info.other:"")
+							+'<div id="btnavi" style="display: none;"><ul>'+cshop+cnext+'</ul></div>'+iffix;
+
+
 		$("confirmbox").innerHTML=blockconfirm;
 		setTimeout("cdown(timedown)",1000);
 		$("fancybox-wrap-clone").setStyle({display:"block"});

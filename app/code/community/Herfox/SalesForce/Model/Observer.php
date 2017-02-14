@@ -141,13 +141,30 @@ class Herfox_SalesForce_Model_Observer
     public function sync()
     {
         // Sync Data
+        // echo "SINCRONIZACION PRODUCTOS...<br>";
         $this->syncProducts();
+        // echo "SINCRONIZACION PRECIOS...<br>";
         $this->syncPrices();
+        // echo "SINCRONIZACION PROMOCIONES...<br>";
         $this->syncPriceRules();
+
+        // Reindex Data
+        // echo "REINDEXANDO DATOS...<br><br>";
+        for ($ga = 1; $ga <= 9; $ga++) {
+            $reindex = Mage::getModel('index/process')->load($ga);
+            $reindex ->reindexAll();
+        }
 
         // Update last sync date in configuration
         $LastModifiedDate = str_replace(' ', 'T', $this->date) . ".000Z";
         Mage::getConfig()->saveConfig('herfox_salesforce/general/last_modified', $LastModifiedDate);
+
+        // Refresh Cache
+        // echo "Refrescando Cache (Configuracion)...<br>";
+        Mage::app()->getCacheInstance()->cleanType('config');
+        // echo "Refrescando Cache (Bloques HTML)...<br><br>";
+        Mage::app()->getCacheInstance()->cleanType('block_html');
+        // echo "Fin del proceso.";
     }
 
     private function syncProducts()
@@ -161,20 +178,51 @@ class Herfox_SalesForce_Model_Observer
             $sync['unsuccess'] = 0;
             $sync['status'] = 1;
             $sync['errors'] = "";
+            $count = 0;
+            foreach ($response as $record)
+            {
+                $info = $record["infoProducto"];
+                $files = $record["archivos"];
 
-            foreach ($response as $record) {
-                $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $record['ProductCode']);
+                $count++;
+                if(isset($info['ProductCode'])) {
+                    if(!empty($info['ProductCode'])) {
+                        $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $info['ProductCode']);
 
-                if (!$product) {
-                    if ($this->createProduct($record)) {
-                        $sync['success']++;
-                    } else {
-                        $sync['unsuccess']++;
-                        $sync['errors'] .= 'No se pudo crear el producto: ' . $record['ProductCode'] . "\n";
+                        if (!$product) {
+                            // echo "<br>".$count.". Creando Producto: ".$info['ProductCode']."<br>";
+                            if ($this->createProduct($info, $files)) {
+                                $sync['success']++;
+                                // echo "Producto creado correctamente<br><br>";
+                            }
+                            else {
+                                // echo "Error creando producto<br><br>";
+                                $sync['unsuccess']++;
+                                $sync['errors'] .= 'No se pudo crear el producto: ' . $info['ProductCode'] . "\n";
+                            }
+                        } else {
+                            // echo "<br>".$count.". Actualizando Producto: ".$info['ProductCode']."<br>";
+                            if($this->updateProduct($product, $info, $files)) {
+                                $sync['success']++;
+                                // echo "Producto actualizado correctamente<br><br>";
+                            }
+                            else {
+                                // echo "Error actualizando producto<br><br>";
+                                $sync['unsuccess']++;
+                                $sync['errors'] .= 'No se pudo actualizar el producto: ' . $info['ProductCode'] . "\n";
+                            }
+                        }
                     }
-                } else {
+                    else {
+                        // echo "Error codigo producto vacio.<br><br>";
+                        $sync['unsuccess']++;
+                        $sync['errors'] .= 'Codigo de producto vacio: ' . $info['Id'] . "\n";
+                    }
+                }
+                else {
+                    // echo "Error codigo producto no definido.<br><br>";
                     $sync['unsuccess']++;
-                    $sync['errors'] .= 'Producto Duplicado: ' . $record['ProductCode'] . "\n";
+                    $sync['errors'] .= 'Codigo de producto no definido: ' . $info['Id'] . "\n";
                 }
             }
 
@@ -198,31 +246,49 @@ class Herfox_SalesForce_Model_Observer
             $sync['errors'] = "";
 
             foreach ($response as $record) {
-                $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $record['ProductCode']);
+                if(isset($record['ProductCode'])) {
+                    if(!empty($record['ProductCode'])) {
+                        // echo "Actualizando precio a producto: " . $record['ProductCode'] . "<br>";
+                        $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $record['ProductCode']);
 
-                if ($product && isset($record['Pricebook2']['IsStandard'])) {
-                    // Create standard price
-                    if($record['Pricebook2']['IsStandard']) {
-                        $product->setPrice($record['UnitPrice']);
-                        $product->save();
-                        $sync['success']++;
+                        if ($product && isset($record['Pricebook2']['IsStandard'])) {
+                            // Create standard price
+                            if ($record['Pricebook2']['IsStandard']) {
+                                // echo "Asignando Precio Base<br>";
+                                $product->setPrice($record['UnitPrice']);
+                                $product->save();
+                                $sync['success']++;
+                            } // Create group price
+                            else {
+                                // echo "Asignando Precio con Descuento<br>";
+                                $group = $this->getGroup($record['Pricebook2Id']);
+                                $product->setData('group_price', [[
+                                    'website_id' => 0,
+                                    'cust_group' => $group,
+                                    'price' => $record['UnitPrice']
+                                ]]);
+                                $product->save();
+                                $sync['success']++;
+                            }
+                            // echo "Precio actualizado correctamente.<br><br>";
+                        } else {
+                            // echo "Error producto no encontrado.<br><br>";
+                            $sync['unsuccess']++;
+                            $sync['errors'] .= 'Producto no encontrado: ' . $record['ProductCode'] . "\n";
+                        }
                     }
-                    // Create group price
                     else {
-                        $group = $this->getGroup($record['Pricebook2Id']);
-                        $product->setData('group_price', [[
-                            'website_id' => 0,
-                            'cust_group' => $group,
-                            'price' => $record['UnitPrice']
-                        ]]);
-                        $product->save();
-                        $sync['success']++;
+                        // echo "Error codigo producto vacio.<br><br>";
+                        $sync['unsuccess']++;
+                        $sync['errors'] .= 'Codigo de producto vacio: ' . $record['Id'] . "\n";
                     }
                 }
                 else {
+                    // echo "Error codigo producto no definido.<br><br>";
                     $sync['unsuccess']++;
-                    $sync['errors'] .= 'Producto no encontrado: ' . $record['ProductCode'] . "\n";
+                    $sync['errors'] .= 'Codigo de producto no definido: ' . $record['Id'] . "\n";
                 }
+
             }
 
             // Create price sync register
@@ -245,22 +311,26 @@ class Herfox_SalesForce_Model_Observer
             $sync['errors'] = "";
 
             foreach ($response as $record) {
-
+                // echo "Creando Descuento: ".$record['Id']."<br>";
                 if ($record['Descuento__c'] != 0){
                     $priceRule = Mage::getModel('salesrule/rule')->load($record['Id'], 'name');
 
                     if (!isset($priceRule['name'])) {
                         if ($this->createPriceRule($record)) {
+                            // echo "Descuento creado correctamente<br><br>";
                             $sync['success']++;
                         } else {
+                            // echo "Error creando descuento<br><br>";
                             $sync['unsuccess']++;
                             $sync['errors'] .= 'No se pudo crear la promoción: ' . $record['Id'] . "\n";
                         }
                     } else {
+                        // echo "Error descuento Duplicado<br><br>";
                         $sync['unsuccess']++;
                         $sync['errors'] .= 'Promoción Duplicada: ' . $record['Id'] . "\n";
                     }
                 } else {
+                    // echo "Error el Descuento es de CERO PESOS ($0)<br><br>";
                     $sync['unsuccess']++;
                     $sync['errors'] .= 'Promoción con descuento cero: ' . $record['Id'] . "\n";
                 }
@@ -273,7 +343,7 @@ class Herfox_SalesForce_Model_Observer
         }
     }
 
-    private function createProduct($record)
+    private function createProduct($info, $files)
     {
         $product = Mage::getModel('catalog/product');
         $product
@@ -283,49 +353,131 @@ class Herfox_SalesForce_Model_Observer
             ->setTypeId('simple')
             ->setCreatedAt(strtotime('now'))
             // ->setUpdatedAt(strtotime('now'))
-            ->setSku($record['ProductCode'])
-            ->setName($record['Name'])
+            ->setSku($info['ProductCode'])
+            ->setName($info['Name'])
             ->setWeight(0)
             ->setStatus(1)
             ->setTaxClassId(0)
             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
-            ->setManufacturer($this->getManufacturer($record['Marca__c']))
+            ->setManufacturer($this->getManufacturer($info['Marca__c']))
             ->setPrice(0)
-            ->setMetaTitle($record['Name'])
-            ->setMetaDescription($record['Description'])
-            ->setDescription($record['Description'])
-            ->setShortDescription($record['Description'])
+            ->setMetaTitle($info['Name'])
+            ->setMetaDescription($info['Description'])
+            ->setShortDescription($info['Description'])
             ->setStockData([
                 'use_config_manage_stock' => 0, //'Use config settings' checkbox
-                'manage_stock'=>1, //manage stock
+                'manage_stock'=>0, //manage stock
                 'min_sale_qty'=>1, //Minimum Qty Allowed in Shopping Cart
-                'max_sale_qty'=>10000, //Maximum Qty Allowed in Shopping Cart
+                'max_sale_qty'=>100000000, //Maximum Qty Allowed in Shopping Cart
                 'is_in_stock' => 1, //Stock Availability
-                'qty' => 1000 //qty
+                'qty' => 100000000 //qty
             ]);
 
-        if(isset($record['Foto__c'])){
-            $file = $this->getImageUrl($record['Foto__c'], $record['Name']);
+        if(isset($info['Observaciones__c'])){
+            $product->setDescription($info['Observaciones__c']);
+        }
+
+        // Set Images
+        foreach ($files as $file) {
+            if ($file['extension'] == 'jpg') {
+                // echo "Creando imagen:<br>";
+                $file = $this->getImageUrl($file['url'], $file['nombre'], $file['extension']);
+                $media = array('image','small_image','thumbnail');
+                $product
+                    ->setMediaGallery (array('images'=>array (), 'values'=>array ()))
+                    ->addImageToMediaGallery($file, $media, false, false);
+            }
+        }
+        /*
+        if(isset($info['Foto__c'])){
+            $file = $this->getImageUrl($info['Foto__c'], $info['Name']);
             $media = array('image','small_image','thumbnail');
             $product
                 ->setMediaGallery (array('images'=>array (), 'values'=>array ()))
                 ->addImageToMediaGallery($file, $media, false, false);
         }
+        */
 
         // Assign Categories
-        if(isset($record['Subcategor_a__c']))
-            $product->setCategoryIds($this->getCategory($record['Family'], $record['Subcategor_a__c']));
-        else
-            $product->setCategoryIds($this->getCategory($record['Family']));
+        // echo "Asignando a Categoria y Subcategoria:<br>";
+        $product->setCategoryIds($this->getCategory(
+            $info['Family'],
+            isset($info['Subcategor_a__c'])?$info['Subcategor_a__c']:"",
+            isset($info['Marca__c'])?$info['Marca__c']:"")
+        );
 
         // Custom attributes
-        $product->setData('delivery_days', $record['Tiempo_de_Entrega__c']);
+        // echo "Creando atributos personalizados<br>";
+        $product->setData('delivery_days', str_replace(' días','',$info['Tiempo_de_Entrega__c']));
+        $product->setData('presentation', $info['Presentaci_n_comercial__c']);
+        $product->setData('html_files', $this->getHtmlFiles($files));
 
         return $product->save();
     }
 
-    private function getImageUrl($remote_html_img, $name_product)
+    private function getHtmlFiles($files)
     {
+        // echo "Creando HTML para documentos<br>";
+        $count = 0;
+        $html = '<div class="container-fluid">';
+        $html .= '<div class="row">';
+        foreach ($files as $file) {
+            if($file['extension'] == 'pdf') {
+                if($count%2 == 0) {
+                    $html .= '</div><div class="row">';
+                }
+                $html .= '<div class="col-md-6">';
+                $html .= '<a target="_blank" href="'.$file['url'].'" >'.$file['nombre'].'</a>';
+                $html .= '</div>';
+                $count++;
+            }
+        }
+        $html .= '</div></div>';
+        return $html;
+    }
+
+    private function updateProduct($product, $info, $files)
+    {
+        $product
+            ->setUpdatedAt(strtotime('now'))
+            ->setSku($info['ProductCode'])
+            ->setName($info['Name'])
+            ->setManufacturer($this->getManufacturer($info['Marca__c']))
+            ->setMetaTitle($info['Name'])
+            ->setMetaDescription($info['Description'])
+            ->setDescription($info['Description'])
+            ->setShortDescription($info['Description']);
+
+        // Delete Images
+        $mediaApi = Mage::getModel("catalog/product_attribute_media_api");
+        $items = $mediaApi->items($product->getId());
+        foreach($items as $item) {
+            // echo "Eliminado imagen: ".$item['file']."<br>";
+            $mediaApi->remove($product->getId(), $item['file']);
+        }
+
+        // Set Images
+        foreach ($files as $file) {
+            if ($file['extension'] == 'jpg' || $file['extension'] == 'png') {
+                // echo "Creando imagen:<br>";
+                $file = $this->getImageUrl($file['url'], $file['nombre'], $file['extension']);
+                $media = array('image','small_image','thumbnail');
+                $product
+                    ->setMediaGallery (array('images'=>array (), 'values'=>array ()))
+                    ->addImageToMediaGallery($file, $media, false, false);
+            }
+        }
+
+        // Custom attributes
+        $product->setData('delivery_days', str_replace(' días','',$info['Tiempo_de_Entrega__c']));
+        $product->setData('presentation', $info['Presentaci_n_comercial__c']);
+
+        return $product->save();
+    }
+
+    private function getImageUrl($remote_html_img, $name_product, $extension)
+    {
+        /*
         $oub = Mage::getStoreConfig('herfox_salesforce/general/origin_image_url_base');
         $nub = Mage::getStoreConfig('herfox_salesforce/general/new_image_url_base');
 
@@ -338,10 +490,13 @@ class Herfox_SalesForce_Model_Observer
         $src = $xpath->evaluate("string(//img/@src)");
 
         $url_remote_img = str_replace($oub, $nub, $src);
+        */
+        $url_remote_img = $remote_html_img;
+        // echo $url_remote_img."<br>";
         $remote_img = file_get_contents($url_remote_img);
 
         $url_base = Mage::getBaseDir('media') . DS . 'import';
-        $name_file = str_replace(" ", "_", $name_product) . ".jpeg";
+        $name_file = str_replace(" ", "_", $name_product) . '.' . $extension;
         $url_local_img = $url_base . DS . $name_file;
         file_put_contents($url_local_img, $remote_img);
 
@@ -406,22 +561,54 @@ class Herfox_SalesForce_Model_Observer
         return $priceRule->save();
     }
 
-    private function getCategory($category_name, $subcategory_name = "")
+    private function getCategory($category_name, $subcategory_name = "", $brand_name = "")
     {
         // The parent category
         $category = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('name', $category_name)->getFirstItem();
+        if(count($category->toArray()) == 0) {
+            // echo "Creando categoria<br>";
+            $category = $this->createCategory($category_name);
+        }
+        if(!empty($brand_name)) {
+            // echo "Asignando a categoria de marca<br>";
+            $brand_category = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('name', $brand_name)->getFirstItem();
 
+            if(count($brand_category->toArray()) == 0){
+                // echo "Creando categoria de marca<br>";
+                $brand_category = $this->createCategory($brand_name, 145);
+            }
+        }
         // The child category
         if(!empty($subcategory_name)) {
+            // echo "Asignando a Subcategoria<br>";
             $subcategories = $category->getChildrenCategories();
 
             foreach ($subcategories as $subcategory) {
                 if ($subcategory->getName() == $subcategory_name)
-                    return [$category->getId(), $subcategory->getId()];
+                    return [$category->getId(), $subcategory->getId(), $brand_category->getId()];
             }
+            // echo "Creando Subcategoria<br>";
+            $subcategory = $this->createCategory($subcategory_name, $category->getId());
+            return [$category->getId(), $subcategory->getId()];
         }
+        return [$category->getId(), $brand_category->getId()];
+    }
 
-        return [$category->getId()];
+    private function createCategory($category_name, $parent_id = 2)
+    {
+        $parent = Mage::getModel('catalog/category')->load($parent_id);
+
+        $category = Mage::getModel('catalog/category');
+        $category->setStoreId(0);
+        $category->setName($category_name);
+        $category->setMetaTitle($category_name);
+        $category->setIsActive(1);
+        $category->setDisplayMode('PRODUCTS');
+        $category->setIsAnchor(1); //for active anchor
+        $category->setPath($parent->getPath());
+        $category->setUrlKey(Mage::getModel('catalog/product_url')->formatUrlKey($category_name));
+
+        return $category->save();
     }
 
     private function getManufacturer($name)
@@ -475,7 +662,11 @@ class Herfox_SalesForce_Model_Observer
 
     private function getSalesForceData($method)
     {
-        $url = $this->session['instance_url'] . "/services/apexrest/" . $method . "?LastModifiedDate=" . $this->LastModifiedDate;
+        if($method == 'Products') $date = '"'.$this->LastModifiedDate.'"';
+        else $date = $this->LastModifiedDate;
+
+        $url = $this->session['instance_url'] . "/services/apexrest/" . $method . "?LastModifiedDate=" . $date;
+        // echo $url."<br><br>";
         // . "&IsActive=" . $this->IsActive
         // . "&IsDelete=" . $this->IsDelete;
 

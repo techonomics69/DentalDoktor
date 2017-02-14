@@ -10,12 +10,13 @@ session_start();
 
 function show_products($instance_url, $access_token)
 {
-    $LastModifiedDate = "2016-10-24T12:21:58.000Z";
+    $LastModifiedDate = "2016-02-08T02:26:53.000Z";
     $IsActive = true;
     $IsDelete = false;
 
-    $url = $instance_url . "/services/apexrest/Products?"
-        . "LastModifiedDate=" . $LastModifiedDate;
+    $url = $instance_url . '/services/apexrest/Products?LastModifiedDate="' . $LastModifiedDate . '"';
+
+    echo $url."<br>";
     //    . "&IsActive=" . $IsActive
     //    . "&IsDelete=" . $IsDelete;
 
@@ -32,18 +33,28 @@ function show_products($instance_url, $access_token)
     //$total_size = $response['totalSize'];
 
     echo "<pre>";
-    var_dump($response);
+    // var_dump($response);
     echo "</pre>";
 
 
     echo count($response) . " record(s) returned<br/><br/>";
     echo "<table border='1'>";
-    echo "<tr><th>Id</th><th>Nombre</th><th>Descripcion</th><th>Codigo Producto</th><th>Marca</th><th>Tiempo Entrega</th><th>Categoria</th><th>Subcategoria</th><th>Imagen</th></tr>";
-    foreach ((array) $response as $record) {
-        echo "<tr><td>".$record['Id']."</td><td>".$record['Name']."</td><td>".$record['Description']."</td><td>".$record['ProductCode']."</td><td>".$record['Marca__c']."</td><td>".$record['Tiempo_de_Entrega__c']."</td><td>".$record['Family']."</td><td>".$record['Subcategor_a__c']."</td><td>".$record['Foto__c']."</td></tr>";
+    echo "<tr><th>Id</th><th>Nombre</th><th>Descripcion</th><th>Codigo Producto</th><th>Marca</th><th>Presentacion</th><th>Peso</th><th>Tiempo Entrega</th><th>Categoria</th><th>Subcategoria</th><th>Observaciones</th><th>Imagenes</th></tr>";
+    foreach ((array)$response as $record) {
+        $info = $record["infoProducto"];
+        echo "<tr><td>" . $info['Id'] . "</td><td>" . $info['Name'] . "</td><td>" . $info['Description'] . "</td><td>" . $info['ProductCode'] . "</td><td>" . $info['Marca__c'] . "</td><td>" . $info['Presentaci_n_comercial__c'] . "</td><td>" . $info['Peso__c'] . "</td><td>" . $info['Tiempo_de_Entrega__c'] . "</td><td>" . $info['Family'] . "</td><td>" . $info['Subcategor_a__c'] . "</td><td>" . $info['Observaciones__c'] . "</td><td><table>";
+        if(isset($record["archivos"])) {
+            $files = $record["archivos"];
+            foreach ($files as $file) {
+                if ($file['extension'] == 'jpg' || $file['extension'] == 'png')
+                    echo "<tr><td><img width='100px' src='" . $file['url'] . "'></td></tr>";
+            }
+        }
+        echo "</table></td></tr>";
     }
     echo "</table>";
 }
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

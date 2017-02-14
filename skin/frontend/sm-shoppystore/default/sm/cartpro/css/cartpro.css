@@ -366,6 +366,7 @@ input.quantity-minus {
 
 #confirmbox .head-iteminfo {
 	text-align: center;
+	font-size: large;
 }
 
 #zoptions .special-price .price-label {
@@ -544,7 +545,7 @@ input.quantity-minus {
 	background-color: #FFF;
 	border: 2px solid #ccc;
 	padding: 20px 10px 15px 10px;
-	width: 300px;
+	width: 500px;
 	min-height: 70px;
 	height: auto !important;
 	position: relative;
@@ -579,6 +580,7 @@ input.quantity-minus {
 	position: relative;
 	width: 100%;
 	padding: 0;
+	left: -100px;
 }
 
 #fancybox-close {

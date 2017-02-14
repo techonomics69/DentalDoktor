@@ -65,13 +65,15 @@
 			<div class="write-your-review">			
 				<?php echo $this->getChildHtml('form_fields_before')?>
 				<h4><?php echo $this->__("Write your own review"); ?></h4>
+				<?php $customer = Mage::getSingleton('customer/session')->getCustomer(); ?>
+				<input type="hidden" name="nickname" id="nickname_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($customer->getName()) ?>" />
 				<ul class="form-list">
-					<li>
+					<!-- li>
 						<label for="nickname_field" class="required"><?php echo $this->__('Nickname') ?><em> *</em></label>
 						<div class="input-box">
 							<input type="text" name="nickname" id="nickname_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" />
 						</div>
-					</li>
+					</li -->
 					<li>
 						<label for="summary_field" class="required"><?php echo $this->__('Summary of Your Review') ?><em> *</em></label>
 						<div class="input-box">
@@ -89,6 +91,7 @@
 			
             </fieldset>
             <div class="buttons-set">
+				<p class="required"><?php echo $this->__('* Required Fields'); ?></p>
                 <button type="submit" title="<?php echo $this->__('Submit Review') ?>" class="button">
 					<span><span class="submit-review-text"><?php echo $this->__('Submit Review') ?></span></span>
 				</button>

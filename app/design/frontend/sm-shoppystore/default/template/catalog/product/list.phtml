@@ -106,9 +106,9 @@ if(!$_productCollection->count()): ?>
 					
 					<div class="product-shop item-info">
 						<div class="f-fix">
-							<div class="item-review">
+							<!-- div class="item-review">
 								<?php  echo $this->getReviewsSummaryHtml($_product, false, true); ?>
-							</div>
+							</div -->
 							
 							<div class="product-name">
 								<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
@@ -135,7 +135,7 @@ if(!$_productCollection->count()): ?>
 								<?php
 								/** HERFOX: Hide add to cart button if User isn't logged in list mode */
 								if(!Mage::getSingleton('customer/session')->isLoggedIn()){
-									echo '<span><p style="height: 35px;">INICIE SESIÓN PARA COMPRAR Y VER PRECIO</p></span>';
+									echo '<span><p style="height: 35px;"><a href="/customer/account/login/">INICIE SESIÓN PARA COMPRAR Y VER PRECIO</a></p></span>';
 								}
 								else{
 								?>
@@ -238,9 +238,9 @@ if(!$_productCollection->count()): ?>
 						</div>
 						
 						<div class="item-info">
-							<div class="item-review">
+							<!-- div class="item-review">
 								<?php  echo $this->getReviewsSummaryHtml($_product, "short", true); ?>
-							</div>
+							</div -->
 							
 							<div class="item-title">
 									<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
@@ -260,7 +260,7 @@ if(!$_productCollection->count()): ?>
 							<?php
 							/** HERFOX: Hide add to cart button if User isn't logged in grid mode */
 							if(!Mage::getSingleton('customer/session')->isLoggedIn()){
-								echo '<span><p style="height: 35px;">INICIE SESIÓN PARA COMPRAR Y VER PRECIO</p></span>';
+								echo '<span><p style="height: 35px;"><a href="/customer/account/login/">INICIE SESIÓN PARA COMPRAR Y VER PRECIO</a></p></span>';
 							}
 							else{
 							?>

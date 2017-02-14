@@ -301,7 +301,7 @@
         <jobs>
             <sync_products>
                 <schedule>
-                    <cron_expr>*/60 * * * *</cron_expr>
+                    <cron_expr>0 2 * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>herfox_salesforce/observer::sync</model>

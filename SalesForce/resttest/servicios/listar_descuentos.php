@@ -14,8 +14,7 @@ function show_discounts($instance_url, $access_token)
     $IsActive = true;
     $IsDelete = false;
 
-    $url = $instance_url . "/services/apexrest/DescuentoVolumen?"
-        . "LastModifiedDate=" . $LastModifiedDate;
+    $url = $instance_url . '/services/apexrest/DescuentoVolumen?LastModifiedDate=' . $LastModifiedDate;
     // . "&IsActive=" . $IsActive
     // . "&IsDelete=" . $IsDelete;
 

@@ -80,7 +80,11 @@ $timeclick = $config['mini_cartpro_effect_duration'];
 				<?php } ?>			
 		 	//]]>
 		    </script>
-			<?php if($hd_style == 'df' || $hd_style == 'hd2'){?>
+			<?php if($hd_style == 'hd3' && !$this->helper('customer')->isLoggedIn()){?>
+				<div class="info-mini-cart">
+					<span><a href="/customer/account/login/"><?php echo $this->__(' Registrese para comprar');?></a></span>
+				</div>
+			<?php } else if($hd_style == 'df' || $hd_style == 'hd2'){?>
 			<div class="info-mini-cart">
 				<span><?php if($_cartQty >= 0 && $_cartQty <= 9) echo '0'; echo $_cartQty;?><?php echo $this->__(' Items -');?></span>
 					<?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>

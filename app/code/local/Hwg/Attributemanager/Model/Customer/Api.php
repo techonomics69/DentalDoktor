@@ -67,18 +67,27 @@ class Hwg_Attributemanager_Model_Customer_Api extends Mage_Customer_Model_Custom
         $customerData = $this->_prepareData($customerData);
 
         $customer = Mage::getModel('customer/customer')->load($customerId);
-        //Mage::log($customerData, null, "herfox_test.log");
+        //Mage::log($customerData, null, "cupo_de_credito.log");
 
         if (!$customer->getId()) {
             $this->_fault('not_exists');
         }
 
+        // Set cupo de credito
         foreach ($this->getAllowedAttributes($customer) as $attributeCode=>$attribute) {
             if (isset($customerData[$attributeCode])) {
-                $customer->setData($attributeCode, $customerData[$attributeCode]);
+                if($attributeCode != 'cupo_de_credito') {
+                    $customer->setData($attributeCode, $customerData[$attributeCode]);
+                }
+                else {
+                    if($customerData[$attributeCode] == 'true')
+                        $customer->setData($attributeCode, 427);
+                    else $customer->setData($attributeCode, 428);
+                }
             }
         }
-        // Get group id 
+
+        // Set group id 
         $group = Mage::getModel('customer/group')->load($customerData['pricelist_id'], 'customer_group_code');
         if(isset($group['customer_group_id'])){
             $customer->setData('group_id', $group["customer_group_id"]);

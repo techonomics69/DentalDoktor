@@ -14,8 +14,7 @@ function show_prices($instance_url, $access_token)
     $IsActive = true;
     $IsDelete = false;
 
-    $url = $instance_url . "/services/apexrest/PricebookEntry?"
-        . "LastModifiedDate=" . $LastModifiedDate;
+    $url = $instance_url . '/services/apexrest/PricebookEntry?LastModifiedDate=' . $LastModifiedDate;
        // . "&IsActive=" . $IsActive
        // . "&IsDelete=" . $IsDelete;
 

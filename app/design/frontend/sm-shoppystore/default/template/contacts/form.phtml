@@ -24,10 +24,12 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 
 <div class="row box-1-contact">
 	<div class="contact-map-wrap col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<div class="contact_message"><?php echo $this->__('Déjenos su comentario y muy pronto lo contactaremos') ?></div>
 		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('google-map')->toHtml() ?>
 	</div>
 	<form class="contact-form col-lg-6 col-md-6 col-sm-6 col-xs-12" action="<?php echo Mage::getUrl(); ?>contacts/index/post/" id="contactForm" method="post">
@@ -51,22 +53,10 @@
 							<input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Su teléfono...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Su teléfono...') ?>';" value="<?php echo ($this->helper('contacts')->getUserTelephone())?$this->htmlEscape($this->helper('contacts')->getUserTelephone()):Mage::helper('contacts')->__('Su teléfono...'); ?>" class="input-text required-entry validate-greater-than-zero" type="text" />
 						</div>
 					</div>
-					<div class="field">
-						<div class="input-box">
-							<input name="subject" id="subject" title="<?php echo Mage::helper('contacts')->__('Title') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Subject') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Subject') ?>';" value="<?php echo Mage::helper('contacts')->__('Subject'); ?>" class="input-text required-entry" type="text" />
-						</div>
-					</div>
-				</li>
-				<li class="wide">
-					<div class="field">
-						<div class="input-box">
-							<textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Comment...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Comment...') ?>';" value="<?php echo Mage::helper('contacts')->__('Comment...'); ?>" class="required-entry input-text" cols="10" rows="7"><?php echo Mage::helper('contacts')->__('Comment...') ?></textarea>
-						</div>
-					</div>
 				</li>
 				<li class="fields">
 					<div class="row">
-						<div class="field col-md-6">
+						<div class="field col-md-12">
 							<div class="input-box">
 								<select id="reason" name="reason" title="<?php echo $this->__('Especialidad') ?>" class="validate-select">
 									<option value=""><?php echo $this->__('-- Seleccione Motivo de Contacto --') ?></option>
@@ -76,7 +66,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="field col-md-6">
+						<!-- div class="field col-md-6">
 							<div class="input-box">
 								<select id="type" name="type" title="<?php echo $this->__('Especialidad') ?>" class="validate-select">
 									<option value=""><?php echo $this->__('-- Seleccione Tipo de Contacto --') ?></option>
@@ -88,6 +78,20 @@
 									<option value="PQR por Logística de envió"><?php echo $this->__('PQR por Logística de envió') ?></option>
 								</select>
 							</div>
+						</div -->
+					</div>
+				</li>
+				<li class="fields">
+					<div class="field">
+						<div class="input-box">
+							<input name="subject" id="subject" title="<?php echo Mage::helper('contacts')->__('Title') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Subject') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Subject') ?>';" value="<?php echo Mage::helper('contacts')->__('Subject'); ?>" class="input-text required-entry" type="text" />
+						</div>
+					</div>
+				</li>
+				<li class="wide">
+					<div class="field">
+						<div class="input-box">
+							<textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Comment...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Comment...') ?>';" value="<?php echo Mage::helper('contacts')->__('Comment...'); ?>" class="required-entry input-text" cols="10" rows="7"><?php echo Mage::helper('contacts')->__('Comment...') ?></textarea>
 						</div>
 					</div>
 				</li>

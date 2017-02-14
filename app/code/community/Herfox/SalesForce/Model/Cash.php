@@ -9,6 +9,7 @@
 class Herfox_SalesForce_Model_Cash extends Mage_Payment_Model_Method_Abstract
 {
     protected $_code = 'cash';
+    /*
     protected $_formBlockType = 'herfox_salesforce/form_cash';
     protected $_infoBlockType = 'herfox_salesforce/info_cash';
 
@@ -40,6 +41,7 @@ class Herfox_SalesForce_Model_Cash extends Mage_Payment_Model_Method_Abstract
         }
         return $this;
     }
+    */
 /*
     public function getOrderPlaceRedirectUrl()
     {

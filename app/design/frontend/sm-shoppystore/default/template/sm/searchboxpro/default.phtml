@@ -23,7 +23,7 @@ $options = $this->getConfigObject();?>
 			<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
 				<div class="form-search">
 					<?php $categorySearchHelper = $this->helper('searchboxpro'); ?>
-					<div class="cat-wrapper">
+					<!-- div class="cat-wrapper">
 						<select id="<?php echo $categorySearchHelper->getCategoryParamName() ?>" name="<?php echo $categorySearchHelper->getCategoryParamName() ?>">
 							<option value=""><?php echo $this->__('All Categories') ?></option>
 
@@ -33,7 +33,7 @@ $options = $this->getConfigObject();?>
 							
 							
 						</select>
-					</div>
+					</div -->
 					<div class="input-search"> 
 						<input size="30" id="search" type="text" name="<?php echo $this->helper('catalogSearch')->getQueryParamName() ?>" class="input-text" onfocus="if(this.value=='Ingrese su búsqueda...') this.value='';" onblur="if(this.value=='') this.value='Ingrese su búsqueda...';" value="Ingrese su búsqueda..."  />
 					</div>

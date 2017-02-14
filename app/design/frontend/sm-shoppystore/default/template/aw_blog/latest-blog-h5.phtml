@@ -1,4 +1,11 @@
 <?php $posts = $this->getPosts(); ?>
+
+<?php $posts = Mage::getResourceModel('wordpress/post_collection')
+	->addPostTypeFilter('post')
+	->setOrderByPostDate()
+	->addIsViewableFilter()
+	->setPageSize(5)
+	->load(); ?>
 <?php
 	
 ?>
@@ -9,6 +16,7 @@
 		</div>
 	
 		<div class="latest-blog-bottom">
+
 			<?php $i=0; foreach ($posts as $post): ?>
 			<?php $i++;?>
 			<div class="item-blog item">
@@ -20,21 +28,21 @@
 					$first_img=$matched[0];
 				?>
 				<div class="accordion" id="<?php  echo  $this->__('section').$i?>">
-						<h2><a title="<?php echo $post->getTitle(); ?>" href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+						<h2><a target="_blank" title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>" href="<?php echo $post->getPermalink() ?>" ><?php echo $this->escapeHtml($post->getPostTitle()) ?></a></h2>
 					</div>
 					
 				<div class="blog-info ">
 					<div class="img-blog" >
-					<a class="img-link" title="<?php echo $post->getTitle(); ?>" href="<?php echo $post->getAddress(); ?>" ><?php echo($first_img);?></a>
+					<a class="img-link" title="<?php echo $post->getPostTitle(); ?>" href="<?php echo $post->getPermalink(); ?>" ><?php echo($first_img);?></a>
 					</div>
 					<div class="postTitle1">
-						<h2><a title="<?php echo $post->getTitle(); ?>" href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+						<h2><a target="_blank" title="<?php echo $post->getPostTitle(); ?>" href="<?php echo $post->getPermalink(); ?>" ><?php echo $post->getPostTitle(); ?></a></h2>
 					</div>
 					
 					<div class="postContent">
-						<?php $text = str_replace($first_img, '', $post->getPostContent()); 
+						<?php $text = str_replace($first_img, '', $post->getPostContent());
 							$html = strip_tags($text);
-							echo substr($html,1,90);
+							echo substr($html,1,90)."...";
 						?>
 					</div>
 					
