@@ -30,6 +30,7 @@
 <header id="header">
   <div class="top_links">
     <div class="container">
+      <div class="row">
       <div class="language">
         <?php ?>
         <?php if ( osc_count_web_enabled_locales() > 1) { ?>
@@ -50,32 +51,70 @@
         <?php } ?>
       </div>
       <?php if(osclasswizards_welcome_message()){ ?>
-      <p class="welcome-message"><?php echo "Bienvenido a la sección de clasificados de DentalDoktor (<a href='/'>Regresar a la Tienda Virtual</a>)"; ?></p>
+        <!-- p class="welcome-message"><?php echo osclasswizards_welcome_message(); ?></p -->
+        <div class="col-lg-7 col-md-5 sl-header-text">
+          <div class="offer-wrapper">
+            <div class="offer-header">
+              <ul id="offer-slider" class="owl-carousel2 owl-theme" style="opacity: 1; display: block;">
+                <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 1340px; left: 0px; display: block; transition: all 1000ms ease; transform: translate3d(0px, 0px, 0px);"><div class="owl-item" style="width: 670px;"><li>
+                      <span style="color:#003A69;"><i class="fa fa-phone"></i>&nbsp;</span>Bogotá: (+571) 6160257 - Linea Nacional: 01800 123433&nbsp;&nbsp;&nbsp;<span style="color:#003A69;"><i class="fa fa-whatsapp"></i>&nbsp;</span>(+57) 317 4355417&nbsp;&nbsp;&nbsp;<span style="color:#003A69;"><i class="fa fa-envelope"></i>&nbsp;</span>infodentaldoktor@bellefarma.com</li></div></div>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
       <?php } ?>
-      <ul>
+        <div class="col-lg-5 col-md-7 top-links-action">
         <?php if( osc_is_static_page() || osc_is_contact_page() ){ ?>
-        <li class="search"><a class="ico-search icons" data-bclass-toggle="display-search"></a></li>
-        <li class="cat"><a class="ico-menu icons" data-bclass-toggle="display-cat"></a></li>
+          <ul>
+            <li class="search"><a class="ico-search icons" data-bclass-toggle="display-search"></a></li>
+            <li class="cat"><a class="ico-menu icons" data-bclass-toggle="display-cat"></a></li>
+          </ul>
         <?php } ?>
         <?php if( osc_users_enabled() ) { ?>
         <?php if( osc_is_web_user_logged_in() ) { ?>
-        <li class="first logged"> <span><?php echo sprintf(__('Hi %s', OSCLASSWIZARDS_THEME_FOLDER), osc_logged_user_name() . '!'); ?> </span> &#10072; <strong><a href="<?php echo osc_user_dashboard_url(); ?>">
-          <?php _e('My account', OSCLASSWIZARDS_THEME_FOLDER); ?>
-          </a></strong> &#10072; <a href="<?php echo osc_user_logout_url(); ?>">
-          <?php _e('Logout', OSCLASSWIZARDS_THEME_FOLDER); ?>
-          </a> </li>
+            <div class="block-action-header top-link-account login-link">
+              <ul>
+                <li>
+                  <a href="<?php echo osc_user_dashboard_url(); ?>"><?php _e('My account', OSCLASSWIZARDS_THEME_FOLDER); ?></a>
+                </li>
+              </ul>
+            </div>
+            <div class="block-action-header top-link-account login-link">
+              <ul>
+                <li>
+                  <p class="hello"><span style="color:#444444;"><i class="fa fa-user"></i>&nbsp;</span><?php echo sprintf(__('Hi %s', OSCLASSWIZARDS_THEME_FOLDER), osc_logged_user_name()); ?> </p>
+                </li>
+                <li>
+                  <a href="<?php echo osc_user_logout_url(); ?>"><span style="color:#444444;"><i class="fa fa-signout"></i>&nbsp;</span><?php _e('Logout', OSCLASSWIZARDS_THEME_FOLDER); ?></a>
+                </li>
+              </ul>
+            </div>
         <?php } else { ?>
-        <li><a id="login_open" href="<?php echo osc_user_login_url(); ?>">
-          <?php _e('Login', OSCLASSWIZARDS_THEME_FOLDER) ; ?>
-          </a></li>
-        <?php if(osc_user_registration_enabled()) { ?>
-        <li><a href="<?php echo osc_register_account_url() ; ?>">
-          <?php _e('Register for a free account', OSCLASSWIZARDS_THEME_FOLDER); ?>
-          </a></li>
-        <?php }; ?>
+            <?php if(osc_user_registration_enabled()) { ?>
+              <!-- REGISTER -->
+              <div class="block-action-header top-link-account login-link">
+                <ul>
+                  <li>
+                    <a href="/customer/account/create/" title="Registrarse"><?php _e('Register for a free account', OSCLASSWIZARDS_THEME_FOLDER); ?></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- END REGISTER -->
+            <?php } ?>
+            <!-- MYLOGIN -->
+            <div class="block-action-header top-link-account login-link">
+              <ul>
+                <li>
+                  <a id="login_open" href="<?php echo osc_user_login_url(); ?>" title="Ingresar"><span style="color:#444444;"><i class="fa fa-lock"></i>&nbsp;</span><?php _e('Login', OSCLASSWIZARDS_THEME_FOLDER) ; ?></a>
+                </li>
+              </ul>
+            </div>
+            <!-- END LOGIN -->
         <?php } ?>
         <?php } ?>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
   <div class="main_header" id="main_header">

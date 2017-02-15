@@ -26,6 +26,9 @@ body {
 
 .top_links {
     background-color: #f7f7f7;
+    height: 33px;
+    box-shadow: none;
+    border-bottom: 1px solid #ddd !important;
 }
 
 .listing-attr .currency-value {
@@ -103,8 +106,8 @@ body {
 }
 
 .container-menu {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 0px;
+    padding-left: 0px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -585,6 +588,44 @@ body {
     background-position: -159px -53px;
 }
 
+.owl-carousel2 {
+    display: none;
+    position: relative;
+    width: 100%;
+    -ms-touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 1;
+}
+
+.owl-carousel2 .owl-wrapper-outer {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.top_links li {
+    margin: 3px 0 0 0;
+    color: #444444;
+}
+.top_links .block-action-header {
+    float: right;
+    position: relative;
+}
+.top_links .top-link-account > ul > li {
+    margin-top: 3px;
+}
+
+.top_links .top-link-account > ul > li > a {
+    padding: 0 15px;
+    cursor: pointer;
+    border-right: 1px solid #ddd;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1200px;
+        max-width: 1200px !important;
+    }
+}
 /* FORO */
 h3, h4 {
     margin-top: 0;

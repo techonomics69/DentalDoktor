@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OsclassWizards Theme\n"
 "POT-Creation-Date: 2016-01-21 13:12+0545\n"
-"PO-Revision-Date: 2016-01-21 13:12+0545\n"
+"PO-Revision-Date: 2017-02-15 00:07-0500\n"
 "Last-Translator: \n"
 "Language-Team: OsclassWizards <hello@osclasswizards.com>\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -112,13 +112,15 @@ msgstr "Guardar los cambios"
 
 #: admin/category-icons.php:15
 msgid "Categories Icons"
-msgstr ""
+msgstr "Iconos de categorías"
 
 #: admin/category-icons.php:21
 msgid ""
 "Choose custom icons for categories. The items from the category will take "
 "the related icons in google map."
 msgstr ""
+"Elija los iconos para las categorías.  Los items de la categoría llevarán "
+"los  iconos relacionados a Google Maps"
 
 #: admin/category-icons.php:23
 msgid ""
@@ -130,43 +132,43 @@ msgstr ""
 
 #: admin/documentation.php:26
 msgid "OsclassWizards Documentation"
-msgstr ""
+msgstr "Documentación"
 
 #: admin/facebook.php:28
 msgid "Facebook Page Like Box Settings"
-msgstr ""
+msgstr "Configuración de la página de Facebook Like Box"
 
 #: admin/facebook.php:33
 msgid "Facebook Page URL"
-msgstr ""
+msgstr "URL de la página de Facebook"
 
 #: admin/facebook.php:40
 msgid "Width"
-msgstr ""
+msgstr "Ancho"
 
 #: admin/facebook.php:44
 msgid "Height"
-msgstr ""
+msgstr "Altura"
 
 #: admin/facebook.php:49
 msgid "Hide Cover Photo"
-msgstr ""
+msgstr "Ocultar foto de portada"
 
 #: admin/facebook.php:58
 msgid "Show Friend's Faces"
-msgstr ""
+msgstr "Mostrar caras de amigos"
 
 #: admin/facebook.php:66
 msgid "Show Page Posts"
-msgstr ""
+msgstr "Mostrar los mensajes de la página"
 
 #: admin/facebook.php:75
 msgid "Show On Item Sidebar"
-msgstr ""
+msgstr "Mostrar en el Siderbar"
 
 #: admin/facebook.php:84
 msgid "Show On Search Sidebar"
-msgstr ""
+msgstr "Mostrar en la barra lateral de búsqueda"
 
 #: admin/favicon.php:29
 msgid "Favicon Image"
@@ -174,7 +176,7 @@ msgstr "Favicon Imagen"
 
 #: admin/favicon.php:30
 msgid "The preferred size of the favicon is 16x16 pixels."
-msgstr ""
+msgstr "El tamaño recomendado del favicon es 16x16 píxeles."
 
 #: admin/favicon.php:37 admin/header.php:35 admin/homeimage.php:35
 msgid "Preview"
@@ -281,7 +283,7 @@ msgstr "Donar"
 
 #: admin/settings.php:60
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: admin/settings.php:61 admin/theme-style.php:13
 msgid "Theme Style"
@@ -289,7 +291,7 @@ msgstr "Estilo Tema"
 
 #: admin/settings.php:62
 msgid "Templates"
-msgstr ""
+msgstr "Plantillas"
 
 #: admin/settings.php:63
 msgid "Header Logo"
@@ -365,31 +367,31 @@ msgstr "Límite Subcategorías"
 
 #: admin/templates-home.php:78
 msgid "Show popular"
-msgstr ""
+msgstr "Mostrar popular"
 
 #: admin/templates-home.php:88
 msgid "Popular searches"
-msgstr ""
+msgstr "Búsquedas populares"
 
 #: admin/templates-home.php:98
 msgid "Popular regions"
-msgstr ""
+msgstr "Regiones populares"
 
 #: admin/templates-home.php:108
 msgid "Popular cities"
-msgstr ""
+msgstr "Ciudades populares"
 
 #: admin/templates-home.php:118
 msgid "Popular searches limit"
-msgstr ""
+msgstr "Límite de búsquedas populares"
 
 #: admin/templates-home.php:127
 msgid "Popular regions limit"
-msgstr ""
+msgstr "Límite de regiones populares"
 
 #: admin/templates-home.php:136
 msgid "Popular cities limit"
-msgstr ""
+msgstr "Límite de ciudades populares"
 
 #: admin/templates-item-post.php:26
 msgid "Item post page settings"
@@ -397,7 +399,7 @@ msgstr "Artículo configuración de la página después"
 
 #: admin/templates-item-post.php:32
 msgid "Category multiple selects"
-msgstr ""
+msgstr "Selección múltiple de categorías"
 
 #: admin/templates-item-post.php:40
 msgid "Title min. length"
@@ -433,7 +435,7 @@ msgstr "configuración de plantillas"
 
 #: admin/templates.php:34
 msgid "Home"
-msgstr ""
+msgstr "Inicio"
 
 #: admin/templates.php:36
 msgid "Item Post"
@@ -592,7 +594,7 @@ msgstr "Idioma"
 #: footer.php:49 header.php:62
 #, php-format
 msgid "Hi %s"
-msgstr "Hola %s"
+msgstr "¡Bienvenido, %s!"
 
 #: footer.php:50 header.php:63
 msgid "My account"
@@ -600,7 +602,7 @@ msgstr "Mi cuenta"
 
 #: footer.php:52 header.php:65
 msgid "Logout"
-msgstr "Desconectarse"
+msgstr "Salir"
 
 #: footer.php:56 functions.php:441 header.php:69 item-sidebar.php:44
 msgid "Login"
@@ -608,7 +610,7 @@ msgstr "Ingresar"
 
 #: footer.php:60 header.php:73 item-sidebar.php:46 user-login.php:73
 msgid "Register for a free account"
-msgstr "Registra tu cuenta gratis"
+msgstr "Registrarse"
 
 #: footer.php:73 functions.php:445 header.php:95 user-public-sidebar.php:28
 msgid "Contact"
@@ -629,7 +631,7 @@ msgstr ""
 
 #: functions.php:30
 msgid "ie. PHP Programmer"
-msgstr "pe. Programador PHP"
+msgstr "Ingrese su búsqueda..."
 
 #: functions.php:280
 msgid "Categories"
@@ -861,15 +863,15 @@ msgstr "Selecciona una categoría"
 
 #: header.php:144 search-sidebar.php:61
 msgid "Select a country"
-msgstr ""
+msgstr "Seleccione país"
 
 #: header.php:150 search-sidebar.php:70
 msgid "Select a region"
-msgstr "Selecciona una categoría"
+msgstr "Selecciona departamento"
 
 #: header.php:155 search-sidebar.php:78
 msgid "Select a city"
-msgstr "Seleccione la ciudad ..."
+msgstr "Seleccione ciudad"
 
 #: item-post.php:70
 msgid "General Information"
@@ -893,7 +895,7 @@ msgstr "Precio"
 
 #: item-post.php:125
 msgid "Listing Location"
-msgstr "Llistat d'Ubicació"
+msgstr "Ubicación"
 
 #: item-post.php:129 search-sidebar.php:58 user-profile.php:88
 msgid "Country"
@@ -901,15 +903,15 @@ msgstr "País"
 
 #: item-post.php:137 search-sidebar.php:67 user-profile.php:96
 msgid "Region"
-msgstr "Provincia"
+msgstr "Departamento"
 
 #: item-post.php:151 search-sidebar.php:75 user-profile.php:104
 msgid "City"
-msgstr "Población"
+msgstr "Ciudad"
 
 #: item-post.php:165
 msgid "City Area"
-msgstr "Zona"
+msgstr "Localidad"
 
 #: item-post.php:173 user-profile.php:120 user-public-profile.php:79
 msgid "Address"
@@ -1362,7 +1364,7 @@ msgstr "Envíame una nueva contraseña"
 
 #: user-register.php:35
 msgid "Register an account for free"
-msgstr "Registra tu cuenta gratis"
+msgstr "Registrarse"
 
 #: user-register.php:69
 msgid "Repeat password"
@@ -1379,6 +1381,10 @@ msgstr "Crear"
 #: user-sidebar.php:26
 msgid "Are you sure you want to delete your account?"
 msgstr "¿Está seguro que desea eliminar su cuenta?"
+
+#: header.php:53
+msgid "Hello Guest, Welcome to OsclassWizards"
+msgstr "Hola invitado, Bienvenido a OsclassWizards"
 
 #~ msgid "Search select option"
 #~ msgstr "Selecciona una categoría"
@@ -1418,10 +1424,6 @@ msgstr "¿Está seguro que desea eliminar su cuenta?"
 
 #~ msgid "Log out"
 #~ msgstr "Desconectar"
-
-#: header.php:53
-msgid "Hello Guest, Welcome to OsclassWizards"
-msgstr "Hola invitado, Bienvenido a OsclassWizards"
 
 #~ msgid "Theme style settings updated correctly"
 #~ msgstr "Ajustes de estilo temático actualizan correctamente"
